@@ -1,14 +1,16 @@
+import "../scss/header.scss";
+
 const Header = () => {
     return (
 
         <div className="container-fluid fixed-top">
-            <div className="row" style={{ height: "63px", backgroundColor: "rgba(0,0,0,1)" }}>
+            <div className="row rowScssH1">
                 <div className="col-2 offset-2 bg-warning">Logo</div>
-                <div className="col-2 offset-4">
-                        <div className="input-group input-group-sm mt-3">
+                <div className="col-3 offset-3">
+                        <div className="input-group groupScssH1">
                             <div className="input-group-prepend">
                                 <button className="input-group-text">
-                                    <i class="fa fa-search" style={{fontSize: "18px"}} aria-hidden="true"></i>
+                                    <i className="fa fa-search searchScssH1" aria-hidden="true"></i>
                                 </button>
                             </div>
                             <input type="text" className="form-control" placeholder="Tìm vị trí" />

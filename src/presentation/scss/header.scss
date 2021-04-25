@@ -1,0 +1,17 @@
+$disH1: 63px;
+$bgH1: rgba(0,0,0,1);
+$fontSizeH1: 24px;
+$fontSizeH2: 12px;
+
+.rowScssH1 {
+    height: $disH1;
+    background-color: $bgH1;
+}
+
+.searchScssH1 {
+    font-size: $fontSizeH1;
+}
+
+.groupScssH1 {
+    margin-top: $fontSizeH2;
+}
