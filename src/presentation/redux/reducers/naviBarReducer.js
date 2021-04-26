@@ -11,7 +11,7 @@ const initialState = {
 const naviBarReducer = (state = initialState, action) => {
     switch (action.type) {
         case navBarActionType.GET_MENU:
-            debugger
+            
             return {
                 ...state,
                 loading: false,

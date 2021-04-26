@@ -1,14 +1,15 @@
 @import "./LeftBar.scss";
-
+$grey: rgba(0,0,0,0.5);
 $greenGmail: rgba(15,157,88,1);
 $yellowGmail: rgba(244,180,0,1);
 .btnScssNB1 {
+    color: $grey;
     background-color: white;
-    border-radius: 5px;
-    border:2px solid black;
+    border-radius: 4px;
+    border:2px solid $grey;
 }
 
 .btnScssNB1:hover {
-    color: $redGmail;
-    border: 2px solid $redGmail;
+    color: black;
+    border: 2px solid black;
 }
