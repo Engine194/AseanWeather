@@ -18,7 +18,7 @@ const NavBar = ({ getMenu, propsMenu }) => {
     }
 
     const markMenu = (element) => {
-        document.querySelector(element).style.backgroundColor = rgba(160,0.5);
+        document.querySelector(element).style.backgroundColor = rgba4(240,253,10,0.8);
         document.querySelector(element).style.color = rgba4(255, 0, 0, 1);
     }
 
