@@ -7,13 +7,14 @@ import CurrentWeatherPage from "../pages/currentWeatherPage";
 import DailyWeatherPage from "../pages/dailyWeatherPage";
 import HourlyWeatherPage from "../pages/hourlyWeatherPage";
 
-const Routes = () => {
+const Routes = () =>
+{
     return (
         <>
             <BrowserRouter>
-                <Header/>
-                <NavBar/>
-                <LeftBar/>
+                <Header />
+                <NavBar />
+                <LeftBar />
                 <MainBody>
                     <Switch>
                         <Route path="/main/current" exact component={CurrentWeatherPage} />
