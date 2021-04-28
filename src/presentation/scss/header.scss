@@ -1,4 +1,4 @@
-$disH1: 63px;
+$disH1: 62px;
 $bgH1: rgba(0,0,0,1);
 $fontSizeH1: 24px;
 $fontSizeH2: 12px;
@@ -14,4 +14,6 @@ $fontSizeH2: 12px;
 
 .groupScssH1 {
     margin-top: $fontSizeH2;
+    position: "relative";
+    left: 10px;
 }

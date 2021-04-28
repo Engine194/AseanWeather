@@ -1,6 +1,7 @@
 $redGmail: rgba(234, 67, 53,1);
 $blueFacebook: rgba(66,103,178,1);
-$disLB1: 116px;
+$disLB1: 107px;
+$disLB2: 135%;
 $positionLB1: relative;
 $fontSizeLB1: 40px;
 
@@ -9,6 +10,7 @@ $fontSizeLB1: 40px;
    font-size: $fontSizeLB1;
    position: $positionLB1;
    top: $disLB1;
+   left: $disLB2;
 }
 
 .colorScssLB2 {
@@ -16,4 +18,5 @@ $fontSizeLB1: 40px;
     font-size: $fontSizeLB1;
     position: $positionLB1;
     top: $disLB1;
+    left: $disLB2;
 }

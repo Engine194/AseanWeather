@@ -13,3 +13,11 @@ const getCurrentFail = payload => {
         error: payload,
     }
 }
+
+const currentActions = {
+    getCurrentSuccess,
+    getCurrentFail,
+}
+
+export default currentActions;
+

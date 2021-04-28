@@ -5,8 +5,8 @@ const Header = () => {
 
         <div className="container-fluid fixed-top">
             <div className="row rowScssH1">
-                <div className="col-2 offset-2 bg-warning">Logo</div>
-                <div className="col-3 offset-3">
+                <div className="col-1 offset-3 bg-warning">Logo</div>
+                <div className="col-3 offset-2">
                         <div className="input-group groupScssH1">
                             <div className="input-group-prepend">
                                 <button className="input-group-text">

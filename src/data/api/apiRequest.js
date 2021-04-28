@@ -1,4 +1,4 @@
-import { axiosClient as Api, parameters, sizeImage, web } from ".";
+import { axiosClient as Api, parameters as parameterImport, axiosType } from ".";
 import urlWA from "./urlWA";
 
 // Xử lý tham số q (thành phố) để đưa vào api
@@ -9,15 +9,17 @@ const convertCity = city => {
     return city;
 }
 
+let parameters = parameterImport;
+
 // US_04 Lấy thông tin thời tiết và aqi hiện tại theo city
 const getCurrentByCity = q => {
     parameters = {
         ...parameters,
         q,
-        aqi: yes,
+        aqi: "yes",
     }
 
-    return Api(web.WA).get(`${urlWA.CURRENT}`, { params: parameters })
+    return Api(axiosType.WA).get(`${urlWA.CURRENT}`, { params: parameters })
 }
 
 // US_04 Lấy thông tin thiên văn của ngày hiện tại theo city
@@ -27,7 +29,7 @@ const getAstronomyByCity = q => {
         q,
     }
 
-    return Api(web.WA).get(`${urlWA.ASTRONOMY}`, { params: parameters })
+    return Api(axiosType.WA).get(`${urlWA.ASTRONOMY}`, { params: parameters })
 }
 
 // US_05, US_6 Lấy thông tin thời tiết cho ngày mai, ngày kia
@@ -39,7 +41,7 @@ const getForecast3daysByCity = q => {
         days: 3,
     }
 
-    return Api(web.WA).get(`${urlWA.FORECAST}`, { params: parameters })
+    return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
 }
 
 export { convertCity,

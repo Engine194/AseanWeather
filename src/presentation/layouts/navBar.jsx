@@ -2,12 +2,14 @@ import { useState, useEffect } from "react";
 import "../scss/navBar.scss";
 import { connect } from "react-redux";
 import getMenuAction from "../redux/actions/navBarAction";
+import { useHistory } from "react-router";
 
 const NavBar = ({ getMenu, propsMenu }) => {
     const [is1Clicked, setIs1Clicked] = useState(false);
     const [is2Clicked, setIs2Clicked] = useState(false);
     const [is3Clicked, setIs3Clicked] = useState(false);
     const [is4Clicked, setIs4Clicked] = useState(false);
+    const history = useHistory();
 
     const rgba = (index1, index2) => {
         return `rgba(${index1},${index1},${index1},${index2})`;
@@ -17,20 +19,22 @@ const NavBar = ({ getMenu, propsMenu }) => {
         return `rgba(${index1},${index2},${index3},${index4})`;
     }
 
-    const markMenu = (element) => {
-        document.querySelector(element).style.backgroundColor = rgba4(240,253,10,0.8);
+    const markMenu = (element, path) => {
+        document.querySelector(element).style.backgroundColor = rgba(255,1);
         document.querySelector(element).style.color = rgba4(255, 0, 0, 1);
+        document.querySelector(element).style.borderBottomColor =  rgba4(255, 0, 0, 1);
+        history.push(path);
     }
 
     const unmarkMenu = (element) => {
-        document.querySelector(element).style.backgroundColor = rgba(255, 1);
+        document.querySelector(element).style.backgroundColor = rgba(235, 1);
         document.querySelector(element).style.color = rgba(0, 0.5);
     }
 
-    // click vào menu1 thì khóa hết các menu còn lại và tương tự với các hàm bên dưới
+    // click vào menu1 thì đổi nền menu1 và khóa hết các menu còn lại. Tương tự với các hàm bên dưới
     const handleClick1 = () => {
         setIs1Clicked(true);
-        markMenu("button.btnJS1");
+        markMenu("button.btnJS1","/main/current");
         setIs2Clicked(false);
         unmarkMenu("button.btnJS2");
         setIs3Clicked(false);
@@ -43,7 +47,7 @@ const NavBar = ({ getMenu, propsMenu }) => {
         setIs1Clicked(false);
         unmarkMenu("button.btnJS1");
         setIs2Clicked(true);
-        markMenu("button.btnJS2");
+        markMenu("button.btnJS2","/main/hours");
         setIs3Clicked(false);
         unmarkMenu("button.btnJS3");
         setIs4Clicked(false);
@@ -56,7 +60,7 @@ const NavBar = ({ getMenu, propsMenu }) => {
         setIs2Clicked(false);
         unmarkMenu("button.btnJS2");
         setIs3Clicked(true);
-        markMenu("button.btnJS3");
+        markMenu("button.btnJS3", "/main/days");
         setIs4Clicked(false);
         unmarkMenu("button.btnJS4");
     }
@@ -69,7 +73,7 @@ const NavBar = ({ getMenu, propsMenu }) => {
         setIs3Clicked(false);
         unmarkMenu("button.btnJS3");
         setIs4Clicked(true);
-        markMenu("button.btnJS4");
+        markMenu("button.btnJS4","/home");
     }
 
 
@@ -101,9 +105,9 @@ const NavBar = ({ getMenu, propsMenu }) => {
 
     return (
 
-        <div className="container-fluid" style={{ position: "absolute", top: "64px" }}>
+        <div className="container-fluid" style={{ position: "absolute", top: "62px" }}>
             <div className="row">
-                <div className="col-8 offset-2">
+                <div className="col-6 offset-3">
                     <div className="row">
                         <button className="col btnScssNB1 btnJS1" onClick={handleClick1}>
                             HIÊN TẠI

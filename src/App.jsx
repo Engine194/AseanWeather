@@ -10,7 +10,7 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Route path="/main/*" component={Routes}/>
-      <Route path="/" exact component={HomePage} ></Route>
+      <Route path="/home" exact render={(props)=> <HomePage {...props}/>} ></Route>
       <Footer/>
     </BrowserRouter>
   </Provider>

@@ -1,3 +1,4 @@
+import { readBuilderProgram } from 'typescript';
 import '../scss/LeftBar.scss';
 
 const LeftBar = () => {
@@ -10,7 +11,7 @@ const LeftBar = () => {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-2 offset-0">
+                    <div className="col-2 offset-0 mt-2">
                         <i className="fa fa-facebook-square colorScssLB2" aria-hidden="true"></i>
                     </div>
                 </div>

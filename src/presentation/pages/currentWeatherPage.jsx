@@ -1,9 +1,51 @@
-const CurrentWeatherPage = ()=> {
-    return (
-        <h1>
-            CurrentWeatherPage
-        </h1>
-    );
+import { useEffect } from "react";
+import { Card } from "react-bootstrap"
+import { connect } from "react-redux";
+import { bindActionCreators } from 'redux';
+import getFormatDate from "../../data/configDate";
+import getImage128URL from "../../data/configImage";
+import CurrentDetail from "../components/currentDetail";
+import CurrentMain from "../components/currentMain";
+import Loading from "../components/loading";
+import { getCurrentRequest } from "../redux/effects/currentEffect"
+import '../scss/currentPage.scss';
+
+
+const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) => {
+
+    // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
+    useEffect(() => {
+        getCurrentRequest("da nang");
+    }, [])
+    
+    // Check xem trong store đã có dữ liệu trả về chưa, nếu chưa thì cho hiển thi màn hình loading ...
+    if (propsCurrent.success == 0) {
+        return (
+            <Loading/>
+        );
+    } else {
+        const location = propsCurrent.data.current.location;
+        const current = propsCurrent.data.current.current;
+        return (
+            <>
+                <CurrentMain location={location} current={current}/>
+                <CurrentDetail current={current}/>
+
+            </>
+        );
+    }
 }
 
-export default CurrentWeatherPage;
+const mapStateToProps = (state) => {
+    return {
+        propsCurrent: state.currentReducer,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+    getCurrentRequest,
+},
+    dispatch
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeatherPage);

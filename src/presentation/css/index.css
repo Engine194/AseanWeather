@@ -1,0 +1,10 @@
+@import "../../data/weatherImgs/weather-icons-master/css/weather-icons-wind.min.css"; 
+@font-face {
+    font-family: 'weathericons-regular-webfont';
+    src: url(../../data/weatherImgs/weather-icons-master/font/weathericons-regular-webfont.ttf) format('truetype',
+    url(../../data/weatherImgs/weather-icons-master/font/weathericons-regular-webfont.eot),
+    url(../../data/weatherImgs/weather-icons-master/font/weathericons-regular-webfont.woff) format('woff'),
+    url(../../data/weatherImgs/weather-icons-master/font/weathericons-regular-webfont.woff2) format('woff2'));
+    font-weight:normal;
+    font-style:normal;
+}

@@ -1,8 +1,8 @@
 import axios from "axios";
 
 const axiosType = {
-    WA = "[WEB] WA",
-    BE = "[BACK-END] BE",
+    WA : "[WEB] WA",
+    BE : "[BACK-END] BE",
 }
 
 const apiKey = "effc8583cba94b22b7b32127212204";
@@ -11,8 +11,9 @@ const baseUrlWA = "http://api.weatherapi.com/v1";
 const baseUrlBE = "";
 
 // Khởi tạo parameters để get kèm param (lang, key, id, q, aqi, ...)
-const parameters = {
-    lang: vi,
+let parameters = {
+    lang: "vi",
+    key: apiKey,
 };
 
 // Tạo một cổng lựa chọn api nào
@@ -21,50 +22,44 @@ const parameters = {
 const axiosClient = (id) => {
     switch(id) {
         case axiosType.WA:
-            parameters = {
-                ...parameters,
-                key: apiKey,
-            }
-            return axios.create({
-                baseURL: baseUrlWA,
-                responseType: "json",
-            })
+            return getAxiosClient(baseUrlWA);
         case axiosType.BE:
-                return axios.create({
-                baseURL: baseUrlBE,
-                responseType: "json",
-            })
+            return getAxiosClient(baseUrlBE);
     }
     
 }
 
-axiosClient.interceptors.request.use(async config=>{
-    //Handle token ....
-    // Nếu token có thì tự đính kèm
-    const token = storage.getToken()
-
-    if (token !== null && token !== undefined) {
-        config.headers.Authorization = "Bearer "+ token;
-    }
-
-    return config;
-})
-
-axiosClient.interceptors.response.use(response=>{
-    if(response && response.data !== undefined){
+const getAxiosClient = baseURL => {
+    const axiosClient = axios.create({
+        baseURL: baseURL,
+        responseType: "json",
+    })
+    axiosClient.interceptors.request.use(async config=>{
+        //Handle token ....
+        // Nếu token có thì tự đính kèm
+        
+        return config;
+    })
+    
+    axiosClient.interceptors.response.use(response=>{
+        if(response && response.data !== undefined){
+            return response.data;
+        }
         return response.data;
-    }
-    return response.data;
-}, err =>{
-    if (err.response) {
-        throw err.response
-    } else if (err.request) {
-        throw err.request
-    } else {
-    throw err
-    }
-})
+    }, err =>{
+        if (err.response) {
+            throw err.response
+        } else if (err.request) {
+            throw err.request
+        } else {
+        throw err
+        }
+    })
+    return axiosClient;
+}
 
 
 
-export  {axiosClient, web, parameters, sizeImage};
+
+
+export  {axiosClient, axiosType, parameters};
