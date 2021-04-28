@@ -1,0 +1,55 @@
+$disCP1: 30px;
+$disCP2: 20px;
+$disCP3: 25px;
+.leftSide {
+    
+    position: relative;
+    left: 5%;
+}
+
+.card-custom {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.TNM {
+    font-family: "Arial";
+}
+
+.real-feel {
+    font-size: $disCP2;
+    position: relative;
+    left: 1.5%;
+}
+.temperature {
+    margin-top: -20px;
+    margin-bottom: -10px;
+    font-size: 100px;
+    color: black;
+}
+
+.condition-text {
+    font-size: $disCP2;
+    position: relative;
+    left: 1.5%;
+}
+
+.condition-img {
+    text-align: center;
+    float: right;
+    margin-right: 20%;
+    margin-top: 30px;
+}
+
+.under-icon {
+    font-size: $disCP2;
+}
+
+.textRight {
+    text-align: right;
+}
+
+.showIconDetail {
+    font-size: $disCP3;
+    color:rgb(156,34,93);
+}
