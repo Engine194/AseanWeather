@@ -14,7 +14,7 @@ const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) => {
     useEffect(() => {
         getCurrentRequest("ha noi");
     }, [])
-    
+    console.log(propsCurrent);
     // Check xem trong store đã có dữ liệu trả về chưa, nếu chưa thì cho hiển thi màn hình loading ...
     if (propsCurrent.success === 0) {
         return (

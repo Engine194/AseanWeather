@@ -1,9 +1,13 @@
-import { Card } from "react-bootstrap";
-import windDirection from "../../data/configWindDirection";
-import '../scss/currentPage.scss';
+import { useEffect } from "react";
+import aqi from "../../data/configAQI";
 
-const CurrentDetail = ({ current }) => {
-    
+const CurrentAqi = ({ current }) => {
+    const values = Object.values(current.air_quality);
+    const usEpaIndex = values[7];
+
+    useEffect(() => {
+        aqi.fixColorOfAqi(usEpaIndex, "div.aqi");
+    }, []);
 
     return (
         <>
@@ -25,10 +29,10 @@ const CurrentDetail = ({ current }) => {
                                     <div className="row border-bottom mb-2">
                                         <div className="col-1 text-center"><i className="fa fa-location-arrow showIconDetail" aria-hidden="true"></i></div>
                                         <div className="col-6">
-                                            Gió hướng
+                                            Hướng gió
                                         </div>
                                         <div className="col-5 textRight mr-3">
-                                            {windDirection(current.wind_dir)}
+                                            {current.wind_dir}
                                         </div>
                                     </div>
                                     <div className="row border-bottom mb-2">
@@ -46,7 +50,7 @@ const CurrentDetail = ({ current }) => {
                                 <div className="leftSide mt-1">
                                     <div className="row border-bottom mb-2">
                                         <div className="col-1 text-center"><i className="fa fa-low-vision showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-6">
+                                        <div className="col-5">
                                             Tầm nhìn
                                         </div>
                                         <div className="col-5 textRight">
@@ -64,11 +68,11 @@ const CurrentDetail = ({ current }) => {
                                     </div>
                                     <div className="row border-bottom mb-2">
                                         <div className="col-1 mr-1 text-center"><i className="fa fa-cloud showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-6">
-                                            Mây che phủ
+                                        <div className="col-7">
+                                            Chất lượng không khí
                                         </div>
-                                        <div className="col-5 textRight">
-                                            {current.cloud}%
+                                        <div className="col-4 textRight aqi">
+                                            {aqi.convertAQItoString(usEpaIndex)}
                                         </div>
                                     </div>
                                 </div>
@@ -81,4 +85,4 @@ const CurrentDetail = ({ current }) => {
     );
 }
 
-export default CurrentDetail;
+export default CurrentAqi;

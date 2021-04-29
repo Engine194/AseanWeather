@@ -1,6 +1,7 @@
 $disCP1: 30px;
 $disCP2: 20px;
-$disCP3: 25px;
+$disCP3: 24px;
+$disCP4: 20px;
 .leftSide {
     
     position: relative;
@@ -52,4 +53,25 @@ $disCP3: 25px;
 .showIconDetail {
     font-size: $disCP3;
     color:rgb(156,34,93);
+}
+
+.showIconDetail1{
+    font-size: $disCP4;
+    color:rgb(156,34,93);
+}
+
+.border-bottom {
+    border-bottom: 2px solid black;
+}
+
+.colScssCD1 {
+    margin-right: 7%;
+}
+
+.colScssCD2 {
+    margin-left: -4%;
+}
+
+.colScssCD3 {
+    margin-right: 4%
 }
