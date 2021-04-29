@@ -1,14 +1,28 @@
-const HeaderHome = () => {
+import logo from './../../Assets/logo.png';
+import background from './../../Assets/Backgroup.jpg';
+import React from 'react';
+import './HomeHeader.css';
+
+// import { func } from 'prop-types';
+import Search from './../components/Search/Search';
+
+const HeaderHome = (props) =>
+{
     return (
-        <>
-            <div className="container-fluid">
-                <div className="row" style={{height: "60px", backgroundColor: "rgba(0,0,0,0.1)"}}>
-                    <div className="col-1 offset-2 bg-warning">Logo</div>
-                    
-                    <div className="col-1 offset-5 bg-primary">Login</div>
-                </div>
+        <div className="Home_header"
+            style={{ backgroundImage: `url(${background})` }}
+        >
+            <div className="Home_logo">
+                <img src={logo} alt="" />
             </div>
-        </>
+            <div className="Home_search">
+              <Search/>
+            </div>
+            <div className="Home_login">
+                <button type="button"  >LOGIN</button>
+            </div>
+        </div >
+
     );
 }
 

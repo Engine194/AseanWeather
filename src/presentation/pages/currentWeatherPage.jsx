@@ -8,32 +8,41 @@ import { getCurrentRequest } from "../redux/effects/currentEffect"
 import '../scss/currentPage.scss';
 
 
-const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) => {
-
+const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) =>
+{
+    const valueSearch = localStorage.getItem("Search");
+  
     // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
-    useEffect(() => {
-        getCurrentRequest("ha noi");
+    useEffect(() =>
+    {
+        getCurrentRequest(valueSearch);
     }, [])
     
     // Check xem trong store đã có dữ liệu trả về chưa, nếu chưa thì cho hiển thi màn hình loading ...
     if (propsCurrent.success === 0) {
         return (
-            <Loading/>
+            <Loading />
         );
     } else {
+     
         const location = propsCurrent.data.current.location;
         const current = propsCurrent.data.current.current;
         return (
             <>
-                <CurrentMain location={location} current={current}/>
-                <CurrentDetail current={current}/>
-
+                <CurrentMain location={location} current={current} />
+                <CurrentDetail current={current} />
             </>
         );
     }
 }
-
-const mapStateToProps = (state) => {
+export const  getProps = (props) =>
+{
+    return (
+        props.location.state
+    )
+}
+const mapStateToProps = (state) =>
+{
     return {
         propsCurrent: state.currentReducer,
     }
@@ -45,4 +54,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     dispatch
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(CurrentWeatherPage);
+export default connect(mapStateToProps, mapDispatchToProps )(CurrentWeatherPage);

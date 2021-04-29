@@ -1,9 +1,15 @@
-import HeaderHome from "../layouts/headerHome";
+import Footer from "./../layouts/footer";
+import HeaderHome from "./../layouts/headerHome";
+import HomeBody from "./../layouts/HomeBody";
+
+
 
 const HomePage = () => {
     return (
         <>
-            <HeaderHome/>            
+            <HeaderHome />
+            <HomeBody />
+            <Footer />         
         </>
     );
 }

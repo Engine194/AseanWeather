@@ -10,8 +10,8 @@ const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Route path="/main/*" component={Routes}/>
-      <Route path="/home" exact render={(props)=> <HomePage {...props}/>} ></Route>
-      
+      {/* <Route path="/home" exact render={(props)=> <HomePage {...props}/>} ></Route> */}
+      <Route path="/" exact component={HomePage} ></Route>
     </BrowserRouter>
   </Provider>
 );
