@@ -1,0 +1,77 @@
+$disCP1: 30px;
+$disCP2: 20px;
+$disCP3: 24px;
+$disCP4: 20px;
+.leftSide {
+    
+    position: relative;
+    left: 5%;
+}
+
+.card-custom {
+    background-color: white;
+    border-radius: 5px;
+}
+
+.TNM {
+    font-family: "Arial";
+}
+
+.real-feel {
+    font-size: $disCP2;
+    position: relative;
+    left: 1.5%;
+}
+.temperature {
+    margin-top: -20px;
+    margin-bottom: -10px;
+    font-size: 100px;
+    color: black;
+}
+
+.condition-text {
+    font-size: $disCP2;
+    position: relative;
+    left: 1.5%;
+}
+
+.condition-img {
+    text-align: center;
+    float: right;
+    margin-right: 20%;
+    margin-top: 30px;
+}
+
+.under-icon {
+    font-size: $disCP2;
+}
+
+.textRight {
+    text-align: right;
+}
+
+.showIconDetail {
+    font-size: $disCP3;
+    color:rgb(156,34,93);
+}
+
+.showIconDetail1{
+    font-size: $disCP4;
+    color:rgb(156,34,93);
+}
+
+.border-bottom {
+    border-bottom: 2px solid black;
+}
+
+.colScssCD1 {
+    margin-right: 7%;
+}
+
+.colScssCD2 {
+    margin-left: -4%;
+}
+
+.colScssCD3 {
+    margin-right: 4%
+}
