@@ -1,10 +1,10 @@
 import { Card } from "react-bootstrap";
 import '../scss/currentPage.scss';
-import '../css/index.css'
+
 const CurrentDetail = ({ current }) => {
     return (
         <>
-            <div className="row mt-3">
+            <div className="row mt-3 mb-1">
                 <div className="col-12 card-custom">
                     <Card.Body>
                         <div className="row">

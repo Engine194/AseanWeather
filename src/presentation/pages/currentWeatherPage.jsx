@@ -1,9 +1,6 @@
 import { useEffect } from "react";
-import { Card } from "react-bootstrap"
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import getFormatDate from "../../data/configDate";
-import getImage128URL from "../../data/configImage";
 import CurrentDetail from "../components/currentDetail";
 import CurrentMain from "../components/currentMain";
 import Loading from "../components/loading";
@@ -15,11 +12,11 @@ const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) => {
 
     // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
     useEffect(() => {
-        getCurrentRequest("da nang");
+        getCurrentRequest("ha noi");
     }, [])
-    console.log("1111111111111",propsCurrent)
+    
     // Check xem trong store đã có dữ liệu trả về chưa, nếu chưa thì cho hiển thi màn hình loading ...
-    if (propsCurrent.success == 0) {
+    if (propsCurrent.success === 0) {
         return (
             <Loading/>
         );

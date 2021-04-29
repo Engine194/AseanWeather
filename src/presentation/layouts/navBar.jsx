@@ -4,11 +4,17 @@ import { connect } from "react-redux";
 import getMenuAction from "../redux/actions/navBarAction";
 import { useHistory } from "react-router";
 
-const NavBar = ({ getMenu, propsMenu }) => {
+const NaviBar = ({ getMenu, propsMenu }) => {
     const [is1Clicked, setIs1Clicked] = useState(false);
     const [is2Clicked, setIs2Clicked] = useState(false);
     const [is3Clicked, setIs3Clicked] = useState(false);
     const [is4Clicked, setIs4Clicked] = useState(false);
+    const [payload, setPayload] = useState({
+        menu1: false,
+        menu2: false,
+        menu3: false,
+        menu4: false,
+    })
     const history = useHistory();
 
     const rgba = (index1, index2) => {
@@ -76,15 +82,6 @@ const NavBar = ({ getMenu, propsMenu }) => {
         markMenu("button.btnJS4","/home");
     }
 
-
-
-    let payload = {
-        menu1: is1Clicked,
-        menu2: is2Clicked,
-        menu3: is3Clicked,
-        menu4: is4Clicked,
-    }
-
     // Đưa action vào useEffect với đk thay đổi is*Clicked thì mới chạy
     useEffect(() => {
         // Ban đầu khi tải lại trang, mặc định sẽ chọn vào current(menu1)
@@ -92,20 +89,28 @@ const NavBar = ({ getMenu, propsMenu }) => {
             && !is2Clicked
             && !is3Clicked
             && !is4Clicked) {
-            payload = {
+            setPayload({
                 menu1: true,
                 menu2: false,
                 menu3: false,
                 menu4: false,
-            }
+            })
+        } else {
+            setPayload({
+                menu1: is1Clicked,
+                menu2: is2Clicked,
+                menu3: is3Clicked,
+                menu4: is4Clicked,
+            })
         }
+        
         // gọi action lấy danh sách menu đã được chọn
         getMenu(payload);
     }, [is1Clicked, is2Clicked, is3Clicked, is4Clicked]);
 
     return (
 
-        <div className="container-fluid" style={{ position: "absolute", top: "62px" }}>
+        <div className="container-fluid">
             <div className="row">
                 <div className="col-6 offset-3">
                     <div className="row">
@@ -142,4 +147,4 @@ const mapDispatchToProps = (dispatch) => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NavBar);
+export default connect(mapStateToProps, mapDispatchToProps)(NaviBar);

@@ -1,26 +1,22 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import Header from "../layouts/header";
+import NaviBar from "../layouts/navBar";
 import LeftBar from "../layouts/leftBar";
-import MainBody from "../layouts/mainBody";
-import NavBar from "../layouts/navBar";
-import CurrentWeatherPage from "../pages/currentWeatherPage";
+import currentWeatherPage from "../pages/currentWeatherPage";
 import DailyWeatherPage from "../pages/dailyWeatherPage";
 import HourlyWeatherPage from "../pages/hourlyWeatherPage";
+import Footer from "../layouts/footer";
+import MainFrame from "../layouts/mainFrame";
 
 const Routes = () => {
     return (
         <>
             <BrowserRouter>
-                <Header/>
-                <NavBar/>
-                <LeftBar/>
-                <MainBody>
-                    <Switch>
-                        <Route path="/main/current" exact component={CurrentWeatherPage} />
-                        <Route path="/main/hours" exact component={HourlyWeatherPage} />
-                        <Route path="/main/days" exact component={DailyWeatherPage} />
-                    </Switch>
-                </MainBody>
+                <Switch>
+                    <Route path="/main/current" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={currentWeatherPage} Footer={Footer}/>} />
+                    <Route path="/main/hours" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={HourlyWeatherPage} Footer={Footer}/>} />
+                    <Route path="/main/days" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={DailyWeatherPage} Footer={Footer}/>} />
+                </Switch>
             </BrowserRouter>
         </>
     );

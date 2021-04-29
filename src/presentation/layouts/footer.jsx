@@ -3,7 +3,7 @@ import '../scss/footer.scss';
 const Footer = () => {
     return (
         <>
-            <div className="container-fluid fixed-bottom">
+            <div className="container-fluid mt-3">
                 <div className="row rowScssF1">
                     <div className="col-1 offset-3">Logo mini</div>
                     <div className="col-4">

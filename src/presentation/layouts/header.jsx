@@ -3,7 +3,7 @@ import "../scss/header.scss";
 const Header = () => {
     return (
 
-        <div className="container-fluid fixed-top">
+        <div className="container-fluid">
             <div className="row rowScssH1">
                 <div className="col-1 offset-3 bg-warning">Logo</div>
                 <div className="col-3 offset-2">
