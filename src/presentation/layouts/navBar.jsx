@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import getMenuAction from "../redux/actions/navBarAction";
 import { useHistory } from "react-router";
 
-const NaviBar = ({ getMenu, propsMenu }) => {
+const NaviBar = ({getMenu}) => {
     const [is1Clicked, setIs1Clicked] = useState(false);
     const [is2Clicked, setIs2Clicked] = useState(false);
     const [is3Clicked, setIs3Clicked] = useState(false);
@@ -135,16 +135,10 @@ const NaviBar = ({ getMenu, propsMenu }) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        propsMenu: state.naviBarReducer,
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
         getMenu: (payload) => dispatch(getMenuAction(payload))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NaviBar);
+export default connect(null, mapDispatchToProps)(NaviBar);

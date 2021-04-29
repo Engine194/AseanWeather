@@ -25,6 +25,8 @@ const axiosClient = (id) => {
             return getAxiosClient(baseUrlWA);
         case axiosType.BE:
             return getAxiosClient(baseUrlBE);
+        default:
+            return null;
     }
     
 }
