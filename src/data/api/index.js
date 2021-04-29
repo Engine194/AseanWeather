@@ -7,7 +7,7 @@ const axiosType = {
 
 const apiKey = "effc8583cba94b22b7b32127212204";
 
-const baseUrlWA = "http://api.weatherapi.com/v1";
+const baseUrlWA = "https://api.weatherapi.com/v1";
 const baseUrlBE = "";
 
 // Khởi tạo parameters để get kèm param (lang, key, id, q, aqi, ...)
