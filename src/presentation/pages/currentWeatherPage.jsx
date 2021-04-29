@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
+import CurrentAqi from "../components/currentAqi";
 import CurrentDetail from "../components/currentDetail";
 import CurrentMain from "../components/currentMain";
 import Loading from "../components/loading";
@@ -14,7 +15,7 @@ const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) => {
     useEffect(() => {
         getCurrentRequest("ha noi");
     }, [])
-    console.log(propsCurrent);
+    // console.log(propsCurrent);
     // Check xem trong store đã có dữ liệu trả về chưa, nếu chưa thì cho hiển thi màn hình loading ...
     if (propsCurrent.success === 0) {
         return (
@@ -27,7 +28,7 @@ const CurrentWeatherPage = ({ propsCurrent, getCurrentRequest }) => {
             <>
                 <CurrentMain location={location} current={current}/>
                 <CurrentDetail current={current}/>
-
+                <CurrentAqi current={current}/>
             </>
         );
     }

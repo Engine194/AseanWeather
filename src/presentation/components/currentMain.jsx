@@ -9,7 +9,7 @@ const CurrentMain = ({ location, current }) => {
                 <div className="col-12 card-custom">
                     <Card.Body>
                         <div className="row">
-                            <div className="col">
+                            <div className="col text-center">
                                 <div className="leftSide mt-1">
                                     <Card.Title>{location.name}, {location.country}</Card.Title>
                                     <Card.Subtitle className="text-muted">Cập nhật lần cuối: {getFormatDate(current.last_updated).time} {getFormatDate(current.last_updated).date}</Card.Subtitle>
@@ -24,11 +24,14 @@ const CurrentMain = ({ location, current }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col">
+                            <div className="col text-center">
                                 <div className="condition-img">
                                     <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
                                     <div className="real-feel">
-                                        <div className="under-icon"><small>Real Feel : {current.feelslike_c}<span>&#176;</span>C</small></div>
+                                        <div className="under-icon"><small>Real Feel</small></div>
+                                        <div className="under-icon">
+                                        <small>{current.feelslike_c}<span>&#176;</span>C</small>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
