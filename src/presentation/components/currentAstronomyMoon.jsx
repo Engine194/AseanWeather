@@ -4,10 +4,10 @@ import moonrise from "../../data/weatherImgs/moonrise.png";
 import moonset from "../../data/weatherImgs/moonset.png";
 
 // Thẻ show ra thông tin thiên văn của mặt trăng
-const currentAstronomyMoon = ({astronomy}) => {
+const currentAstronomyMoon = ({ astronomy }) => {
     return (
         <>
-        <div className="row mt-3 mb-1">
+            <div className="row mt-3 mb-1">
                 <div className="col-12 card-custom">
                     <Card.Body>
                         <div className="row">
@@ -19,23 +19,46 @@ const currentAstronomyMoon = ({astronomy}) => {
                                         </div>
                                     </div>
                                     <div className="row mb-2">
-                                    <div className="col-6 text-center">
+                                        <div className="col-6 text-center">
                                             <div className="row">
                                                 <div className="col-5 offset-1">
-                                                    <img src={moonrise} />
+                                                    <div className="row">
+                                                        <img src={moonrise} width="100" />
+                                                    </div>
                                                 </div>
                                                 <div className="col-4">
-                                                    <div className="showAstroSunTime">{astronomy.moonrise}</div>
+                                                    <div className="row">
+                                                        <div className="col showAstroMoonTime showAstroTimeTextRight">
+                                                            Trăng lên
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col showAstroTimeTextRight">
+                                                            {astronomy.moonrise}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-6 text-center">
                                             <div className="row">
                                                 <div className="col-5 offset-1">
-                                                    <img src={moonset} />
+                                                    <div className="row">
+                                                        <img src={moonset} width="100" />
+                                                    </div>
                                                 </div>
                                                 <div className="col-4">
-                                                    <div className="showAstroSunTime">{astronomy.moonset}</div>
+                                                    <div className="row">
+                                                        <div className=" col showAstroMoonTime showAstroTimeTextRight">
+                                                            Trăng lặn
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col showAstroTimeTextRight">
+                                                            {astronomy.moonset}
+                                                        </div>
+                                                    </div>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -75,7 +98,7 @@ const currentAstronomyMoon = ({astronomy}) => {
                 </div>
             </div>
         </>
-    ); 
+    );
 }
 
 export default currentAstronomyMoon;

@@ -10,7 +10,7 @@ const CurrentAstronomySun = ({ astronomy }) => {
                 <div className="col-12 card-custom">
                     <Card.Body>
                         <div className="row">
-                            <div className="col colScssCD1">
+                            <div className="col colScssCD2 colScssCD3">
                                 <div className="leftSide mt-2">
                                     <div className="row mb-1 ">
                                         <div className="col-12 text-center">
@@ -20,21 +20,43 @@ const CurrentAstronomySun = ({ astronomy }) => {
                                     <div className="row mb-2">
                                         <div className="col-6 text-center">
                                             <div className="row">
-                                                <div className="col-5 offset-1">
-                                                    <img src={sunrise} />
+                                                <div className="col-4 offset-1">
+                                                    <div className="row">
+                                                        <img src={sunrise} />
+                                                    </div>
                                                 </div>
-                                                <div className="col-4">
-                                                    <div className="showAstroSunTime">{astronomy.sunrise}</div>
+                                                <div className="col-5">
+                                                    <div className="row">
+                                                        <div className="col showAstroSunTime showAstroTimeTextRight">
+                                                            Mặt trời mọc
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col showAstroTimeTextRight">
+                                                            {astronomy.sunrise}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                         <div className="col-6 text-center">
                                             <div className="row">
-                                                <div className="col-5 offset-1">
-                                                    <img src={sunset} />
+                                                <div className="col-4 offset-1">
+                                                    <div className="row">
+                                                        <img src={sunset} />
+                                                    </div>
                                                 </div>
-                                                <div className="col-4">
-                                                    <div className="showAstroSunTime">{astronomy.sunset}</div>
+                                                <div className="col-5">
+                                                    <div className="row">
+                                                        <div className="col showAstroSunTime showAstroTimeTextRight">
+                                                            Mặt trời lặn
+                                                        </div>
+                                                    </div>
+                                                    <div className="row">
+                                                        <div className="col showAstroTimeTextRight">
+                                                            {astronomy.sunset}
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
