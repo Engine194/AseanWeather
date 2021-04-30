@@ -10,12 +10,17 @@ import { getCurrentRequest } from "../redux/effects/currentEffect";
 import { getAstroRequest } from "../redux/effects/astroEffect";
 import '../scss/currentPage.scss';
 import CurrentAstronomyMoon from "../components/currentAstronomyMoon";
+import { markMenuInComponent, menuType } from "../../data/configMenu";
 
 
 const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest }) => {
 
     // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
     useEffect(() => {
+        // Mark menu
+        markMenuInComponent(menuType.CURRENT);
+
+        // Gọi Api ở đây
         const q = "ha noi"
         getCurrentRequest(q);
         getAstroRequest(q);
@@ -58,6 +63,7 @@ const mapStateToProps = (state) => {
     return {
         propsCurrent: state.currentReducer,
         propsAstro: state.astroReducer,
+        propMenu: state.naviBarReducer,
     }
 }
 
