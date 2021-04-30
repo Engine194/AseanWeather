@@ -4,8 +4,8 @@ import aqi from "../../data/configAQI";
 
 const CurrentAqi = ({ current }) => {
     const values = Object.values(current.air_quality);
-    const usEpaIndex = values[7];
-
+    const usEpaIndex = values[6];
+    console.log("1111111111111",usEpaIndex);
     useEffect(() => {
         aqi.fixColorOfAqi(usEpaIndex, "div.aqi");
     }, []);
