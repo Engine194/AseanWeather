@@ -5,7 +5,7 @@ import aqi from "../../data/configAQI";
 const CurrentAqi = ({ current }) => {
     const values = Object.values(current.air_quality);
     const usEpaIndex = values[6];
-    console.log("1111111111111",usEpaIndex);
+    //console.log("111111111111",usEpaIndex);
     useEffect(() => {
         aqi.fixColorOfAqi(usEpaIndex, "div.aqi");
     }, []);
@@ -17,10 +17,9 @@ const CurrentAqi = ({ current }) => {
                     <Card.Body>
                         <div className="row">
                             <div className="col colScssCD1">
-                                <div className="leftSide mt-1">
+                                <div className="leftSide mt-2">
                                     <div className="row mb-2">
-                                        <div className="col-1 text-center"><i className="fa fa-industry showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-11">
+                                        <div className="col-12 text-center">
                                             <big><b>CHẤT LƯỢNG KHÔNG KHÍ</b></big>
                                         </div>
                                     </div>
@@ -33,7 +32,7 @@ const CurrentAqi = ({ current }) => {
                             </div>
                             <div className="col colScssCD2 colScssCD3">
                                 <div className="leftSide mt-1">
-                                    <div className="row mt-2">
+                                    <div className="row mt-3">
                                         <div className="col text-center">
                                             Ảnh hưởng tới sức khỏe
                                         </div>

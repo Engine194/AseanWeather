@@ -1,8 +1,14 @@
+import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import getFormatDate from "../../data/configDate";
 import getImage128URL from "../../data/configImage";
+import { fixColorByTemp } from "../../data/configTempColor";
 
 const CurrentMain = ({ location, current }) => {
+    useEffect(()=>{
+        fixColorByTemp(current.temp_c, "div.temperature");
+        fixColorByTemp(current.feelslike_c, "div.realFeel");
+    },[])
     return (
         <>
             <div className="row mt-3 mb-1">
@@ -20,7 +26,7 @@ const CurrentMain = ({ location, current }) => {
                                         <b>{current.condition.text}</b>
                                     </div>
                                     <div className="condition-text">
-                                        <small>Độ ẩm {current.humidity}%</small>
+                                        <small>Độ ẩm {current.humidity} %</small>
                                     </div>
                                 </div>
                             </div>
@@ -29,7 +35,7 @@ const CurrentMain = ({ location, current }) => {
                                     <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
                                     <div className="real-feel">
                                         <div className="under-icon"><small>Real Feel</small></div>
-                                        <div className="under-icon">
+                                        <div className="under-icon realFeel">
                                         <small>{current.feelslike_c}<span>&#176;</span>C</small>
                                         </div>
                                     </div>
