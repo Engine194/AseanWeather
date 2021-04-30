@@ -15,7 +15,7 @@ const currentAstronomyMoon = ({astronomy}) => {
                                 <div className="leftSide mt-2">
                                     <div className="row mb-1">
                                         <div className="col-12 text-center">
-                                            <big><b>NGUYỆT VĂN</b></big>
+                                            <big><b>MẶT TRĂNG</b></big>
                                         </div>
                                     </div>
                                     <div className="row mb-2">
