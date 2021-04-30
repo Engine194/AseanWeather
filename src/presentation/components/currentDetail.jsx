@@ -23,7 +23,7 @@ const CurrentDetail = ({ current }) => {
                                             Vận tốc gió
                                         </div>
                                         <div className="col-5 textRight mr-3">
-                                            {current.wind_kph}-{current.gust_mph} m/s
+                                            {current.wind_kph} m/s
                                         </div>
                                     </div>
                                     <div className="row border-bottom mb-3">

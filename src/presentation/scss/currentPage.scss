@@ -79,7 +79,7 @@ $disCP4: 20px;
     font-size: 48px;
     text-align: center;
     margin-bottom: 10px;
-    margin-left: -2%;
+    margin-left: -3%;
 }
 
 .reviewAqi {
@@ -91,6 +91,13 @@ $disCP4: 20px;
 }
 
 .showAstroSunTime {
-    margin-top: 67px;
+    margin-top: 27px;
+}
+
+.showAstroTimeTextRight {
     text-align: right !important;
+}
+
+.showAstroMoonTime {
+    margin-top: 27px;
 }
