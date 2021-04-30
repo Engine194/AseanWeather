@@ -2,9 +2,8 @@ import { Card } from "react-bootstrap";
 import windDirection from "../../data/configWindDirection";
 import '../scss/currentPage.scss';
 
+// Thẻ show ra thông tin chi tiết của thời tiết hiện tại
 const CurrentDetail = ({ current }) => {
-    
-
     return (
         <>
             <div className="row mt-3 mb-2">

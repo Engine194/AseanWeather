@@ -17,21 +17,25 @@ const NaviBar = ({getMenu}) => {
     })
     const history = useHistory();
 
+    // đặt màu
     const rgba = (index1, index2) => {
         return `rgba(${index1},${index1},${index1},${index2})`;
     }
-
+    
+    // đặt màu
     const rgba4 = (index1, index2, index3, index4) => {
         return `rgba(${index1},${index2},${index3},${index4})`;
     }
 
+    // Click vào menu nào thì nó sẽ đậm lên, chuyển nền trắng và chuyển sang path khác
     const markMenu = (element, path) => {
         document.querySelector(element).style.backgroundColor = rgba(255,1);
         document.querySelector(element).style.color = rgba4(255, 0, 0, 1);
-        document.querySelector(element).style.borderBottomColor =  rgba4(255, 0, 0, 1);
+        // document.querySelector(element).style.borderBottomColor =  rgba4(255, 0, 0, 1);
         history.push(path);
     }
 
+    // bỏ chọn element thì nó sẽ chuyển sang màu nền và nhạt đi
     const unmarkMenu = (element) => {
         document.querySelector(element).style.backgroundColor = rgba(235, 1);
         document.querySelector(element).style.color = rgba(0, 0.5);
@@ -82,7 +86,7 @@ const NaviBar = ({getMenu}) => {
         markMenu("button.btnJS4","/home");
     }
 
-    // Đưa action vào useEffect với đk thay đổi is*Clicked thì mới chạy
+    // Đưa action vào useEffect với đk thay đổi is*Clicked *=1,2,3,4 thì mới chạy
     useEffect(() => {
         // Ban đầu khi tải lại trang, mặc định sẽ chọn vào current(menu1)
         if (!is1Clicked
@@ -104,7 +108,7 @@ const NaviBar = ({getMenu}) => {
             })
         }
         
-        // gọi action lấy danh sách menu đã được chọn
+        // gọi action đưa danh sách menu đã được chọn và store
         getMenu(payload);
     }, [is1Clicked, is2Clicked, is3Clicked, is4Clicked]);
 

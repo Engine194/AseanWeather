@@ -4,11 +4,18 @@ import getFormatDate from "../../data/configDate";
 import getImage128URL from "../../data/configImage";
 import { fixColorByTemp } from "../../data/configTempColor";
 
+// Thẻ show ra thông tin thời tiết chung của địa phương
 const CurrentMain = ({ location, current }) => {
+    
+    // Gọi một số hàm xử lý kết quả khi khởi tạo trang
     useEffect(()=>{
+        // Đổi màu hiển thị của nhiệt độ tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.temp_c, "div.temperature");
+
+        // Đổi màu hiển thị real feel tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.feelslike_c, "div.realFeel");
     },[])
+
     return (
         <>
             <div className="row mt-3 mb-1">

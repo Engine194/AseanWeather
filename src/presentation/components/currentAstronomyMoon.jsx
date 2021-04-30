@@ -3,6 +3,7 @@ import { moonPhaseToVi } from "../../data/configMoonphase";
 import moonrise from "../../data/weatherImgs/moonrise.png";
 import moonset from "../../data/weatherImgs/moonset.png";
 
+// Thẻ show ra thông tin thiên văn của mặt trăng
 const currentAstronomyMoon = ({astronomy}) => {
     return (
         <>
