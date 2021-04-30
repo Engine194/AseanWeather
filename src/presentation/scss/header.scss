@@ -1,11 +1,9 @@
 $disH1: 62px;
-$bgH1: rgba(0,0,0,1);
 $fontSizeH1: 24px;
 $fontSizeH2: 12px;
 
 .rowScssH1 {
     height: $disH1;
-    background-color: $bgH1;
 }
 
 .searchScssH1 {
@@ -14,6 +12,11 @@ $fontSizeH2: 12px;
 
 .groupScssH1 {
     margin-top: $fontSizeH2;
-    position: "relative";
-    left: 10px;
+    float: right;
+    margin-right: -10px;
+}
+
+.login:hover {
+    color: white !important;
+    background-color: rgb(156,34,93) !important;
 }

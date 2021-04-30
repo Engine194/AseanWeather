@@ -20,8 +20,11 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
         getCurrentRequest(q);
         getAstroRequest(q);
     }, [])
-    console.log("Astro", propsAstro);
-    console.log("Current", propsCurrent);
+
+    // Kiểm tra dữ liệu trả vể
+    // console.log("Astro", propsAstro);
+    // console.log("Current", propsCurrent);
+
     // Check xem trong store đã có dữ liệu trả về chưa, nếu chưa thì cho hiển thi màn hình loading ...
     if (propsCurrent.success == 1) {
         if (propsAstro.success == 0) {
@@ -48,9 +51,9 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
         );
     }
 }
-    
 
 
+// Lấy state của currentReducer và astroReducer từ store ra
 const mapStateToProps = (state) => {
     return {
         propsCurrent: state.currentReducer,
@@ -58,6 +61,7 @@ const mapStateToProps = (state) => {
     }
 }
 
+// Đẩy hai action lấy api thời tiết hiện tại và thông tin thiên văn vào props của component
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getCurrentRequest,
     getAstroRequest,

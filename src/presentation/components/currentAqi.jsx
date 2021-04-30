@@ -2,11 +2,14 @@ import { useEffect } from "react";
 import { Card } from "react-bootstrap";
 import aqi from "../../data/configAQI";
 
+// Thẻ show ra thông tin của chất lượng không khí (AQI)
 const CurrentAqi = ({ current }) => {
+    // Lấy ra chỉ số us-epa-index trong kết quả trả về
     const values = Object.values(current.air_quality);
     const usEpaIndex = values[6];
-    //console.log("111111111111",usEpaIndex);
+    
     useEffect(() => {
+        // Đổi màu hiển thị đánh giá AQI tùy vào mức độ ô nhiễm
         aqi.fixColorOfAqi(usEpaIndex, "div.aqi");
     }, []);
 

@@ -2,6 +2,7 @@ import { Card } from "react-bootstrap";
 import sunrise from "../../data/weatherImgs/sunrise.png";
 import sunset from "../../data/weatherImgs/sunset.png";
 
+// Thẻ show ra thông tin thiên văn của mặt trời
 const CurrentAstronomySun = ({ astronomy }) => {
     return (
         <>
