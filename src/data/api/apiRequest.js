@@ -44,9 +44,21 @@ const getForecast3daysByCity = q => {
     return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
 }
 
+const getHourlyByCity = q => {
+    parameters = {
+        ...parameters,
+        q,
+        days: 1,
+    }
+
+    return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
+}
+
 export { convertCity,
             getCurrentByCity,
             getAstronomyByCity,
             getForecast3daysByCity,
+            getHourlyByCity,
              };
+
 
