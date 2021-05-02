@@ -22,7 +22,7 @@ const CurrentAstronomySun = ({ astronomy }) => {
                                             <div className="row">
                                                 <div className="col-4 offset-1">
                                                     <div className="row">
-                                                        <img src={sunrise} />
+                                                        <img src={sunrise} alt="icon sunrise"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-5">
@@ -43,7 +43,7 @@ const CurrentAstronomySun = ({ astronomy }) => {
                                             <div className="row">
                                                 <div className="col-4 offset-1">
                                                     <div className="row">
-                                                        <img src={sunset} />
+                                                        <img src={sunset} alt="icon sunset"/>
                                                     </div>
                                                 </div>
                                                 <div className="col-5">

@@ -6,7 +6,6 @@ export const getHourlyRequest = q => {
     return (dispatch) => {
         q = convertCity(q);
         getHourlyByCity(q).then(resolve => {
-            console.log(resolve);
             dispatch(hourlyAction.getHourlySuccess(resolve));    
         }).catch(err => {
             dispatch(hourlyAction.getHourlyFail(err));
