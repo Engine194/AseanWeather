@@ -8,24 +8,24 @@ const initialState = {
     success: 0,
     error: '',
     data: {}
-  };
+};
 
 export default function hourlyReducer(state = initialState, action) {
     switch (action.type) {
-        case hourlyActionType.GET_HOURLY_SUCCESS :
-            debugger
-           const hourlyList = getHourlyList(action.payload.forecast.forecastday[0].hour);
+        case hourlyActionType.GET_HOURLY_SUCCESS:
+            // Em đang làm gì ở đây
+            const hourlyList = getHourlyList(action.payload.forecast.forecastday[0].hour);
             return {
                 ...state,
                 loading: false,
                 loaded: true,
-                success:  1,
+                success: 1,
                 data: {
                     hourly: action.payload,
                     hourlyList,
                 }
             }
-        case hourlyActionType.GET_HOURLY_FAIL :
+        case hourlyActionType.GET_HOURLY_FAIL:
             return {
                 ...state,
                 loading: false,

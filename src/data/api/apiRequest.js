@@ -54,11 +54,12 @@ const getHourlyByCity = q => {
     return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
 }
 
-export { convertCity,
-            getCurrentByCity,
-            getAstronomyByCity,
-            getForecast3daysByCity,
-            getHourlyByCity,
-             };
+export {
+    convertCity,
+    getCurrentByCity,
+    getAstronomyByCity,
+    getForecast3daysByCity,
+    getHourlyByCity,
+};
 
 

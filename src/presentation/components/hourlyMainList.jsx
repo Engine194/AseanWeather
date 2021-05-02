@@ -1,11 +1,11 @@
 import HourlyMain from "../components/hourlyMain";
-const HourlyMainList = ({hourlyList,location}) => {
+const HourlyMainList = ({hourlyList}) => {
     return(
     <>
         {
             hourlyList.map(item => {
               return (
-                <HourlyMain location={location} hour={item} />
+                <HourlyMain key={item.time_epoch} hour={item} />
               );  
             })
         }
