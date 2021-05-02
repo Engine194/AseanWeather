@@ -10,10 +10,10 @@ const HourlyMain = ({ hour }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     return (
-        <> <div className="row mt-3">
-            <div className="col-12 colScss1"  >
-                <div className="row" style={{ margin: 15 }}>
-                    <div className="col-1" >
+        <> <div className="row mt-3" >
+            <div className="col-12 colScss1">
+                <div className="row mgMain">
+                    <div className="col-1">
                             <div className="mgHour">
                                 {getFormatDate(hour.time).time}
                             </div>
@@ -65,7 +65,7 @@ const HourlyMain = ({ hour }) => {
                 </div>
                 <div>
                     <Collapse isOpen={isOpen}>
-                        <Card style={{ marginBottom: 10 }}>
+                        <Card className="mgCard">
                             <CurrentDetail current={hour}/>
                         </Card>
                     </Collapse>

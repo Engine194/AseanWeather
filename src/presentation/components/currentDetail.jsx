@@ -37,10 +37,10 @@ const CurrentDetail = ({ current }) => {
                                     </div>
                                     <div className="row border-bottom mb-3">
                                         <div className="col-1 text-center"><i className="fa fa-thermometer-empty showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-6">
+                                        <div className="col-7">
                                             Áp suất khí quyển
                                         </div>
-                                        <div className="col-5 textRight mr-3">
+                                        <div className="col-4 textRight mr-3">
                                             {current.pressure_mb} mb
                                         </div>
                                     </div>
