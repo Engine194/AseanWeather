@@ -8,7 +8,7 @@ const axiosType = {
 const apiKey = "effc8583cba94b22b7b32127212204";
 
 const baseUrlWA = "https://api.weatherapi.com/v1";
-const baseUrlBE = "http://localhost:8080/api/v1";
+const baseUrlBE = "https://asean-weather-api.herokuapp.com/api/v1";
 
 // Khởi tạo parameters để get kèm param (lang, key, id, q, aqi, ...)
 let parameters = {
