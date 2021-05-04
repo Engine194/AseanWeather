@@ -1,12 +1,13 @@
-import logo from './../../Assets/logo.png';
-import background from './../../Assets/Backgroup.jpg';
+import logo from '../../data/weatherImgs/logo.png';
+import background from '../../data/weatherImgs/Backgroup.jpg';
 import React from 'react';
-import './HomeHeader.css';
+import SearchPage from '../pages/searchPage';
+import '../css/HomeHeader.css';
 
 // import { func } from 'prop-types';
-import Search from './../components/Search/Search';
 
-const HeaderHome = (props) =>
+
+const HeaderHome = () =>
 {
     return (
         <div className="Home_header"
@@ -16,7 +17,7 @@ const HeaderHome = (props) =>
                 <img src={logo} alt="" />
             </div>
             <div className="Home_search">
-              <Search/>
+              <SearchPage/>
             </div>
             <div className="Home_login">
                 <button type="button"  >LOGIN</button>

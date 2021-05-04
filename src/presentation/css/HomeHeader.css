@@ -22,12 +22,14 @@
     border-radius: 10px;
 }
 
+.Homebody_font>h4 {
+    float: left;
+}
 
-
-.Homebody_font>h3{
+/* .Homebody_font>h3{
     float: left;
     font-size: 28px;
-}
+} */
 
 .Homebody_font>h5{
     font-size: 15px;
@@ -36,9 +38,9 @@
 
 }
 
-.Homebody_font>h2{
+.Homebody_font>h3{
     float: center;
-    font-size: 150px;
+    font-size: 120px;
     color: #36f;
 }
 
@@ -47,4 +49,9 @@
     font-size: 20px;
     line-height: 25px;
     font-weight: 600;
+}
+
+.center {
+    text-align: center !;
+    
 }

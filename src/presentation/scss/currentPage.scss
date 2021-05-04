@@ -1,6 +1,7 @@
 $disCP1: 30px;
 $disCP2: 20px;
-$disCP3: 25px;
+$disCP3: 24px;
+$disCP4: 20px;
 .leftSide {
     
     position: relative;
@@ -18,8 +19,7 @@ $disCP3: 25px;
 
 .real-feel {
     font-size: $disCP2;
-    position: relative;
-    left: 1.5%;
+    margin-left: 1.5%;
 }
 .temperature {
     margin-top: -20px;
@@ -30,8 +30,8 @@ $disCP3: 25px;
 
 .condition-text {
     font-size: $disCP2;
-    position: relative;
-    left: 1.5%;
+    margin-left: -8%;
+    color:rgb(156,34,93);
 }
 
 .condition-img {
@@ -52,4 +52,52 @@ $disCP3: 25px;
 .showIconDetail {
     font-size: $disCP3;
     color:rgb(156,34,93);
+}
+
+.showIconDetail1{
+    font-size: $disCP4;
+    color:rgb(156,34,93);
+}
+
+.border-bottom {
+    border-bottom: 2px solid black;
+}
+
+.colScssCD1 {
+    margin-right: 7%;
+}
+
+.colScssCD2 {
+    margin-left: -4%;
+}
+
+.colScssCD3 {
+    margin-right: 4%
+}
+
+.showAqi {
+    font-size: 48px;
+    text-align: center;
+    margin-bottom: 10px;
+    margin-left: -3%;
+}
+
+.reviewAqi {
+    text-align: justify;
+}
+
+.showAstroIcon {
+    margin-top: -10px;
+}
+
+.showAstroSunTime {
+    margin-top: 27px;
+}
+
+.showAstroTimeTextRight {
+    text-align: right !important;
+}
+
+.showAstroMoonTime {
+    margin-top: 27px;
 }

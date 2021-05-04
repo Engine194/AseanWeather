@@ -3,8 +3,9 @@ import "../scss/navBar.scss";
 import { connect } from "react-redux";
 import getMenuAction from "../redux/actions/navBarAction";
 import { useHistory } from "react-router";
+import { prepareToMarkMenu, unmarkMenu } from "../../data/configMenu";
 
-const NaviBar = ({ getMenu, propsMenu }) => {
+const NaviBar = ({ getMenu }) => {
     const [is1Clicked, setIs1Clicked] = useState(false);
     const [is2Clicked, setIs2Clicked] = useState(false);
     const [is3Clicked, setIs3Clicked] = useState(false);
@@ -17,30 +18,17 @@ const NaviBar = ({ getMenu, propsMenu }) => {
     })
     const history = useHistory();
 
-    const rgba = (index1, index2) => {
-        return `rgba(${index1},${index1},${index1},${index2})`;
-    }
-
-    const rgba4 = (index1, index2, index3, index4) => {
-        return `rgba(${index1},${index2},${index3},${index4})`;
-    }
-
+    // Click vào menu nào thì nó sẽ đậm lên, chuyển nền trắng và chuyển sang path khác
     const markMenu = (element, path) => {
-        document.querySelector(element).style.backgroundColor = rgba(255,1);
-        document.querySelector(element).style.color = rgba4(255, 0, 0, 1);
-        document.querySelector(element).style.borderBottomColor =  rgba4(255, 0, 0, 1);
+        prepareToMarkMenu(element);
+        // document.querySelector(element).style.borderBottomColor =  rgba4(255, 0, 0, 1);
         history.push(path);
-    }
-
-    const unmarkMenu = (element) => {
-        document.querySelector(element).style.backgroundColor = rgba(235, 1);
-        document.querySelector(element).style.color = rgba(0, 0.5);
     }
 
     // click vào menu1 thì đổi nền menu1 và khóa hết các menu còn lại. Tương tự với các hàm bên dưới
     const handleClick1 = () => {
         setIs1Clicked(true);
-        markMenu("button.btnJS1","/main/current");
+        markMenu("button.btnJS1", "/main/current");
         setIs2Clicked(false);
         unmarkMenu("button.btnJS2");
         setIs3Clicked(false);
@@ -53,7 +41,7 @@ const NaviBar = ({ getMenu, propsMenu }) => {
         setIs1Clicked(false);
         unmarkMenu("button.btnJS1");
         setIs2Clicked(true);
-        markMenu("button.btnJS2","/main/hours");
+        markMenu("button.btnJS2", "/main/hours");
         setIs3Clicked(false);
         unmarkMenu("button.btnJS3");
         setIs4Clicked(false);
@@ -79,10 +67,10 @@ const NaviBar = ({ getMenu, propsMenu }) => {
         setIs3Clicked(false);
         unmarkMenu("button.btnJS3");
         setIs4Clicked(true);
-        markMenu("button.btnJS4","/home");
+        markMenu("button.btnJS4", "/home");
     }
 
-    // Đưa action vào useEffect với đk thay đổi is*Clicked thì mới chạy
+    // Đưa action vào useEffect với đk thay đổi is*Clicked *=1,2,3,4 thì mới chạy
     useEffect(() => {
         // Ban đầu khi tải lại trang, mặc định sẽ chọn vào current(menu1)
         if (!is1Clicked
@@ -103,8 +91,8 @@ const NaviBar = ({ getMenu, propsMenu }) => {
                 menu4: is4Clicked,
             })
         }
-        
-        // gọi action lấy danh sách menu đã được chọn
+
+        // gọi action đưa danh sách menu đã được chọn và store
         getMenu(payload);
     }, [is1Clicked, is2Clicked, is3Clicked, is4Clicked]);
 
@@ -135,16 +123,10 @@ const NaviBar = ({ getMenu, propsMenu }) => {
     );
 }
 
-const mapStateToProps = (state) => {
-    return {
-        propsMenu: state.naviBarReducer,
-    }
-}
-
 const mapDispatchToProps = (dispatch) => {
     return {
         getMenu: (payload) => dispatch(getMenuAction(payload))
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NaviBar);
+export default connect(null, mapDispatchToProps)(NaviBar);
