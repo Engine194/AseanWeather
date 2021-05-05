@@ -11,19 +11,39 @@ import { getAstroRequest } from "../redux/effects/astroEffect";
 import '../scss/currentPage.scss';
 import CurrentAstronomyMoon from "../components/currentAstronomyMoon";
 import { markMenuInComponent, menuType } from "../../data/configMenu";
+import { useHistory } from 'react-router';
 
 
-const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest }) => {
-
+const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest, propsSearch }) =>
+{
+    const history = useHistory();
     // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
-    useEffect(() => {
+    useEffect(() =>
+    {
         // Mark menu
         markMenuInComponent(menuType.CURRENT);
+        if (propsSearch.success == 1) {
+            if (propsSearch.data.search) {
+                // Gọi Api ở đây
+                const q = propsSearch.data.search.name;
+                getCurrentRequest(q);
+                getAstroRequest(q);
+            }
+        }else {
+            console.log('localStorage');
+            const cityName = localStorage.getItem("cityName");
+            console.log("11111", cityName);
+            if (cityName) {
+                getCurrentRequest(cityName);
+                getAstroRequest(cityName);
+            } else {
+                history.push({
+                    pathname: "/",
+                })
+            }
+        }
 
-        // Gọi Api ở đây
-        const q = "ha noi"
-        getCurrentRequest(q);
-        getAstroRequest(q);
+
     }, [])
 
     // Kiểm tra dữ liệu trả vể
@@ -59,11 +79,13 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
 
 
 // Lấy state của currentReducer và astroReducer từ store ra
-const mapStateToProps = (state) => {
+const mapStateToProps = (state) =>
+{
     return {
         propsCurrent: state.currentReducer,
         propsAstro: state.astroReducer,
         propMenu: state.naviBarReducer,
+        propsSearch: state.searchReducer,
     }
 }
 

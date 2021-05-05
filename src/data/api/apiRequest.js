@@ -1,5 +1,6 @@
 import { axiosClient as Api, parameters as parameterImport, axiosType } from ".";
 import urlWA from "./urlWA";
+import urlBE from "./urlBE";
 
 // Xử lý tham số q (thành phố) để đưa vào api
 const convertCity = city => {
@@ -54,12 +55,32 @@ const getHourlyByCity = q => {
     return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
 }
 
+const getDailyByCity = q => {
+    parameters = {
+        ...parameters,
+        q,
+        days: 3,
+    }
+
+    return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
+}
+
+const getSearch = searchValue =>
+{
+    // const parameters = {
+    //     search: searchValue,
+    // }
+    return Api(axiosType.BE).get(`${urlBE.SEARCH}/${searchValue}`) //{ params: parameters })
+}
+
 export {
     convertCity,
     getCurrentByCity,
     getAstronomyByCity,
     getForecast3daysByCity,
     getHourlyByCity,
+    getSearch,
+    getDailyByCity,
 };
 
 

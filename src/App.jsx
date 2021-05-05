@@ -5,13 +5,16 @@ import store from "./presentation/redux/store/index";
 import {BrowserRouter, Route } from 'react-router-dom';
 import HomePage from "./presentation/pages/homePage";
 import Routes from "./presentation/routes/routes";
+import HeaderHome from "./presentation/layouts/headerHome";
+import HomeBody from "./presentation/layouts/homeBody";
+import Footer from "./presentation/layouts/footer";
+
 
 const App = () => (
   <Provider store={store}>
     <BrowserRouter>
       <Route path="/main/*" component={Routes}/>
-      <Route path="/home" exact render={(props)=> <HomePage {...props}/>} ></Route>
-      
+      <Route path="/" exact render={(props) => <HomePage {...props} Header={HeaderHome} HomeBody={HomeBody} Footer={Footer}/>} ></Route>
     </BrowserRouter>
   </Provider>
 );

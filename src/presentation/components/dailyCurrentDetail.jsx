@@ -3,7 +3,7 @@ import windDirection from "../../data/configWindDirection";
 import '../scss/currentPage.scss';
 
 // Thẻ show ra thông tin chi tiết của thời tiết hiện tại
-const CurrentDetail = ({ current }) => {
+const DailyCurrentDetail = ({ current }) => {
     return (
         <>
             <div className="row mt-3 mb-2">
@@ -14,34 +14,25 @@ const CurrentDetail = ({ current }) => {
                                 <big><b>THÔNG TIN CHI TIẾT</b></big>
                             </div>
                         </div>
-                        <div className="row">
+                        <div className="row border_bottom">
                             <div className="col colScssCD1">
                                 <div className="leftSide mt-1">
                                     <div className="row border-bottom mb-3">
                                         <div className="col-1 text-center"><i className="fa fa-superpowers showIconDetail" aria-hidden="true"></i></div>
                                         <div className="col-6">
-                                            Vận tốc gió
+                                            Vận tốc gió 
                                         </div>
                                         <div className="col-5 textRight mr-3">
-                                            {current.wind_kph} m/s
+                                            {current.maxwind_kph} m/s
                                         </div>
                                     </div>
                                     <div className="row border-bottom mb-3">
                                         <div className="col-1 text-center"><i className="fa fa-location-arrow showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-4">
-                                            Gió hướng
+                                        <div className="col-5">
+                                            Lượng mưa dự báo
                                         </div>
-                                        <div className="col-7 textRight mr-3">
-                                            {windDirection(current.wind_dir)}
-                                        </div>
-                                    </div>
-                                    <div className="row border-bottom mb-3">
-                                        <div className="col-1 text-center"><i className="fa fa-thermometer-empty showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-6">
-                                            Áp suất khí quyển
-                                        </div>
-                                        <div className="col-5 textRight mr-3">
-                                            {current.pressure_mb} mb
+                                        <div className="col-6 textRight mr-3">
+                                            {current.totalprecip_mm} mm
                                         </div>
                                     </div>
                                 </div>
@@ -54,7 +45,7 @@ const CurrentDetail = ({ current }) => {
                                             Tầm nhìn
                                         </div>
                                         <div className="col-5 textRight">
-                                            {current.vis_km} km
+                                            {current.avgvis_km} km
                                         </div>
                                     </div>
                                     <div className="row border-bottom mb-3">
@@ -66,15 +57,7 @@ const CurrentDetail = ({ current }) => {
                                             {current.uv}
                                         </div>
                                     </div>
-                                    <div className="row border-bottom mb-3">
-                                        <div className="col-1 text-center"><i className="fa fa-cloud showIconDetail" aria-hidden="true"></i></div>
-                                        <div className="col-6">
-                                            Mây che phủ
-                                        </div>
-                                        <div className="col-5 textRight">
-                                            {current.cloud} %
-                                        </div>
-                                    </div>
+                                   
                                 </div>
                             </div>
                         </div>
@@ -85,4 +68,4 @@ const CurrentDetail = ({ current }) => {
     );
 }
 
-export default CurrentDetail;
+export default DailyCurrentDetail;
