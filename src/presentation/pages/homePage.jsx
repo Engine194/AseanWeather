@@ -1,18 +1,9 @@
-const HomePage = ({ Header, Footer, HomeBody }) =>
-{
+import HeaderHome from "../layouts/headerHome";
+
+const HomePage = () => {
     return (
         <>
-            <div className="container-fluid">
-                <div className="row">
-                    <Header />
-                </div>
-                <div className="row">
-                    <HomeBody />
-                </div>
-                <div className="row">
-                    <Footer />
-                </div>
-            </div>
+            <HeaderHome/>            
         </>
     );
 }

@@ -41,7 +41,7 @@ const CurrentMain = ({ location, current }) => {
                                 <div className="condition-img">
                                     <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
                                     <div className="real-feel">
-                                        <div className="under-icon"><small>Cảm giác thực tế</small></div>
+                                        <div className="under-icon"><small>Real Feel</small></div>
                                         <div className="under-icon realFeel">
                                         <small>{current.feelslike_c}<span>&#176;</span>C</small>
                                         </div>
