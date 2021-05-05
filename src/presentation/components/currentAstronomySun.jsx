@@ -5,6 +5,8 @@ import sunset from "../../data/weatherImgs/sunset.png";
 const CurrentAstronomySun = ({ astronomy }) => {
     return (
         <>
+             <div className="row mt-3 mb-2">
+        <div className="col-12 card-custom">
             <div className="row">
                 <div className="col colScssCD2 colScssCD3">
                     <div className="leftSide mt-2">
@@ -60,6 +62,8 @@ const CurrentAstronomySun = ({ astronomy }) => {
                     </div>
                 </div>
             </div>
+            </div>
+                        </div>
         </>
     );
 }
