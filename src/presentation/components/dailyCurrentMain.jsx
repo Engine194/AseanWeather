@@ -6,15 +6,15 @@ import { fixColorByTemp } from "../../data/configTempColor";
 
 // Thẻ show ra thông tin thời tiết chung của địa phương
 const DailyCurrentMain = ({ current }) => {
-    
+
     // Gọi một số hàm xử lý kết quả khi khởi tạo trang
-    useEffect(()=>{
+    useEffect(() => {
         // Đổi màu hiển thị của nhiệt độ tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.temp_c, "div.temperature");
 
         // Đổi màu hiển thị real feel tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.feelslike_c, "div.realFeel");
-    },[])
+    }, [])
 
     return (
         <>
@@ -36,12 +36,22 @@ const DailyCurrentMain = ({ current }) => {
                                 </div>
                             </div>
                             <div className="col text-center">
-                                <div className="conditionimgDP1">
-                                    <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
-                                    <div className="real-feel">
-                                        <div className="under-icon"><small>Biên độ nhiệt</small></div>
-                                        <div className="under-icon realFeel">
-                                        <small>{current.maxtemp_c}<span>&#176;</span>C / {current.mintemp_c}<span>&#176;</span>C</small>
+                                <div className="row">
+                                    <div className="col-12">
+                                        <div className="row">
+                                            <div className="col conditionimgDP1">
+                                                <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
+                                                <div className="real-feel">
+                                                    <div className="row">
+                                                        <div className="col">
+                                                            <small>Biên độ nhiệt</small>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row under-icon realFeel">
+                                                        <small>{current.maxtemp_c}<span>&#176;</span>C / {current.mintemp_c}<span>&#176;</span>C</small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

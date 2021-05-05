@@ -6,15 +6,15 @@ import { fixColorByTemp } from "../../data/configTempColor";
 
 // Thẻ show ra thông tin thời tiết chung của địa phương
 const CurrentMain = ({ location, current }) => {
-    
+
     // Gọi một số hàm xử lý kết quả khi khởi tạo trang
-    useEffect(()=>{
+    useEffect(() => {
         // Đổi màu hiển thị của nhiệt độ tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.temp_c, "div.temperature");
 
         // Đổi màu hiển thị real feel tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.feelslike_c, "div.realFeel");
-    },[])
+    }, [])
 
     return (
         <>
@@ -22,7 +22,7 @@ const CurrentMain = ({ location, current }) => {
                 <div className="col-12 card-custom">
                     <Card.Body>
                         <div className="row">
-                            <div className="col text-center">
+                            <div className="col-6 text-center">
                                 <div className="leftSide mt-1">
                                     <Card.Title>{location.name}, {location.country}</Card.Title>
                                     <Card.Subtitle className="text-muted">Cập nhật lần cuối: {getFormatDate(current.last_updated).time} {getFormatDate(current.last_updated).date}</Card.Subtitle>
@@ -37,13 +37,23 @@ const CurrentMain = ({ location, current }) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="col text-center">
-                                <div className="condition-img">
-                                    <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
-                                    <div className="real-feel">
-                                        <div className="under-icon"><small>Real Feel</small></div>
-                                        <div className="under-icon realFeel">
-                                        <small>{current.feelslike_c}<span>&#176;</span>C</small>
+                            <div className="col-6 text-center">
+                                <div className="row condition-img">
+                                    <div className="col-12">
+                                        <div className="row">
+                                            <div className="col">
+                                                <img src={getImage128URL(current.condition.icon)} alt="Icon Weather" />
+                                                <div className="real-feel">
+                                                    <div className="row">
+                                                        <div className="col">
+                                                            <small>Cảm giác thực tế</small>
+                                                        </div>
+                                                    </div>
+                                                    <div className="row under-icon realFeel">
+                                                        <small>{current.feelslike_c}<span>&#176;</span>C</small>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
