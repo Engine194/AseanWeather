@@ -1,4 +1,3 @@
-import { Card } from "react-bootstrap";
 import { moonPhaseToVi } from "../../data/configMoonphase";
 import moonrise from "../../data/weatherImgs/moonrise.png";
 import moonset from "../../data/weatherImgs/moonset.png";
@@ -7,9 +6,6 @@ import moonset from "../../data/weatherImgs/moonset.png";
 const currentAstronomyMoon = ({ astronomy }) => {
     return (
         <>
-            <div className="row mt-3 mb-1">
-                <div className="col-12 card-custom">
-                    <Card.Body>
                         <div className="row">
                             <div className="col colScssCD2 colScssCD3">
                                 <div className="leftSide mt-2">
@@ -94,9 +90,6 @@ const currentAstronomyMoon = ({ astronomy }) => {
                                 </div>
                             </div>
                         </div>
-                    </Card.Body>
-                </div>
-            </div>
         </>
     );
 }
