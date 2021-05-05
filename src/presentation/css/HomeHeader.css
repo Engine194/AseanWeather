@@ -3,7 +3,7 @@
     flex-wrap: nowrap;
     background-color: #CCC;
     justify-content:center;
-    margin-left: -50px;
+    margin-left: 0px;
    
 
 }
@@ -12,7 +12,7 @@
     background-color: white;
     width: 19%;
     margin-top: 50px;
-    margin-bottom: 50px;
+    margin-bottom: 20px;
     margin-left:50px;
     text-align: center;
     line-height: 60px;
@@ -44,14 +44,13 @@
     color: #36f;
 }
 
-.Homebody_font>p{
+.Homebody_font>div{
     float: left;
     font-size: 20px;
     line-height: 25px;
-    font-weight: 600;
+    font-weight: 450;
 }
 
 .center {
     text-align: center !important;
-    
 }

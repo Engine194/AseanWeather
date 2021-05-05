@@ -29,7 +29,7 @@ const CurrentDetail = ({ current }) => {
                                     <div className="row border-bottom mb-3">
                                         <div className="col-1 text-center"><i className="fa fa-location-arrow showIconDetail" aria-hidden="true"></i></div>
                                         <div className="col-4">
-                                            Gió hướng
+                                            Hướng gió
                                         </div>
                                         <div className="col-7 textRight mr-3">
                                             {windDirection(current.wind_dir)}

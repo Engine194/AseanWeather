@@ -7,6 +7,7 @@ const HourlyBody = ({ location, hourlyList }) => {
             <div className="col-12 card-custom">
                 <div className="leftSizeHour">
                     <div className="colScss4"> <b>Thời tiết hàng giờ</b></div>
+                    <div style={{ color: "GrayText" }}>{location.name}, {location.country}</div>
                     <div className="colorLocaltime">Kể từ {location.localtime}</div>
                 </div>
                 <HourlyMainList hourlyList={hourlyList} />

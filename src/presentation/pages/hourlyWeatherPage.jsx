@@ -4,11 +4,32 @@ import { bindActionCreators } from 'redux';
 import { getHourlyRequest } from "../redux/effects/hourlyEffect";
 import Loading from "../components/loading";
 import HourlyBody from "../components/hourlyBody";
+import { useHistory } from 'react-router';
 
-const HourlyWeatherPage = ({ getHourlyRequest, propsHourly }) => {
+const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
     
+    const history = useHistory();
+
     useEffect(() => {
-        getHourlyRequest("ha noi");
+        if (propsSearch.success == 1) {
+            if (propsSearch.data.search) {
+                console.log(propsSearch.data.search.name);
+                // Gọi Api ở đây
+                const q = propsSearch.data.search.name;
+                getHourlyRequest(q);
+            }
+            
+        } else {
+            console.log('localStorage');
+            const cityName = localStorage.getItem("cityName");
+            if (cityName) {
+                getHourlyRequest(cityName);
+            } else {
+                history.push({
+                    pathname: "/",
+                })
+            }
+        }
     }, [])
     
     // Kiểm tra data
@@ -33,6 +54,7 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly }) => {
 const mapStateToProps = (state) => {
     return {
         propsHourly: state.hourlyReducer,
+        propsSearch: state.searchReducer,
     }
 }
 
