@@ -20,7 +20,7 @@ const DailyCurrentDetail = ({ current }) => {
                                     <div className="row border-bottom mb-3">
                                         <div className="col-1 text-center"><i className="fa fa-superpowers showIconDetail" aria-hidden="true"></i></div>
                                         <div className="col-6">
-                                            Vận tốc gió 
+                                            Vận tốc gió
                                         </div>
                                         <div className="col-5 textRight mr-3">
                                             {current.maxwind_kph} m/s
@@ -57,7 +57,7 @@ const DailyCurrentDetail = ({ current }) => {
                                             {current.uv}
                                         </div>
                                     </div>
-                                   
+
                                 </div>
                             </div>
                         </div>
