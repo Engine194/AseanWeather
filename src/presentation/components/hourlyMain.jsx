@@ -2,9 +2,7 @@ import { Collapse, Card } from 'reactstrap';
 import React, { useState } from 'react';
 import getFormatDate from '../../data/configDate';
 import "../scss/hourlyPage.scss";
-import CurrentDetail from './currentDetail';
-
-
+import HourlyDetail from './hourlyDetail';
 
 const HourlyMain = ({ hour }) => {
     const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +64,7 @@ const HourlyMain = ({ hour }) => {
                 <div>
                     <Collapse isOpen={isOpen}>
                         <Card className="mgCard">
-                            <CurrentDetail current={hour}/>
+                            <HourlyDetail hour={hour}/>
                         </Card>
                     </Collapse>
                 </div>

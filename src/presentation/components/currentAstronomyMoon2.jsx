@@ -3,11 +3,11 @@ import moonrise from "../../data/weatherImgs/moonrise.png";
 import moonset from "../../data/weatherImgs/moonset.png";
 
 // Thẻ show ra thông tin thiên văn của mặt trăng
-const currentAstronomyMoon = ({ astronomy }) => {
+const currentAstronomyMoon2 = ({ astronomy }) => {
     return (
         <>
             <div className="row mt-3 mb-2">
-                <div className="col-12 card-custom">
+                <div className="col-12">
                     <div className="row">
                         <div className="col colScssCD2 colScssCD3">
                             <div className="leftSide mt-2">
@@ -99,4 +99,4 @@ const currentAstronomyMoon = ({ astronomy }) => {
     );
 }
 
-export default currentAstronomyMoon;
+export default currentAstronomyMoon2;

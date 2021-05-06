@@ -4,10 +4,10 @@ import getFormatDate from '../../data/configDate';
 import "../scss/hourlyPage.scss";
 import CurrentDetail from './currentDetail';
 import CurrentAqi from './currentAqi';
-import CurrentAstronomySun from './currentAstronomySun';
-import CurrentAstronomyMoon from './currentAstronomyMoon';
 import DailyCurrentMain from './dailyCurrentMain';
 import DailyCurrentDetail from './dailyCurrentDetail';
+import CurrentAstronomySun2 from './currentAstronomySun2';
+import CurrentAstronomyMoon2 from './currentAstronomyMoon2';
 
 
 
@@ -88,8 +88,8 @@ const DailyMain = ({ forecastDay }) =>
                                 <Card style={{ marginBottom: 10 }}>
                                     <DailyCurrentMain current={forecastDay.day} />
                                     <DailyCurrentDetail current={forecastDay.day}/>
-                                    <CurrentAstronomySun astronomy={forecastDay.astro} />
-                                    <CurrentAstronomyMoon astronomy={forecastDay.astro} />
+                                    <CurrentAstronomySun2 astronomy={forecastDay.astro} />
+                                    <CurrentAstronomyMoon2 astronomy={forecastDay.astro} />
                                 </Card>
                             </Collapse>
                         </div>
