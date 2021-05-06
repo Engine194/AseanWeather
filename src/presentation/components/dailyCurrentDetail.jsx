@@ -25,10 +25,10 @@ const DailyCurrentDetail = ({ current }) => {
                             </div>
                             <div className="row border-bottom mb-3">
                                 <div className="col-1 text-center"><i className="fa fa-location-arrow showIconDetail" aria-hidden="true"></i></div>
-                                <div className="col-5">
+                                <div className="col-6">
                                     Lượng mưa dự báo
                                         </div>
-                                <div className="col-6 textRight mr-3">
+                                <div className="col-5 textRight mr-3">
                                     {current.totalprecip_mm} mm
                                         </div>
                             </div>
