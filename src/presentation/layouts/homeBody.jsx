@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { getSearchApiE1Request, getSearchApiE2Request, getSearchApiE3Request } from '../redux/effects/searchApiEffect';
 import Loading from '../components/loading';
 import getFormatDate from '../../data/configDate';
-
+import "../scss/homePage.scss";
 
 
 const HomeBody = ({ propsSearchApi,
@@ -40,14 +40,16 @@ const HomeBody = ({ propsSearchApi,
 
         return (
 
-            <div className="HomeBody">
+            <div className="row HomeBody">
                 {/* <button>
                     <i class="fa fa-envelope-square" style={{ color: "rgba(234, 67, 53,1)", fontSize: "36px", position: "relative", top: "103px" }} aria-hidden="true" />
                 </button>
                 <button> <i class="fa fa-facebook-square" style={{ color: "rgba(66,103,178,1)", fontSize: "36px", position: "relative", top: "103px" }} aria-hidden="true" />
                 </button> */}
+                <div className="col-2">
 
-                <div className="Homebody_font" name="hanoi">
+                </div>
+                <div className="col mt-4 homeCurrent" name="hanoi">
                     <h4>{locationE1.name}, {locationE1.country}</h4>
                     <h5>Cập nhật lần cuối: {getFormatDate(currentE1.last_updated).time} {getFormatDate(currentE1.last_updated).date}</h5>
                     <h3>{currentE1.temp_c}<span>&#176;</span></h3>
@@ -56,7 +58,8 @@ const HomeBody = ({ propsSearchApi,
                         <p>Mây che phủ {currentE1.cloud} %</p>
                     </div>
                 </div>
-                <div className="Homebody_font" name="viang chan"  >
+                <div className="col-1"></div>
+                <div className="col mt-4 homeCurrent" name="viang chan"  >
                     <h4>{locationE2.name}, {locationE2.country}</h4>
                     <h5>Cập nhật lần cuối: {getFormatDate(currentE2.last_updated).time} {getFormatDate(currentE2.last_updated).date}</h5>
                     <h3>{currentE2.temp_c}<span>&#176;</span></h3>
@@ -64,9 +67,9 @@ const HomeBody = ({ propsSearchApi,
                         <p >{currentE2.condition.text}</p><br />
                         <p>Mây che phủ {currentE2.cloud} %</p>
                     </div>
-
                 </div>
-                <div className="Homebody_font" name="bangkok">
+                <div className="col-1"></div>
+                <div className="col mt-4 homeCurrent" name="bangkok">
                     <h4>{locationE3.name}, {locationE3.country}</h4>
                     <h5>Cập nhật lần cuối: {getFormatDate(currentE3.last_updated).time} {getFormatDate(currentE3.last_updated).date}</h5>
                     <h3>{currentE3.temp_c}<span>&#176;</span></h3>
@@ -74,6 +77,8 @@ const HomeBody = ({ propsSearchApi,
                         <p>{currentE3.condition.text}</p><br />
                         <p>Mây che phủ {currentE3.cloud} %</p>
                     </div>
+                </div>
+                <div className="col-2">
 
                 </div>
             </div>
