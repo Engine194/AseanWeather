@@ -1,3 +1,5 @@
+import "../scss/mainFrame.scss";
+
 const MainFrame = ({Header, NavBar, LeftBar, Body, Footer}) => {
     return (
         <>
@@ -19,10 +21,10 @@ const MainFrame = ({Header, NavBar, LeftBar, Body, Footer}) => {
                     
                 </div>
             </div>
-            <div className="row">
+        </div>
+        <div className="fixedBottom">
                 <Footer/>
             </div>
-        </div>
         </>
     );
 }

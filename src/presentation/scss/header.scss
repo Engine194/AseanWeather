@@ -1,9 +1,10 @@
-$disH1: 62px;
+$disH1: 80px;
 $fontSizeH1: 24px;
-$fontSizeH2: 12px;
+$fontSizeH2: 20px;
 
 .rowScssH1 {
     height: $disH1;
+    background-color: rgba(0, 0, 0, 0.4);
 }
 
 .searchScssH1 {
@@ -16,7 +17,26 @@ $fontSizeH2: 12px;
     margin-right: -10px;
 }
 
+.login {
+    border-radius: 50px !important;
+    padding-bottom: 6px;
+}
+
 .login:hover {
     color: white !important;
     background-color: rgb(156,34,93) !important;
+    
+}
+
+.LogoHome :hover {
+    cursor: pointer;
+}
+
+.borderR50 {
+    border-radius: 50px;
+}
+
+.LborderR50 {
+    border-bottom-left-radius: 50px;
+    border-top-left-radius: 50px;
 }

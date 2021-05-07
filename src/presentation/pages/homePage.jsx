@@ -9,10 +9,10 @@ const HomePage = ({ Header, Footer, HomeBody }) =>
                 <div className="row">
                     <HomeBody />
                 </div>
-                <div className="row">
+            </div>
+            <div className="row fixed-bottom">
                     <Footer />
                 </div>
-            </div>
         </>
     );
 }

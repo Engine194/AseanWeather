@@ -73,6 +73,14 @@ const getDailyByCity = q => {
     return Api(axiosType.WA).get(`${urlWA.FORECAST}`, { params: parameters })
 }
 
+const getSearchV2 = searchValue =>
+{
+    const parameters = {
+        search: searchValue,
+    }
+    return Api(axiosType.BE).get(`${urlBE.SEARCHV2}`, { params: parameters })
+}
+
 export {
     convertCity,
     getCurrentByCity,
@@ -80,6 +88,7 @@ export {
     getForecast3daysByCity,
     getHourlyByCity,
     getSearch,
+    getSearchV2,
     getDailyByCity,
 };
 

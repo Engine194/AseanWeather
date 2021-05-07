@@ -28,7 +28,7 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                 getCurrentRequest(q);
                 getAstroRequest(q);
             }
-        }else {
+        } else {
             console.log('localStorage');
             const cityName = localStorage.getItem("cityName");
             console.log("11111", cityName);
@@ -63,7 +63,11 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                     <CurrentDetail current={current} />
                     <CurrentAqi current={current} />
                     <CurrentAstronomySun astronomy={astronomy} />
-                    <CurrentAstronomyMoon astronomy={astronomy} />
+                    <div className="row margin_bottom_normal">
+                        <div className="col-12">
+                            <CurrentAstronomyMoon astronomy={astronomy} />
+                        </div>
+                    </div>
                 </>
             );
         }

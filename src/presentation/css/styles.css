@@ -3,9 +3,22 @@
     width: 80%;
     height: 45px;
     border: none;
-    border-radius: 50Px;
+    border-radius: 50px;
     outline: none;
     padding: 15px;
-    position: inherit;
     margin: -35px;
+}
+
+.home_search {
+    width: 80%;
+    height: 45px !important;
+    border: none !important;
+    border-radius: 50px;
+    outline: none;
+}
+
+.searchIcon:hover {
+    color: rgb(156,34,93) ;
+    position: relative;
+    top: 1px
 }

@@ -7,7 +7,7 @@ import HourlyBody from "../components/hourlyBody";
 import { useHistory } from 'react-router';
 
 const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
-    
+
     const history = useHistory();
 
     useEffect(() => {
@@ -18,7 +18,7 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
                 const q = propsSearch.data.search.name;
                 getHourlyRequest(q);
             }
-            
+
         } else {
             console.log('localStorage');
             const cityName = localStorage.getItem("cityName");
@@ -31,7 +31,7 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
             }
         }
     }, [])
-    
+
     // Kiểm tra data
     //console.log(propsHourly);
 
@@ -43,10 +43,14 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
     } else {
         const location = propsHourly.data.hourly.location;
         const hourlyList = propsHourly.data.hourlyList;
-        
+
         return (
             <>
-             <HourlyBody location={location} hourlyList={hourlyList} /> 
+                <HourlyBody location={location} hourlyList={hourlyList} />
+                <div className="row margin_bottom_normal">
+                    <div className="col-12">
+                    </div>
+                </div>
             </>
         );
     }

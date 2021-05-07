@@ -1,6 +1,5 @@
 import '../scss/currentPage.scss';
 import '../scss/hourlyPage.scss';
-import { Collapse, Card } from 'reactstrap';
 import { useEffect, useState } from 'react';
 import { getDailyRequest } from '../redux/effects/dailyEffect';
 import { useHistory } from 'react-router';
@@ -8,21 +7,18 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import Loading from "../components/loading";
 import getFormatDate from "../../data/configDate";
-import DailyMainList from '../components/dailyMainList';
 import DailyBody from '../components/dailyBody';
 
 
 
-const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) =>
-{
+const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     console.log('ropsSearch', propsSearch);
     console.log('propsDaily', propsDaily);
 
     const history = useHistory();
-    useEffect(() =>
-    {
+    useEffect(() => {
         console.log('propsSearch.success', propsSearch.success);
         if (propsSearch.success == 1) {
 
@@ -61,14 +57,18 @@ const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) =>
         const location = propsDaily.data.daily.location;
         const forecastDay = forecastDays[0];
         return (
-            <DailyBody location={location} dateTime={dateTime} forecastDays={forecastDays} />
-            
+            <>
+                <DailyBody location={location} dateTime={dateTime} forecastDays={forecastDays} />
+                <div className="row margin_bottom_normal">
+                    <div className="col-12">
+                    </div>
+                </div>
+            </>
         );
     }
 }
 
-const mapStateToProps = (state) =>
-{
+const mapStateToProps = (state) => {
     return {
         propsSearch: state.searchReducer,
         propsDaily: state.dailyReducer,

@@ -1,4 +1,3 @@
-import windDirection from "../../data/configWindDirection";
 import '../scss/currentPage.scss';
 
 // Thẻ show ra thông tin chi tiết của thời tiết hiện tại
@@ -6,12 +5,7 @@ const DailyCurrentDetail = ({ current }) => {
     return (
         <>
             <div>
-                <div className="row mt-2 mb-3">
-                    <div className="text-center">
-                        <big><b>THÔNG TIN CHI TIẾT</b></big>
-                    </div>
-                </div>
-                <div className="row ">
+                <div className="row mt-2">
                     <div className="col colScssCD1">
                         <div className="leftSide mt-1">
                             <div className="row border-bottom mb-3">
