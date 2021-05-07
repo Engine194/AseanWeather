@@ -1,3 +1,3 @@
-const linkHome = "http://localhost:3000/";
+const linkHome = "https://asean-weather.herokuapp.com/";
 
 export default linkHome;
