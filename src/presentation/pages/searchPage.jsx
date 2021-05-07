@@ -19,8 +19,7 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
 
     const handleSearch = async (e) => {
         e.preventDefault();
-        alert(searchItem);
-
+       
         // nếu có searchItem thì mới gọi API
         if (searchItem) {
             // gọi action lưu kết quả lại vào trong redux
