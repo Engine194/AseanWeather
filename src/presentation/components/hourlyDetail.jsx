@@ -23,7 +23,7 @@ const HourlyDetail = ({ hour }) => {
                                 <div className="row border-bottom mb-2">
                                     <div className="col-1 text-center"><i className="fa fa-location-arrow showIconDetail" aria-hidden="true"></i></div>
                                     <div className="col-5">
-                                        Gió hướng
+                                        Hướng gió
                                         </div>
                                     <div className="col-6 textRight mr-3">
                                         {windDirection(hour.wind_dir)}
