@@ -22,7 +22,7 @@ const MainFrame = ({Header, NavBar, LeftBar, Body, Footer}) => {
                 </div>
             </div>
         </div>
-        <div className="fixedBottom">
+        <div>
                 <Footer/>
             </div>
         </>
