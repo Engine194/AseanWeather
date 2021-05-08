@@ -4,8 +4,7 @@ import '../scss/hourlyPage.scss';
 import '../scss/dailyPage.scss';
 import getFormatDate from "../../data/configDate";
 
-const DailyBody = ({ location, dateTime, forecastDays,current }) =>
-{
+const DailyBody = ({ location, forecastDays,current }) => {
     return (
         <div className="row mt-3">
             <div className="col-12 card-custom">

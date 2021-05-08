@@ -60,10 +60,6 @@ const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
         return (
             <>
                 <DailyBody current={current} location={location} dateTime={dateTime} forecastDays={forecastDays} />
-                <div className="row margin_bottom_normal">
-                    <div className="col-12">
-                    </div>
-                </div>
             </>
         );
     }
