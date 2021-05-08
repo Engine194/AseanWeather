@@ -1,6 +1,7 @@
 import "../scss/header.scss";
 import logo from "../../data/weatherImgs/logo.png";
 import linkHome from "../../data/api/linkHome";
+import '../css/HomeHeader.css';
 
 const Header = () => {
     return (
@@ -16,11 +17,11 @@ const Header = () => {
                         <div className="col-6 offset-4">
                             <div className="input-group groupScssH1">
                                 <div className="input-group-prepend">
-                                    <button className="input-group-text LborderR50">
+                                    <button className="input-group-text LborderR4">
                                         <i className="fa fa-search searchScssH1" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input type="text" className="form-control borderR50" placeholder="Tìm vị trí" />
+                                <input type="text" className="form-control borderR4" placeholder="Tìm vị trí" />
                             </div>
                         </div>
                         <div className="col-2">

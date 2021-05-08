@@ -63,11 +63,7 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                     <CurrentDetail current={current} />
                     <CurrentAqi current={current} />
                     <CurrentAstronomySun astronomy={astronomy} />
-                    <div className="row margin_bottom_normal">
-                        <div className="col-12">
-                            <CurrentAstronomyMoon astronomy={astronomy} />
-                        </div>
-                    </div>
+                    <CurrentAstronomyMoon astronomy={astronomy} />
                 </>
             );
         }

@@ -6,7 +6,7 @@ import moonset from "../../data/weatherImgs/moonset.png";
 const currentAstronomyMoon = ({ astronomy }) => {
     return (
         <>
-            <div className="row mt-3 mb-2">
+            <div className="row mt-3">
                 <div className="col-12 card-custom">
                     <div className="row">
                         <div className="col colScssCD2 colScssCD3">
@@ -66,7 +66,7 @@ const currentAstronomyMoon = ({ astronomy }) => {
                     </div>
                     <div className="row mt-3">
                         <div className="col colScssCD1">
-                            <div className="leftSide mt-1">
+                            <div className="leftSide">
                                 <div className="row border-bottom mb-3">
                                     <div className="col-1 text-center"><i className="fa fa-wpexplorer showIconDetail" aria-hidden="true"></i></div>
                                     <div className="col-3">
@@ -79,7 +79,7 @@ const currentAstronomyMoon = ({ astronomy }) => {
                             </div>
                         </div>
                         <div className="col colScssCD2 colScssCD3">
-                            <div className="leftSide mt-1">
+                            <div className="leftSide">
                                 <div className="row border-bottom mb-3">
                                     <div className="col-1 text-center"><i className="fa fa-adjust showIconDetail" aria-hidden="true"></i></div>
                                     <div className="col-6">
@@ -87,7 +87,7 @@ const currentAstronomyMoon = ({ astronomy }) => {
                                         </div>
                                     <div className="col-5 textRight">
                                         {astronomy.moon_illumination} %
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

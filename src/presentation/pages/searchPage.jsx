@@ -90,7 +90,7 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
                                             placeholder="Tìm kiếm vị trí"
                                             onChange={handleChange}
                                         />
-                                        <button type="submit" style={{ width: "15%", height: "50px", position: "relative", bottom: "6px" }} className="btn btn-primary" onClick={handleSearch}>
+                                        <button type="submit" style={{ width: "15%", height: "48px", position: "relative", bottom: "6px" }} className="btn btn-primary" onClick={handleSearch}>
                                             <SearchIcon className="searchIcon" />
                                         </button>
                                     </div>
