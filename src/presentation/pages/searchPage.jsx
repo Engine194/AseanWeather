@@ -7,45 +7,41 @@ import { bindActionCreators } from 'redux';
 import { getSearchRequest } from '../redux/effects/searchEffect';
 import { getSearchV2Request } from '../redux/effects/searchV2Effect';
 import getSearchV3 from '../redux/actions/searchV3Action';
-import Autocomplete from '@material-ui/lab/Autocomplete';
+import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import "../scss/homePage.scss";
 
+const filter = createFilterOptions();
 
 const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3 }) => {
     // khai báo state để hứng dữ liệu search
-    const [searchItem, setSearchItem] = useState('');
+    const [searchItem, setSearchItem] = useState(null);
     const options = [];
     const history = useHistory();
 
     const handleSearch = async (e) => {
         e.preventDefault();
-       
+
         // nếu có searchItem thì mới gọi API
         if (searchItem) {
             // gọi action lưu kết quả lại vào trong redux
             getSearchV3(searchItem);
-            // getSearchRequest(searchItem);
-            //getSearchV2Request(searchItem);
         }
     }
 
     const handleChange = async (e) => {
-        setSearchItem(e.target.value);
+        setSearchItem(e.target.value)
         getSearchV2Request(searchItem);
-
     }
 
     useEffect(() => {
-        
+
     }, [])
 
     // sau khi đã có data thì thực hiện lệnh chuyển trang 
     if (propsSearchV3.success == 1) {
-
         history.push({
             pathname: "/main/current",
         })
-
     }
 
     if (propsSearchV2.success == 1) {
@@ -53,16 +49,7 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
         searches.forEach(element => {
             options.push(element.name);
         });
-        console.log("111111111111111");
     }
-    console.log("propsSearchV22222222222222", propsSearchV2);
-
-    // useEffect(() => {
-
-    // }, [searchItem])
-    // console.log("propsSearchV2", propsSearchV2);
-    console.log("options", options);
-
 
     return (
         <>
@@ -71,13 +58,28 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
                     <div className="col">
 
                         <Autocomplete
-                            freeSolo
+                            value={searchItem}
+                            onChange={handleChange}
+                            filterOptions={(options, params) => {
+                                const filtered = filter(options, params);
+                                return filtered;
+                            }}
                             selectOnFocus
-                            disableClearable
-                            id="custom-input-demo"
-                            onSubmit={handleSearch}
+                            clearOnBlur
+                            freeSolo
+                            handleHomeEndKeys
+                            id="inputSearch"
                             options={options}
-
+                            getOptionLabel={option => {
+                                if (typeof option === 'string') {
+                                    return option;
+                                }
+                                console.log("getOptionLabel",option);
+                                return option;
+                            }}
+                            renderOption={(option) => {
+                                return option}}
+                            
                             renderInput={(params) => (
                                 <>
                                     <div className="text-center" ref={params.InputProps.ref}>
@@ -85,12 +87,10 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
                                             {...params.inputProps}
                                             id="inputSearch"
                                             type="text"
-                                            placeholder=" Tìm kiếm vị trí"
-                                            value={searchItem}
+                                            placeholder="Tìm kiếm vị trí"
                                             onChange={handleChange}
-                                            onSelect={e => setSearchItem(e.target.value)}
                                         />
-                                        <button type="submit" style={{ width: "15%", height: "44px", position: "relative", bottom: "4px" }} className="btn btn-primary" onClick={handleSearch}>
+                                        <button type="submit" style={{ width: "15%", height: "50px", position: "relative", bottom: "6px" }} className="btn btn-primary" onClick={handleSearch}>
                                             <SearchIcon className="searchIcon" />
                                         </button>
                                     </div>

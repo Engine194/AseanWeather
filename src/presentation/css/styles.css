@@ -17,6 +17,10 @@
     outline: none;
 }
 
+.searchIcon {
+    font-size: 35px !important;
+}
+
 .searchIcon:hover {
     color: rgb(156,34,93) ;
     position: relative;
