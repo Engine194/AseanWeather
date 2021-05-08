@@ -16,11 +16,11 @@ const Header = () => {
                         <div className="col-6 offset-4">
                             <div className="input-group groupScssH1">
                                 <div className="input-group-prepend">
-                                    <button className="input-group-text LborderR50">
+                                    <button className="input-group-text">
                                         <i className="fa fa-search searchScssH1" aria-hidden="true"></i>
                                     </button>
                                 </div>
-                                <input type="text" className="form-control borderR50" placeholder="Tìm vị trí" />
+                                <input type="text" className="form-control" placeholder="Tìm vị trí" />
                             </div>
                         </div>
                         <div className="col-2">

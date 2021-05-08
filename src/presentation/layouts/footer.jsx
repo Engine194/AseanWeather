@@ -5,7 +5,7 @@ import logoWA from "../../data/weatherImgs/weatherapi_logo.png";
 const Footer = () => {
     return (
         <>
-            <div className="container-fluid mt-3">
+            <div className="container-fluid ">
                 <div className="row rowScssF1">
                     <div className="col-1 offset-3">
                     <img src={logo} width="55" alt="Logo Image"/>

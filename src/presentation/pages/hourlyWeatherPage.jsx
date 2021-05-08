@@ -5,6 +5,7 @@ import { getHourlyRequest } from "../redux/effects/hourlyEffect";
 import Loading from "../components/loading";
 import HourlyBody from "../components/hourlyBody";
 import { useHistory } from 'react-router';
+import { getCurrentRequest } from "../redux/effects/currentEffect";
 
 const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
 
