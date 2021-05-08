@@ -9,7 +9,7 @@ const HourlyBody = ({ location, hourlyList,current }) => {
                 <div className="leftSizeHour">
                     <div className="colScss4"> <b>Thời tiết hàng giờ</b></div>
                     <div style={{ color: "GrayText" }}>{location.name}, {location.country}</div>
-                    <div className="colorLocaltime">Cập nhật lần cuối {getFormatDate(location.localtime).time} {getFormatDate(location.localtime).date}</div>
+                    <div className="colorLocaltime">Cập nhật lần cuối {getFormatDate(current.last_updated).time} {getFormatDate(current.last_updated).date}</div>
                 </div>
                 <HourlyMainList hourlyList={hourlyList} />
             </div>

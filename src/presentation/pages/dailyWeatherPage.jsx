@@ -53,12 +53,13 @@ const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
         const localtime = propsDaily.data.daily.location.localtime;
         const dateTime = getFormatDate(localtime);
         const forecastDays = propsDaily.data.daily.forecast.forecastday;
+        const current = propsDaily.data.daily.current;
         console.log('forecastDays', forecastDays);
         const location = propsDaily.data.daily.location;
-        const forecastDay = forecastDays[0];
+    
         return (
             <>
-                <DailyBody location={location} dateTime={dateTime} forecastDays={forecastDays} />
+                <DailyBody current={current} location={location} dateTime={dateTime} forecastDays={forecastDays} />
                 <div className="row margin_bottom_normal">
                     <div className="col-12">
                     </div>

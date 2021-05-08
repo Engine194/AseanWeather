@@ -44,10 +44,11 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
     } else {
         const location = propsHourly.data.hourly.location;
         const hourlyList = propsHourly.data.hourlyList;
+        const current = propsHourly.data.hourly.current;
 
         return (
             <>
-                <HourlyBody location={location} hourlyList={hourlyList} />
+                <HourlyBody current={current} location={location} hourlyList={hourlyList} />
                 <div className="row margin_bottom_normal">
                     <div className="col-12">
                     </div>

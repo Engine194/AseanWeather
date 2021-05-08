@@ -13,7 +13,7 @@ const DailyBody = ({ location, dateTime, forecastDays,current }) =>
                     <div className="col-12 colScss1">
                         <div style={{ marginTop: 20 }}> <b style={{ fontSize: "25px" }}>Thời tiết ba ngày</b></div>
                         <div style={{ color: "GrayText" }}>{location.name}, {location.country}</div>
-                        <div style={{ color: "GrayText" }}>Cập nhật lần cuối {getFormatDate(location.localtime).time} {getFormatDate(location.localtime).date}</div>
+                        <div style={{ color: "GrayText" }}>Cập nhật lần cuối {getFormatDate(current.last_updated).time} {getFormatDate(current.last_updated).date}</div>
                     </div>
                 </div>
                 <DailyMainList forecastDays={forecastDays} />

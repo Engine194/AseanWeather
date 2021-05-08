@@ -13,7 +13,7 @@ const initialState = {
 export default function hourlyReducer(state = initialState, action) {
     switch (action.type) {
         case hourlyActionType.GET_HOURLY_SUCCESS:
-            // Em đang làm gì ở đây
+            // lấy về danh sách data theo từng giờ 
             const hourlyList = getHourlyList(action.payload.forecast.forecastday[0].hour);
             return {
                 ...state,
