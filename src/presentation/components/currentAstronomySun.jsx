@@ -7,7 +7,7 @@ const CurrentAstronomySun = ({ astronomy }) => {
         <>
              <div className="row mt-3 mb-2">
         <div className="col-12 card-custom">
-            <div className="row">
+            <div className="row mt-3">
                 <div className="col colScssCD2 colScssCD3">
                     <div className="leftSide mt-2">
                         <div className="row mb-1 ">

@@ -8,7 +8,7 @@ const currentAstronomyMoon = ({ astronomy }) => {
         <>
             <div className="row mt-3">
                 <div className="col-12 card-custom">
-                    <div className="row">
+                    <div className="row mt-3">
                         <div className="col colScssCD2 colScssCD3">
                             <div className="leftSide mt-2">
                                 <div className="row mb-1">
@@ -64,7 +64,7 @@ const currentAstronomyMoon = ({ astronomy }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="row mt-3">
+                    <div className="row mb-3">
                         <div className="col colScssCD1">
                             <div className="leftSide">
                                 <div className="row border-bottom mb-3">
