@@ -12,25 +12,74 @@ import "../scss/homePage.scss";
 
 const filter = createFilterOptions();
 
-const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3 }) => {
+const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3 }) => {
     // khai báo state để hứng dữ liệu search
     const [searchItem, setSearchItem] = useState(null);
+    const [isMatch, setIsMatch] = useState(false);
+    const [isShowErr, setIsShowErr] = useState(false);
+    const [isShowEmpty, setIsShowEmpty] = useState(false);
+    const [isSumimited, setIsSumimited] = useState(false);
     const options = [];
     const history = useHistory();
 
     const handleSearch = async (e) => {
         e.preventDefault();
+        setIsSumimited(true);
 
-        // nếu có searchItem thì mới gọi API
+        // xử lý các trường hợp search
         if (searchItem) {
-            // gọi action lưu kết quả lại vào trong redux
-            getSearchV3(searchItem);
+            
+            // Nếu người dùng gõ một chuỗi bất kỳ mà không select từ gợi ý
+            if (typeof searchItem === 'string') {
+                const value = searchItem.trim();
+                if (value) {
+                    console.log("options",options);
+                    const results = options.filter(item => {
+                    const match = item.title.toLowerCase().indexOf(value.toLowerCase());
+                        return match !== -1;
+                    })
+                    console.log("results",results);
+                    if (results.length > 0) {
+                        setIsMatch(true)
+                        getSearchV3(results[0].title);
+                    }
+                    if (!isMatch) {
+                        setIsShowErr(true);
+                    }
+                }
+            }
+
+            // Nếu người dùng gõ một chuỗi và select từ gợi ý
+            if (typeof searchItem === 'object') {
+                const value = searchItem.title.trim();
+                // nếu có searchItem thì mới gọi API
+                if (value && options.length > 0) {
+
+                    options.forEach(element => {
+                        if (value.toLowerCase() == element.title.toLowerCase()) {
+                            setIsMatch(true);
+                            // Nếu từ khóa nhập vào trùng với một trong các dữ liệu trả về mới
+                            // gọi action lưu kết quả lại vào trong redux
+                            getSearchV3(value);
+                        }
+                    });
+                    // Nếu trong DB ko có city thì trả về not found
+                    if (!isMatch) {
+                        setIsShowErr(true);
+                    }
+
+                }
+            }
+        } else {
+            // xử lý khi searchItem rỗng
+            setIsShowEmpty(true);
         }
+
     }
 
     const handleChange = async (e) => {
         setSearchItem(e.target.value)
-        getSearchV2Request(searchItem);
+        await getSearchV2Request(searchItem);
     }
 
     useEffect(() => {
@@ -47,7 +96,7 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
     if (propsSearchV2.success == 1) {
         const searches = propsSearchV2.data.search;
         searches.forEach(element => {
-            options.push(element.name);
+            options.push({ title: element.name });
         });
     }
 
@@ -59,9 +108,31 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
 
                         <Autocomplete
                             value={searchItem}
-                            onChange={handleChange}
+                            onChange={(event, newValue) => {
+                                if (typeof newValue === 'string') {
+                                    setSearchItem({
+                                        title: newValue,
+                                    });
+                                } else if (newValue && newValue.inputValue) {
+                                    // Create a new value from the user input
+                                    setSearchItem({
+                                        title: newValue.inputValue,
+                                    });
+                                }
+                                else {
+                                    setSearchItem(newValue);
+                                }
+
+                            }}
                             filterOptions={(options, params) => {
                                 const filtered = filter(options, params);
+                                // Suggest the creation of a new value
+                                if (params.inputValue !== '') {
+                                    filtered.push({
+                                        inputValue: params.inputValue,
+                                        title: `Add "${params.inputValue}"`,
+                                    });
+                                }
                                 return filtered;
                             }}
                             selectOnFocus
@@ -74,12 +145,18 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
                                 if (typeof option === 'string') {
                                     return option;
                                 }
-                                console.log("getOptionLabel",option);
-                                return option;
+                                // Add "xxx" option created dynamically
+                                if (option.inputValue) {
+                                    return option.inputValue;
+                                }
+
+                                // Regular option
+                                return option.title;
                             }}
                             renderOption={(option) => {
-                                return option}}
-                            
+                                return (<>{option.title}</>);
+                            }}
+
                             renderInput={(params) => (
                                 <>
                                     <div className="text-center" ref={params.InputProps.ref}>
@@ -97,6 +174,12 @@ const SearchPage = ({ getSearchRequest, propsSearch, getSearchV2Request, propsSe
                                 </>
                             )}
                         />
+                    </div>
+                </div>
+                <div className="row">
+                    <div className="col text-center notfound">
+                        {!(isShowErr && isSumimited) ? null : (<i><big>Không tìm thấy thành phố</big></i>)}
+                        {!(isShowEmpty && isSumimited) ? null : (<i><big>Hãy nhập thông tin</big></i>)}
                     </div>
                 </div>
             </form>

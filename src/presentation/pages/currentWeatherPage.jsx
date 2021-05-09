@@ -29,9 +29,7 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                 getAstroRequest(q);
             }
         } else {
-            console.log('localStorage');
             const cityName = localStorage.getItem("cityName");
-            console.log("11111", cityName);
             if (cityName) {
                 getCurrentRequest(cityName);
                 getAstroRequest(cityName);

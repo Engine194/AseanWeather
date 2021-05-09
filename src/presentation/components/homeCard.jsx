@@ -28,7 +28,7 @@ const HomeCart = ({location, current}) => {
                     <div className="row">
                         <div className="col">
                             <div className="row mt-2">
-                                <div className="col text-center temperature" style={{ fontSize: "90px" }}>
+                                <div className="col text-center temperatureHP" style={{ fontSize: "90px" }}>
                                     {current.temp_c}<span>&#176;</span>
                                 </div>
                             </div>

@@ -6,14 +6,14 @@ import { fixColorByTemp } from "../../data/configTempColor";
 
 // Thẻ show ra thông tin thời tiết chung của địa phương
 const CurrentMain = ({ location, current }) => {
-
+    
     // Gọi một số hàm xử lý kết quả khi khởi tạo trang
     useEffect(() => {
         // Đổi màu hiển thị của nhiệt độ tùy vào nhiệt độ nóng hay lạnh
-        fixColorByTemp(current.temp_c, "div.temperature");
+        fixColorByTemp(current.temp_c, "#temperature");
 
         // Đổi màu hiển thị real feel tùy vào nhiệt độ nóng hay lạnh
-        fixColorByTemp(current.feelslike_c, "div.realFeel");
+        fixColorByTemp(current.feelslike_c, "#realFeel");
     }, [])
 
     return (
@@ -26,7 +26,7 @@ const CurrentMain = ({ location, current }) => {
                                 <div className="leftSide mt-1">
                                     <Card.Title>{location.name}, {location.country}</Card.Title>
                                     <Card.Subtitle className="text-muted">Cập nhật lần cuối: {getFormatDate(current.last_updated).time} {getFormatDate(current.last_updated).date}</Card.Subtitle>
-                                    <div className="temperature">
+                                    <div className="temperature" id="temperature">
                                         {current.temp_c}<span>&#176;</span>
                                     </div>
                                     <div className="condition-text">
@@ -49,7 +49,7 @@ const CurrentMain = ({ location, current }) => {
                                                             <small>Cảm giác thực tế</small>
                                                         </div>
                                                     </div>
-                                                    <div className="row under-icon realFeel">
+                                                    <div className="row under-icon" id="realFeel">
                                                         <small>{current.feelslike_c}<span>&#176;</span>C</small>
                                                     </div>
                                                 </div>
