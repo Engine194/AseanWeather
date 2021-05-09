@@ -5,7 +5,7 @@ const DailyCurrentDetail = ({ current }) => {
     return (
         <>
             <div>
-                <div className="row mt-2">
+                <div className="row mt-5 mb-1">
                     <div className="col colScssCD1">
                         <div className="leftSide mt-1">
                             <div className="row border-bottom mb-3">

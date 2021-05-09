@@ -6,7 +6,7 @@ import moonset from "../../data/weatherImgs/moonset.png";
 const currentAstronomyMoon2 = ({ astronomy }) => {
     return (
         <>
-            <div className="row mt-3 mb-2">
+            <div className="row mt-3">
                 <div className="col-12">
                     <div className="row">
                         <div className="col colScssCD2 colScssCD3">
@@ -56,7 +56,6 @@ const currentAstronomyMoon2 = ({ astronomy }) => {
                                                         {astronomy.moonset}
                                                     </div>
                                                 </div>
-
                                             </div>
                                         </div>
                                     </div>
@@ -64,7 +63,7 @@ const currentAstronomyMoon2 = ({ astronomy }) => {
                             </div>
                         </div>
                     </div>
-                    <div className="row mt-3">
+                    <div className="row mb-2">
                         <div className="col colScssCD1">
                             <div className="leftSide mt-1">
                                 <div className="row border-bottom mb-3">
@@ -87,7 +86,7 @@ const currentAstronomyMoon2 = ({ astronomy }) => {
                                         </div>
                                     <div className="col-5 textRight">
                                         {astronomy.moon_illumination} %
-                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

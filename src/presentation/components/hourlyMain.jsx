@@ -8,7 +8,7 @@ const HourlyMain = ({ hour }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
     return (
-        <> <div className="row mt-3" >
+        <> <div className="row mt-3 mb-1" >
             <div className="col-12 colScss1">
                 <div className="row mgMain">
                     <div className="col-1">

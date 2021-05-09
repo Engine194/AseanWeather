@@ -27,8 +27,7 @@ const DailyMain = ({ forecastDay }) =>
 
     return (
         <div className="row">
-            <div className="col-12 card-custom">
-
+            <div className="col-12 mb-1 card-custom">
                 <div className="row mt-3">
                     <div className="col-12 colScss1"  >
                         <div className="row" style={{ margin: 15 }}>

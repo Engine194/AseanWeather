@@ -16,7 +16,7 @@ const DailyCurrentMain = ({ current }) => {
 
     return (
         <>
-                    <div className="row">
+                    <div className="row mt-2">
                         <div className="col text-center">
                             <div className="leftSide mt-1">
                                 <div className="temperature">
