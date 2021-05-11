@@ -4,7 +4,6 @@ import '../css/styles.css';
 import React, { useEffect, useState } from 'react';
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import { getSearchRequest } from '../redux/effects/searchEffect';
 import { getSearchV2Request } from '../redux/effects/searchV2Effect';
 import getSearchV3 from '../redux/actions/searchV3Action';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
@@ -82,10 +81,6 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
         await getSearchV2Request(searchItem);
     }
 
-    useEffect(() => {
-
-    }, [])
-
     // sau khi đã có data thì thực hiện lệnh chuyển trang 
     if (propsSearchV3.success == 1) {
         history.push({
@@ -93,6 +88,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
         })
     }
 
+    // Khi có data search trả về, đẩy vào trong options 
     if (propsSearchV2.success == 1) {
         const searches = propsSearchV2.data.search;
         searches.forEach(element => {
@@ -191,14 +187,12 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
 
 const mapStateToProps = (state) => {
     return {
-        propsSearch: state.searchReducer,
         propsSearchV2: state.searchV2Reducer,
         propsSearchV3: state.searchV3Reducer,
     }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-    getSearchRequest,
     getSearchV2Request,
     getSearchV3,
 },

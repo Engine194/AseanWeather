@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Switch } from "react-router-dom";
-import Header from "../layouts/header";
+import Header from "../layouts/headerSearch";
 import NaviBar from "../layouts/navBar";
 import LeftBar from "../layouts/leftBar";
 import currentWeatherPage from "../pages/currentWeatherPage";

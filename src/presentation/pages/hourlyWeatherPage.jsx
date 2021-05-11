@@ -13,14 +13,12 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
     useEffect(() => {
         if (propsSearch.success == 1) {
             if (propsSearch.data.search) {
-                console.log(propsSearch.data.search.name);
                 // Gọi Api ở đây
-                const q = propsSearch.data.search.name;
+                const q = propsSearch.data.search;
                 getHourlyRequest(q);
             }
 
         } else {
-            console.log('localStorage');
             const cityName = localStorage.getItem("cityName");
             if (cityName) {
                 getHourlyRequest(cityName);
@@ -55,7 +53,7 @@ const HourlyWeatherPage = ({ getHourlyRequest, propsHourly, propsSearch }) => {
 const mapStateToProps = (state) => {
     return {
         propsHourly: state.hourlyReducer,
-        propsSearch: state.searchReducer,
+        propsSearch: state.searchV3Reducer,
     }
 }
 

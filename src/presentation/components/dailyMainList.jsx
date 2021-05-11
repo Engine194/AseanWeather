@@ -7,7 +7,7 @@ const DailyMainList = ({ forecastDays}) =>
             {forecastDays.map(item =>
             {
                 return (
-                    <DailyMain forecastDay={item}/>
+                    <DailyMain key={item.date} forecastDay={item}/>
                 );
             })}
         </>

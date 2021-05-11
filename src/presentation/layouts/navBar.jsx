@@ -6,12 +6,12 @@ import { useHistory } from "react-router";
 import { prepareToMarkMenu, unmarkMenu } from "../../data/configMenu";
 
 const NaviBar = ({ getMenu }) => {
-    const [is1Clicked, setIs1Clicked] = useState(false);
+    const [is1Clicked, setIs1Clicked] = useState(true);
     const [is2Clicked, setIs2Clicked] = useState(false);
     const [is3Clicked, setIs3Clicked] = useState(false);
     const [is4Clicked, setIs4Clicked] = useState(false);
     const [payload, setPayload] = useState({
-        menu1: false,
+        menu1: true,
         menu2: false,
         menu3: false,
         menu4: false,
@@ -92,9 +92,11 @@ const NaviBar = ({ getMenu }) => {
             })
         }
 
-        // gọi action đưa danh sách menu đã được chọn và store
-        getMenu(payload);
+        
     }, [is1Clicked, is2Clicked, is3Clicked, is4Clicked]);
+
+// gọi action đưa danh sách menu đã được chọn và store
+getMenu(payload);
 
     return (
 

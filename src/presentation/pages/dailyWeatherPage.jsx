@@ -14,26 +14,20 @@ import DailyBody from '../components/dailyBody';
 const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
     const [isOpen, setIsOpen] = useState(false);
     const toggle = () => setIsOpen(!isOpen);
-    console.log('ropsSearch', propsSearch);
-    console.log('propsDaily', propsDaily);
 
     const history = useHistory();
     useEffect(() => {
-        console.log('propsSearch.success', propsSearch.success);
         if (propsSearch.success == 1) {
 
-            console.log("propsSearch", propsSearch.data);
             if (propsSearch.data.search) {
-                console.log(propsSearch.data.search.name);
+                console.log(propsSearch.data.search);
                 // Gọi Api ở đây
-                const q = propsSearch.data.search.name;
+                const q = propsSearch.data.search;
                 getDailyRequest(q);
             }
 
         } else {
-            console.log('localStorage');
             const cityName = localStorage.getItem("cityName");
-            console.log("11111", cityName);
             if (cityName) {
                 getDailyRequest(cityName);
             } else {
@@ -53,7 +47,6 @@ const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
         const localtime = propsDaily.data.daily.location.localtime;
         const dateTime = getFormatDate(localtime);
         const forecastDays = propsDaily.data.daily.forecast.forecastday;
-        console.log('forecastDays', forecastDays);
         const location = propsDaily.data.daily.location;
         const forecastDay = forecastDays[0];
         const current = propsDaily.data.daily.current;
@@ -67,7 +60,7 @@ const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
 
 const mapStateToProps = (state) => {
     return {
-        propsSearch: state.searchReducer,
+        propsSearch: state.searchV3Reducer,
         propsDaily: state.dailyReducer,
     }
 }

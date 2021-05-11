@@ -19,7 +19,7 @@ const DailyCurrentMain = ({ current }) => {
                     <div className="row mt-2">
                         <div className="col text-center">
                             <div className="leftSide mt-1">
-                                <div className="temperature">
+                                <div className="temperature temperatureHP">
                                     {current.avgtemp_c}<span>&#176;</span>
                                 </div>
                                 <div className="condition-text">

@@ -22,8 +22,6 @@ const DailyMain = ({ forecastDay }) =>
     const date = forecastDay.date;  
     const dateSplited = date.split('-');
     const showDate = `${dateSplited[2]}/${dateSplited[1]}`;
-    console.log(forecastDay);
-
 
     return (
         <div className="row">

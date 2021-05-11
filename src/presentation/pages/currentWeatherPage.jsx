@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import CurrentAqi from "../components/currentAqi";
@@ -15,16 +15,20 @@ import { useHistory } from 'react-router';
 
 const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest, propsSearch }) => {
     const history = useHistory();
+    
 
     // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
     useEffect(() => {
         // Mark menu
         markMenuInComponent(menuType.CURRENT);
 
+        if (history.location.search) {
+            console.log("history.location.search",history.location.search);
+        }
         if (propsSearch.success == 1) {
             if (propsSearch.data.search) {
                 // Gọi Api ở đây
-                const q = propsSearch.data.search.name;
+                const q = propsSearch.data.search;
                 getCurrentRequest(q);
                 getAstroRequest(q);
             }
@@ -39,7 +43,11 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                 })
             }
         }
-    }, [])
+    }, [propsSearch.data.search])
+
+    useEffect(()=> {
+
+    })
 
     // Kiểm tra dữ liệu trả vể
     // console.log("Astro", propsAstro);
@@ -79,7 +87,7 @@ const mapStateToProps = (state) => {
         propsCurrent: state.currentReducer,
         propsAstro: state.astroReducer,
         propMenu: state.naviBarReducer,
-        propsSearch: state.searchReducer,
+        propsSearch: state.searchV3Reducer,
     }
 }
 

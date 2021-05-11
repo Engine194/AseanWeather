@@ -2,7 +2,7 @@ export const moonPhaseToVi = moonphase => {
     if (moonphase) {
         moonphase = moonphase.trim();
         switch (moonphase) {
-            case "New":
+            case "New Moon":
                 return "Trăng mới";
             case "Waning Crescent":
                 return "Lưỡi liềm đầu tháng";
