@@ -20,7 +20,7 @@ const CurrentAqi = ({ current }) => {
     useEffect(() => {
         // Đổi màu hiển thị đánh giá AQI tùy vào mức độ ô nhiễm
         aqi.fixColorOfAqi(usEpaIndex, "div.aqi");
-    }, []);
+    }, [current.air_quality]);
 
     return (
         <>

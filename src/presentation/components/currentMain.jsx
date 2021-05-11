@@ -14,7 +14,7 @@ const CurrentMain = ({ location, current }) => {
 
         // Đổi màu hiển thị real feel tùy vào nhiệt độ nóng hay lạnh
         fixColorByTemp(current.feelslike_c, "#realFeel");
-    }, [])
+    },[current.temp_c,current.feelslike_c ])
 
     return (
         <>
