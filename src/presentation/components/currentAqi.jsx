@@ -118,7 +118,7 @@ const CurrentAqi = ({ current }) => {
                             <div className="row rowScssCP1 mt-3">
                                 <div className="col-12">
                                     <div className="row">
-                                        <div className="col">
+                                        <div className="col text-center">
                                             <i><small>(*) - Đánh giá theo tiêu chuẩn của Cơ quan Bảo vệ Môi trường Hoa kỳ (US EPA), gồm các mức sau:</small></i>
                                         </div>
                                     </div>
