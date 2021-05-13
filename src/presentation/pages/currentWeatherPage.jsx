@@ -24,25 +24,32 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
 
         if (history.location.search) {
             console.log("history.location.search",history.location.search);
-        }
-        if (propsSearch.success == 1) {
-            if (propsSearch.data.search) {
-                // Gọi Api ở đây
-                const q = propsSearch.data.search;
-                getCurrentRequest(q);
-                getAstroRequest(q);
-            }
+            let search = history.location.search;
+            search = search.replace("?", " ");
+            search = search.trim();
+            getCurrentRequest(search);
+            getAstroRequest(search);
+            localStorage.setItem("cityName",search);
         } else {
-            const cityName = localStorage.getItem("cityName");
-            if (cityName) {
-                getCurrentRequest(cityName);
-                getAstroRequest(cityName);
+            if (propsSearch.success == 1) {
+                if (propsSearch.data.search) {
+                    // Gọi Api ở đây
+                    const q = propsSearch.data.search;
+                    getCurrentRequest(q);
+                    getAstroRequest(q);
+                }
             } else {
-                history.push({
-                    pathname: "/",
-                })
+                const cityName = localStorage.getItem("cityName");
+                if (cityName) {
+                    getCurrentRequest(cityName);
+                    getAstroRequest(cityName);
+                } else {
+                    const linkHomeHS = document.querySelector("a.linkHomeHS");
+                    linkHomeHS.click();
+                }
             }
         }
+       
     }, [propsSearch.data.search])
 
     useEffect(()=> {

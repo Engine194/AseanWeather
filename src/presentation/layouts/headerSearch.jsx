@@ -131,7 +131,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
         <div className="container-fluid">
             <div className="row rowScssH1">
                 <div className="col-1 offset-3">
-                    <a href={linkHome}>
+                    <a href={linkHome} className="linkHomeHS"> 
                         <img src={logo} width="73" alt="Logo" />
                     </a>
                 </div>
