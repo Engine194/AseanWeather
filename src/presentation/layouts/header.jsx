@@ -2,6 +2,7 @@ import "../scss/header.scss";
 import logo from "../../data/weatherImgs/logo.png";
 import linkHome from "../../data/api/linkHome";
 import '../css/HomeHeader.css';
+import Login from "../components/Login";
 
 const Header = () => {
     return (
@@ -26,7 +27,7 @@ const Header = () => {
                         </div>
                         <div className="col-2">
                             <div className="groupScssH1">
-                                <button className=" btn btn-light login">LOGIN</button>
+                                <Login />
                             </div>
                         </div>
                     </div>

@@ -6,7 +6,10 @@ import urlBE from "./urlBE";
 const convertCity = city => {
     city = city.trim();
     city = city.replace(" ", "20%");
-
+    city = city.replace(" ", "20%");
+    city = city.replace(" ", "20%");
+    city = city.replace(" ", "20%");
+    city = city.replace(" ", "20%");
     return city;
 }
 

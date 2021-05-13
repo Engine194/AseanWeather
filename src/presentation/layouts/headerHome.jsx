@@ -4,6 +4,7 @@ import React from 'react';
 import SearchPage from '../pages/searchPage';
 import '../css/HomeHeader.css';
 import linkHome from '../../data/api/linkHome';
+import Login from '../components/Login';
 
 // import { func } from 'prop-types';
 
@@ -22,7 +23,7 @@ const HeaderHome = () => {
                 <SearchPage />
             </div>
             <div className="Home_login">
-                <button type="button"  >LOGIN</button>
+                <Login />
             </div>
         </div >
 
