@@ -14,17 +14,23 @@ firebase.initializeApp(config);
 // Configure FirebaseUI.
 const uiConfig = {
   signInFlow: 'redirect',
-  signInSuccessUrl : '',
+  signInSuccessUrl: '',
   // Hiển thị Facebook là nhà cung cấp xác thực.
   signInOptions: [
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
   ],
+  callbacks: {
+    // Avoid redirects after sign-in.
+    signInSuccessWithAuthResult: () => {
+      alert("Login Success!");
+      return false
+    },
+  },
 };
 
 const Login = (props) => {
-  const {
-    className
-  } = props;
+
+  const { className } = props;
 
   const [modal, setModal] = useState(false);
 
@@ -34,55 +40,70 @@ const Login = (props) => {
 
   const toggle1 = () => setModal1(!modal1);
 
+  const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+
   useEffect(() => {
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged( async (user) => {
-    if (!user){
-      //user log out ,handle ...
-      return;
-    }
-    console.log("logged in user: ", user);
-    const token = await user.getIdToken();
-    console.log("logged in user token: ", token);
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+      setIsSignedIn(!!user);
     });
-    return () => unregisterAuthObserver(); 
+    return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
-  return (
-    <div className="Home_login">
-      <button type="button" onClick={toggle}>LOGIN</button>
-      <Modal isOpen={modal} toggle={toggle} className={className}>
-        <ModalHeader toggle={toggle}>LOGIN</ModalHeader>
-        <ModalBody>
-        <FormGroup>
-       <div className="text-center">Click vào <b><u>Sign in with Facebook</u></b> nếu bạn đồng ý cho <b><u>AseanWeather</u></b> sẽ có quyền truy cập vào Facebook của bạn</div>
-        </FormGroup>
-          <FormGroup>
-        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
-        </FormGroup>
-        <FormGroup className="text-center">
-        <div>If You Are Admin, <a onClick={toggle1} style={{color:"Highlight"}}><i><u>Click Here </u></i></a> To Login</div>
-        <Modal isOpen={modal1} toggle={toggle1} className={className}>
-        <ModalHeader toggle={toggle1}>SIGN IN ADMIN</ModalHeader>
-        <ModalBody>
-        <Form>
-      <FormGroup>
-        <Label for="exampleEmail">Email</Label>
-        <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
-      </FormGroup>
-      <FormGroup>
-        <Label for="examplePassword">Password</Label>
-        <Input type="password" name="password" id="examplePassword" placeholder="Password" />
-      </FormGroup>
-      </Form>
-      <Button style={{marginTop:20}} color="primary" onClick={toggle}>Summit</Button>
-        </ModalBody>
-      </Modal>
-        </FormGroup>
-        </ModalBody>
-      </Modal>
-    </div>
-    
-  );
+
+  if (isSignedIn) {
+    return (
+      <div className="Home_login">
+        <button type="button" onClick={toggle}>LOGIN</button>
+        <Modal isOpen={modal} toggle={toggle} className={className}>
+          <ModalHeader toggle={toggle} >LOGIN</ModalHeader>
+          <ModalBody>
+            <FormGroup>
+              <div className="text-center">Bạn đã đăng nhập rồi, vui lòng quay lại trang</div>
+            </FormGroup>
+          </ModalBody>
+        </Modal>
+      </div>
+    );
+  } else {
+    const user111 = firebase.auth().currentUser;
+    console.log("user111", user111);
+    return (
+      <div className="Home_login">
+        <button type="button" onClick={toggle}>LOGIN</button>
+        <Modal isOpen={modal} toggle={toggle} className={className}>
+          <ModalHeader toggle={toggle}>LOGIN</ModalHeader>
+          <ModalBody>
+            <FormGroup>
+              <div className="text-center">Click vào <b><u>Sign in with Facebook</u></b> nếu bạn đồng ý cho <b><u>AseanWeather</u></b> sẽ có quyền truy cập vào Facebook của bạn</div>
+            </FormGroup>
+            <FormGroup>
+              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+            </FormGroup>
+            <FormGroup className="text-center">
+              <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }}><i><u>Click Here </u></i></a> To Login</div>
+              <Modal isOpen={modal1} toggle={toggle1} className={className}>
+                <ModalHeader toggle={toggle1}>SIGN IN ADMIN</ModalHeader>
+                <ModalBody>
+                  <Form>
+                    <FormGroup>
+                      <Label for="exampleEmail">Email</Label>
+                      <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
+                    </FormGroup>
+                    <FormGroup>
+                      <Label for="examplePassword">Password</Label>
+                      <Input type="password" name="password" id="examplePassword" placeholder="Password" />
+                    </FormGroup>
+                  </Form>
+                  <Button style={{ marginTop: 20 }} color="primary" onClick={toggle}>Summit</Button>
+                </ModalBody>
+              </Modal>
+            </FormGroup>
+          </ModalBody>
+        </Modal>
+      </div>
+
+    );
+  }
 }
 
 export default Login;
