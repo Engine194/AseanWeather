@@ -27,9 +27,9 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
             let search = history.location.search;
             search = search.replace("?", " ");
             search = search.trim();
-            search = search.replace("&"," ");
-            const searchSplited = search.split(" ");
-            search = searchSplited[0];
+            // search = search.replace("&"," ");
+            // const searchSplited = search.split(" ");
+            // search = searchSplited[0];
             getCurrentRequest(search);
             getAstroRequest(search);
             localStorage.setItem("cityName",search);

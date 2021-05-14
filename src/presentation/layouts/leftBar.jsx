@@ -19,7 +19,8 @@ const LeftBar = ({ propsSearch }) => {
         }
     }
     const searchValue = search();
-    const hrefFB = `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasean-weather.herokuapp.com/main/current?${searchValue}%2F&amp;src=sdkpreparse`;
+    console.log(searchEmail, "searchEmail");
+    const hrefFB = `https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fasean-weather.herokuapp.com/main/current?Bandar+Seri+Begawan;src=sdkpreparse`;
     const hrefEmail = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to&su=https://asean-weather.herokuapp.com/main/current?${searchEmail}`;
     return (
         <>
@@ -33,7 +34,7 @@ const LeftBar = ({ propsSearch }) => {
                 </div>
                 <div className="row">
                     <div className="col-12 mt-2">
-                        <a target="_blank" href={hrefFB} className="fb-xfbml-parse-ignore"><i className="fa fa-facebook-square colorScssLB2 onHover" aria-hidden="true" data-href="https://asean-weather.herokuapp.com/" data-layout="button"></i></a>
+                        <a target="_blank" data-href={hrefFB} className="fb-xfbml-parse-ignore"><i className="fa fa-facebook-square colorScssLB2 onHover" aria-hidden="true" data-layout="button"></i></a>
                     </div>
                 </div>
             </div>

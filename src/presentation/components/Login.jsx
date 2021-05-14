@@ -35,11 +35,13 @@ const Login = (props) => {
 
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
+  const [token, setToken] = useState("");
+
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (user) {
-        const token = await user.getIdToken();
+        setToken(await user.getIdToken());
         console.log(user, "user");
       }
 
@@ -48,7 +50,7 @@ const Login = (props) => {
   }, []);
 
 
-  if (isSignedIn) {
+  if (isSignedIn && !token) {
     const user111 = firebase.auth().currentUser;
     console.log("user111", user111);
     return (
