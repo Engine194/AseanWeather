@@ -13,7 +13,7 @@ firebase.initializeApp(config);
 
 // Configure FirebaseUI.
 const uiConfig = {
-  signInFlow: 'redirect',
+  signInFlow: 'popup',
   signInSuccessUrl: '',
   // Hiển thị Facebook là nhà cung cấp xác thực.
   signInOptions: [
@@ -36,14 +36,19 @@ const Login = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   useEffect(() => {
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged( async user => {
       setIsSignedIn(!!user);
+      const token = await user.getIdToken();
+      console.log(user, "user");
+
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
 
   if (isSignedIn) {
+    const user111 = firebase.auth().currentUser;
+    console.log("user111", user111);
     return (
       <div className="Home_login">
         <button type="button" onClick={toggle}>LOGIN</button>
@@ -58,8 +63,6 @@ const Login = (props) => {
       </div>
     );
   } else {
-    const user111 = firebase.auth().currentUser;
-    console.log("user111", user111);
     return (
       <div className="Home_login">
         <button type="button" onClick={toggle}>LOGIN</button>
