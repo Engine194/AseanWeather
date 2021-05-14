@@ -36,10 +36,12 @@ const Login = (props) => {
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
   useEffect(() => {
-    const unregisterAuthObserver = firebase.auth().onAuthStateChanged( async user => {
+    const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
-      const token = await user.getIdToken();
-      console.log(user, "user");
+      if (user) {
+        const token = await user.getIdToken();
+        console.log(user, "user");
+      }
 
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
