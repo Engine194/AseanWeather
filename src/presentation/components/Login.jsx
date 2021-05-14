@@ -19,13 +19,6 @@ const uiConfig = {
   signInOptions: [
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
   ],
-  callbacks: {
-    // Avoid redirects after sign-in.
-    signInSuccessWithAuthResult: () => {
-      alert("Login Success!");
-      return false
-    },
-  },
 };
 
 const Login = (props) => {
