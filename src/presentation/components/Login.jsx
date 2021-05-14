@@ -3,6 +3,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../css/HomeHeader.css';
+import linkHome from '../../data/api/linkHome';
 
 // Gọi API từ Firebase
 const config = {
@@ -14,7 +15,7 @@ firebase.initializeApp(config);
 // Configure FirebaseUI.
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: '',
+  signInSuccessUrl: linkHome,
   // Hiển thị Facebook là nhà cung cấp xác thực.
   signInOptions: [
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
