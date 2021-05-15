@@ -45,15 +45,15 @@ const Login = (props) => {
         console.log("user", user);
         console.log("user.displayName",user.displayName);
         console.log("user.email", user.email);
+        console.log("user.Im.multiFactor.photoURL", user.Im.multiFactor.photoURL);
       }
 
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  }, []);
+  },[]);
 
 
   if (isSignedIn && !isClickLogin) {
-    const user111 = firebase.auth().currentUser;
     return (
       <div className="Home_login">
         <button type="button" onClick={toggle}>LOGIN</button>
