@@ -9,9 +9,11 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { getSearchV2Request } from '../redux/effects/searchV2Effect';
 import getSearchV3 from '../redux/actions/searchV3Action';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import { markMenuInComponent, menuType } from '../../data/configMenu';
+import firebase from 'firebase';
+import Login from '../components/Login';
+
 
 const filter = createFilterOptions();
 
@@ -24,6 +26,24 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
     const [isSumimited, setIsSumimited] = useState(false);
     const options = [];
     const history = useHistory();
+
+    const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
+    const [displayName, setDisplayName] = useState("");
+    
+    useEffect(() => {
+        const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
+            setIsSignedIn(!!user);
+            if (!!user) {
+              console.log("user", user);
+              setDisplayName(user.displayName);
+              console.log("user.email", user.email);
+              console.log("user.photoURL", user.photoURL);
+            }
+      
+          });
+          return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
+    }, []);
+
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -226,8 +246,8 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                             </div>
                         </div>
                         <div className="col-2">
-                            <div className="groupScssH1">
-                                <button className=" btn btn-light login">LOGIN</button>
+                            <div className="groupScssH2">
+                                <Login/>
                             </div>
                         </div>
                     </div>

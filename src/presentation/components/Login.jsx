@@ -22,9 +22,7 @@ const uiConfig = {
   ],
 };
 
-const Login = (props) => {
-
-  const { className } = props;
+const Login = ({className}) => {
 
   const [modal, setModal] = useState(false);
 
@@ -38,12 +36,14 @@ const Login = (props) => {
 
   const [isClickLogin, setIsClickLogin] = useState(false);
 
+  const [displayName, setDisplayName] = useState("");
+
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
         console.log("user", user);
-        console.log("user.displayName",user.displayName);
+        setDisplayName(user.displayName);
         console.log("user.email", user.email);
         console.log("user.photoURL", user.photoURL);
       }
@@ -56,15 +56,8 @@ const Login = (props) => {
   if (isSignedIn && !isClickLogin) {
     return (
       <div className="Home_login">
-        <button type="button" onClick={toggle}>LOGIN</button>
-        <Modal isOpen={modal} toggle={toggle} className={className}>
-          <ModalHeader toggle={toggle} >LOGIN</ModalHeader>
-          <ModalBody>
-            <FormGroup>
-              <div className="text-center">Bạn đã đăng nhập rồi, vui lòng quay lại trang</div>
-            </FormGroup>
-          </ModalBody>
-        </Modal>
+        <div className="row">Chào Mừng</div>
+        <div className="row">{displayName}</div>
       </div>
     );
   } else if (!isSignedIn && !isClickLogin) {
@@ -102,7 +95,6 @@ const Login = (props) => {
           </ModalBody>
         </Modal>
       </div>
-
     );
   }
 }

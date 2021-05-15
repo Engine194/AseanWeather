@@ -16,8 +16,7 @@ import { useHistory } from 'react-router';
 const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest, propsSearch }) => {
     const history = useHistory();
     
-
-    // Gọi api ở đây và chỉ gọi 1 lần khi trang mới mở lên
+       // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
         // Mark menu
         markMenuInComponent(menuType.CURRENT);
@@ -27,8 +26,8 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
             let search = history.location.search;
             search = search.replace("?", " ");
             search = search.trim();
-            if (search.endsWith("|")) {
-                search = search.replace("|", " ");
+            if (search.endsWith("%7C")) {
+                search = search.replace("%7C", " ");
                 search = search.trim();
             } else if ( search.indexOf("%7C") != -1 ) {
                 const searchSplited = search.split("%7C");
@@ -64,12 +63,8 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                 }
             }
         }
-       
+       console.log("111111111111111");
     }, [propsSearch.data.search])
-
-    useEffect(()=> {
-
-    })
 
     // Kiểm tra dữ liệu trả vể
     // console.log("Astro", propsAstro);
