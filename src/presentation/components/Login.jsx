@@ -36,14 +36,15 @@ const Login = (props) => {
 
   const [isSignedIn, setIsSignedIn] = useState(false); // Local signed-in state.
 
-  const [token, setToken] = useState("");
+  const [isClickLogin, setIsClickLogin] = useState(false);
 
   useEffect(() => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
-      if (user) {
-        setToken(await user.getIdToken());
-        console.log(user, "user");
+      if (!!user) {
+        console.log("user", user);
+        console.log("user.displayName",user.displayName);
+        console.log("user.email", user.email);
       }
 
     });
@@ -51,9 +52,8 @@ const Login = (props) => {
   }, []);
 
 
-  if (isSignedIn && !token) {
+  if (isSignedIn && !isClickLogin) {
     const user111 = firebase.auth().currentUser;
-    console.log("user111", user111);
     return (
       <div className="Home_login">
         <button type="button" onClick={toggle}>LOGIN</button>
@@ -67,7 +67,7 @@ const Login = (props) => {
         </Modal>
       </div>
     );
-  } else {
+  } else if (!isSignedIn && !isClickLogin) {
     return (
       <div className="Home_login">
         <button type="button" onClick={toggle}>LOGIN</button>
@@ -78,7 +78,7 @@ const Login = (props) => {
               <div className="text-center">Click vào <b><u>Sign in with Facebook</u></b> nếu bạn đồng ý cho <b><u>AseanWeather</u></b> sẽ có quyền truy cập vào Facebook của bạn</div>
             </FormGroup>
             <FormGroup>
-              <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+              <StyledFirebaseAuth onClick={()=> setIsClickLogin(true)} uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </FormGroup>
             <FormGroup className="text-center">
               <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }}><i><u>Click Here </u></i></a> To Login</div>

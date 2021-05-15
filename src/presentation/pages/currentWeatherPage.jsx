@@ -27,9 +27,21 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
             let search = history.location.search;
             search = search.replace("?", " ");
             search = search.trim();
-            // search = search.replace("&"," ");
-            // const searchSplited = search.split(" ");
-            // search = searchSplited[0];
+            if (search.endsWith("|")) {
+                search = search.replace("|", " ");
+                search = search.trim();
+            } else if ( search.indexOf("%7C") != -1 ) {
+                const searchSplited = search.split("%7C");
+                search = searchSplited[0];
+                search = search.replace("_", " ");
+                search = search.replace("_", " ");
+                search = search.replace("_", " ");
+                search = search.replace("_", " ");
+                search = search.replace("_", " ");
+            } else {
+                search = "Ha Noi";
+            }
+                
             getCurrentRequest(search);
             getAstroRequest(search);
             localStorage.setItem("cityName",search);
