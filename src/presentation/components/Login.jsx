@@ -45,7 +45,7 @@ const Login = (props) => {
         console.log("user", user);
         console.log("user.displayName",user.displayName);
         console.log("user.email", user.email);
-        console.log("user.multiFactor.photoURL", user.Im.multiFactor.photoURL);
+        console.log("user.photoURL", user.Im.multiFactor.photoURL);
       }
 
     });
