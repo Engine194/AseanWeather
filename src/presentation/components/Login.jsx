@@ -22,7 +22,7 @@ const uiConfig = {
   ],
 };
 
-const Login = ({className}) => {
+const Login = ({ className }) => {
 
   const [modal, setModal] = useState(false);
 
@@ -38,32 +38,49 @@ const Login = ({className}) => {
 
   const [displayName, setDisplayName] = useState("");
 
+  const [isOpen, setIsOpen] = useState(false);
+
+  const [isHome, setIsHome] = useState(false);
+
   useEffect(() => {
+    const pathname = window.location.pathname;
+    if (pathname == "/") {
+      setIsHome(true)
+    }
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
         console.log("user", user);
-        setDisplayName(user.displayName);
+        setDisplayName(user.displayName.split(" ")[0]);
         console.log("user.email", user.email);
         console.log("user.photoURL", user.photoURL);
       }
 
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
-  },[]);
+  }, []);
 
-
+  const handleDropdown = () => {
+    setIsOpen(!isOpen);
+  }
+  
   if (isSignedIn && !isClickLogin) {
-    return (
-      <div className="Home_login">
-        <div className="row">Chào Mừng</div>
-        <div className="row">{displayName}</div>
+  return (
+    <>
+      <div className="dropdown" style={{fontSize: (isHome? "20px": '15px'),}}>
+        <button type="button" onClick={handleDropdown} className="headerLogin" style={{height: (isHome? "46px": '40px'), width: (isHome? "160px": '120px')}} ><big>Hi, Nguyễn{displayName}!</big></button>
+        <div id="myDropdown" className="dropdown-content" style={{width: (isHome? "160px": '120px')}} >
+          {isOpen ? (<a href="#about">Yêu thích</a>) : null}
+          {isOpen ? (<a href="#about">Log out</a>) : null}
+        </div>
       </div>
-    );
+
+    </>
+  );
   } else if (!isSignedIn && !isClickLogin) {
     return (
-      <div className="Home_login">
-        <button type="button" onClick={toggle}>LOGIN</button>
+      <>
+        <button className="headerSearch" type="button" onClick={toggle}>LOGIN</button>
         <Modal isOpen={modal} toggle={toggle} className={className}>
           <ModalHeader toggle={toggle}>LOGIN</ModalHeader>
           <ModalBody>
@@ -71,7 +88,7 @@ const Login = ({className}) => {
               <div className="text-center">Click vào <b><u>Sign in with Facebook</u></b> nếu bạn đồng ý cho <b><u>AseanWeather</u></b> sẽ có quyền truy cập vào Facebook của bạn</div>
             </FormGroup>
             <FormGroup>
-              <StyledFirebaseAuth onClick={()=> setIsClickLogin(true)} uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
+              <StyledFirebaseAuth onClick={() => setIsClickLogin(true)} uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </FormGroup>
             <FormGroup className="text-center">
               <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }}><i><u>Click Here </u></i></a> To Login</div>
@@ -94,7 +111,7 @@ const Login = ({className}) => {
             </FormGroup>
           </ModalBody>
         </Modal>
-      </div>
+      </>
     );
   }
 }
