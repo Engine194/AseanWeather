@@ -14,7 +14,7 @@ const HomeCart = ({location, current}) => {
         name = name.replace(" ", "_");
         name = name.replace(" ", "_");
         history.push({
-            pathname: "/main/curent",
+            pathname: "/main/current",
             search: `${name}%7C`
         })
     }
