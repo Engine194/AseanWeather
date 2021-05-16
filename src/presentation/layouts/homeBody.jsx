@@ -40,13 +40,17 @@ const HomeBody = ({ propsSearchApi,
         return (
 
             <div className="row margin_bottom">
-                <div className="col-1"></div>
-                <HomeCart location={locationE1} current={currentE1}/>
-                <div className="col-1"></div>
-                <HomeCart location={locationE2} current={currentE2}/>
-                <div className="col-1"></div>
-                <HomeCart location={locationE3} current={currentE3}/>
-                <div className="col-1"></div>
+                <div className="col-2"></div>
+                <div className="col-8">
+                    <div className="row">
+                        <HomeCart location={locationE1} current={currentE1} />
+                        <div className="col-1"></div>
+                        <HomeCart location={locationE2} current={currentE2} />
+                        <div className="col-1"></div>
+                        <HomeCart location={locationE3} current={currentE3} />
+                    </div>
+                <div className="col-2"></div>
+                </div>
             </div>
         )
     } else {

@@ -67,7 +67,7 @@ const Login = ({ className }) => {
   if (isSignedIn && !isClickLogin) {
   return (
     <>
-      <div className="dropdown" style={{fontSize: (isHome? "20px": '15px'),}}>
+      <div className="dropdown" style={{fontSize: (isHome? "19px": '15px'),}}>
         <button type="button" onClick={handleDropdown} className="headerLogin" style={{height: (isHome? "46px": '40px'), width: (isHome? "160px": '120px')}} ><big>Hi, {displayName}!</big></button>
         <div id="myDropdown" className="dropdown-content" style={{width: (isHome? "160px": '120px')}} >
           {isOpen ? (<a href="#about">Yêu thích</a>) : null}
@@ -85,7 +85,7 @@ const Login = ({ className }) => {
           <ModalHeader toggle={toggle}>LOGIN</ModalHeader>
           <ModalBody>
             <FormGroup>
-              <div className="text-center">Click vào <b><u>Sign in with Facebook</u></b> nếu bạn đồng ý cho <b><u>AseanWeather</u></b> sẽ có quyền truy cập vào Facebook của bạn</div>
+              <div className="text-center">Click vào <b><u>Sign in with Facebook</u></b> nếu bạn đồng ý cho <b><u>AseanWeather</u></b> có quyền truy cập vào Facebook của bạn</div>
             </FormGroup>
             <FormGroup>
               <StyledFirebaseAuth onClick={() => setIsClickLogin(true)} uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
