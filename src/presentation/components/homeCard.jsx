@@ -1,11 +1,26 @@
+import { useHistory } from "react-router";
 import getFormatDate from "../../data/configDate";
 import getImage128URL from "../../data/configImage";
 
 const HomeCart = ({location, current}) => {
+    
+    const history = useHistory();
 
+    const handlePush = () => {
+        let name = location.name;
+        name = name.replace(" ", "_");
+        name = name.replace(" ", "_");
+        name = name.replace(" ", "_");
+        name = name.replace(" ", "_");
+        name = name.replace(" ", "_");
+        history.push({
+            pathname: "/main/curent",
+            search: `${name}%7C`
+        })
+    }
     
     return (
-        <div className="col mt-3 card_home" name="hanoi">
+        <div className="col mt-3 card_home" onClick={handlePush} name="hanoi">
                     <div className="row mt-2">
                         <div className="col text-center" style={{ fontSize: "30px" }}>
                             {location.name}

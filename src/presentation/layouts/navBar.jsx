@@ -67,7 +67,7 @@ const NaviBar = ({ getMenu }) => {
         setIs3Clicked(false);
         unmarkMenu("button.btnJS3");
         setIs4Clicked(true);
-        markMenu("button.btnJS4", "/home");
+        markMenu("button.btnJS4", "/main/favorite_cities");
     }
 
     // Đưa action vào useEffect với đk thay đổi is*Clicked *=1,2,3,4 thì mới chạy

@@ -8,6 +8,7 @@ import HourlyWeatherPage from "../pages/hourlyWeatherPage";
 import Footer from "../layouts/footer";
 import MainFrame from "../layouts/mainFrame";
 import NotFound404 from "../components/NotFound404";
+import FavoriteCities from "../pages/favoriteCities";
 
 const Routes = () => {
     return (
@@ -17,6 +18,7 @@ const Routes = () => {
                     <Route path="/main/current" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={currentWeatherPage} Footer={Footer}/>} />
                     <Route path="/main/hours" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={HourlyWeatherPage} Footer={Footer}/>} />
                     <Route path="/main/days" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={DailyWeatherPage} Footer={Footer}/>} />
+                    <Route path="/main/favorite_cities" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={FavoriteCities} Footer={Footer}/>} />
                     <Route path="/main/404" exact render={()=> <MainFrame Header={Header} NavBar={NaviBar} LeftBar={LeftBar} Body={NotFound404} Footer={Footer}/>} />
                 </Switch>
             </BrowserRouter>
