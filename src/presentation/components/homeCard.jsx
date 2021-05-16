@@ -20,7 +20,7 @@ const HomeCart = ({location, current}) => {
     }
     
     return (
-        <div className="col mt-3 card_home" onClick={handlePush} name="hanoi">
+        <div className="col mt-3 card_home" onClick={handlePush} name="hanoi" title="Click for more information">
                     <div className="row mt-2">
                         <div className="col text-center" style={{ fontSize: "30px" }}>
                             {location.name}
