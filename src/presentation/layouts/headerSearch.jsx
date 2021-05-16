@@ -24,6 +24,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
     const options = [];
+    const [optionBEs, setOptionBEs] = useState([]);
     const history = useHistory();
 
     const handleSearch = async (e) => {
@@ -36,12 +37,10 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             if (typeof searchItem === 'string') {
                 const value = searchItem.trim();
                 if (value) {
-                    console.log("options", options);
-                    const results = options.filter(item => {
+                    const results = optionBEs.filter(item => {
                         const match = item.title.toLowerCase().indexOf(value.toLowerCase());
                         return match !== -1;
                     })
-                    console.log("results", results);
                     if (results.length > 0) {
                         setIsMatch(true)
                         getSearchV3(results[0].title);
@@ -54,20 +53,20 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             if (typeof searchItem === 'object') {
                 const value = searchItem.title.trim();
                 // nếu có searchItem thì mới gọi API
-                if (value && options.length > 0) {
-                    options.forEach(element => {
+                if (value && optionBEs.length > 0) {
+                    optionBEs.forEach(element => {
                         if (value.toLowerCase() == element.title.toLowerCase()) {
                             setIsMatch(true);
-                            successNotify();
                             // Nếu từ khóa nhập vào trùng với một trong các dữ liệu trả về mới
                             // gọi action lưu kết quả lại vào trong redux
                             getSearchV3(value);
+                            successNotify();
                         }
                     });
                 }
             }
         }
-
+        
 
     }
 
@@ -81,36 +80,44 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
-        });
+            });
     }
 
-    useEffect(() => {
+    useEffect(()=>{
         // Nếu trong DB ko có city thì trả về not found
         if (isMatch) {
             resetForm();
-
+            
         } else {
             setIsShowErr(true);
         }
-    }, [isMatch, isSumimited])
+    },[isMatch, isSumimited])
 
     const resetForm = () => {
         setSearchItem('');
         setIsSumimited(false);
         setIsShowErr(false);
     }
-    
-    // Call API để search mỗi khi searchItem thay đổi
-    useEffect(() => {
-        getSearchV2Request(searchItem);
-    }, [searchItem]);
 
+    // Gọi API mỗi khi searchItem thay đổi
+    useEffect(async () => {
+        await getSearchV2Request(searchItem);
+        if (propsSearchV2.success == 1) {
+            const searches = propsSearchV2.data.search;
+            const results = []
+            searches.forEach(element => {
+                results.push({ title: element.name });
+            });
+            setOptionBEs(results);
+        }
+    }, [searchItem]);
+    
     // Binding input khi gõ vào ô input
     const handleChange = (e) => {
         setSearchItem(e.target.value)
     }
 
-    useEffect(() => {
+    useEffect(()=> {
         // sau khi đã có data thì thực hiện lệnh chuyển trang 
         if (propsSearchV3.success == 1) {
             const menu1 = document.querySelector("button.btnJS1");
@@ -121,7 +128,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
         }
     }, [propsSearchV3]);
 
-
+    
 
 
     // Khi có data search trả về, đẩy vào trong options 
@@ -136,7 +143,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
         <div className="container-fluid">
             <div className="row rowScssH1">
                 <div className="col-1 offset-3">
-                    <a href={linkHome} className="linkHomeHS">
+                    <a href={linkHome} className="linkHomeHS"> 
                         <img src={logo} width="73" alt="Logo" />
                     </a>
                 </div>
@@ -232,7 +239,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                         </div>
                         <div className="col-2">
                             <div className="groupScssH2">
-                                <Login />
+                                <Login/>
                             </div>
                         </div>
                     </div>

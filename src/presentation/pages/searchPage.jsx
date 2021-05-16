@@ -18,6 +18,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     const [isShowErr, setIsShowErr] = useState(false);
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
+    const [optionBEs, setOptionBEs] = useState([]);
     const options = [];
     const history = useHistory();
 
@@ -27,13 +28,12 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
 
         // xử lý các trường hợp search
         if (searchItem) {
-            
             // Nếu người dùng gõ một chuỗi bất kỳ mà không select từ gợi ý
             if (typeof searchItem === 'string') {
                 const value = searchItem.trim();
                 if (value) {
                     console.log("options",options);
-                    const results = options.filter(item => {
+                    const results = optionBEs.filter(item => {
                     const match = item.title.toLowerCase().indexOf(value.toLowerCase());
                         return match !== -1;
                     })
@@ -50,11 +50,11 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
 
             // Nếu người dùng gõ một chuỗi và select từ gợi ý
             if (typeof searchItem === 'object') {
+                
                 const value = searchItem.title.trim();
                 // nếu có searchItem thì mới gọi API
-                if (value && options.length > 0) {
-
-                    options.forEach(element => {
+                if (value && optionBEs.length > 0) {
+                    optionBEs.forEach(element => {
                         if (value.toLowerCase() == element.title.toLowerCase()) {
                             setIsMatch(true);
                             // Nếu từ khóa nhập vào trùng với một trong các dữ liệu trả về mới
@@ -76,9 +76,22 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
 
     }
 
-    const handleChange = async (e) => {
-        setSearchItem(e.target.value)
+    // Gọi API mỗi khi searchItem thay đổi
+    useEffect( async () => {
         await getSearchV2Request(searchItem);
+        if (propsSearchV2.success == 1) {
+            const searches = propsSearchV2.data.search;
+            const results = []
+            searches.forEach(element => {
+                results.push({ title: element.name });
+            });
+            setOptionBEs(results);
+        }
+    }, [searchItem]);
+
+    // binding searchItem vào ô input
+    const handleChange = (e) => {
+        setSearchItem(e.target.value)
     }
 
     // sau khi đã có data thì thực hiện lệnh chuyển trang 
