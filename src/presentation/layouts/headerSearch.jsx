@@ -67,7 +67,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                 }
             }
         }
-        
+
 
     }
 
@@ -81,32 +81,36 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            });
+        });
     }
 
-    useEffect(()=>{
+    useEffect(() => {
         // Nếu trong DB ko có city thì trả về not found
         if (isMatch) {
             resetForm();
-            
+
         } else {
             setIsShowErr(true);
         }
-    },[isMatch, isSumimited])
+    }, [isMatch, isSumimited])
 
     const resetForm = () => {
         setSearchItem('');
         setIsSumimited(false);
         setIsShowErr(false);
     }
+    
+    // Call API để search mỗi khi searchItem thay đổi
+    useEffect(() => {
+        getSearchV2Request(searchItem);
+    }, [searchItem]);
 
     // Binding input khi gõ vào ô input
     const handleChange = (e) => {
         setSearchItem(e.target.value)
-        getSearchV2Request(searchItem);
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         // sau khi đã có data thì thực hiện lệnh chuyển trang 
         if (propsSearchV3.success == 1) {
             const menu1 = document.querySelector("button.btnJS1");
@@ -117,7 +121,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
         }
     }, [propsSearchV3]);
 
-    
+
 
 
     // Khi có data search trả về, đẩy vào trong options 
@@ -132,7 +136,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
         <div className="container-fluid">
             <div className="row rowScssH1">
                 <div className="col-1 offset-3">
-                    <a href={linkHome} className="linkHomeHS"> 
+                    <a href={linkHome} className="linkHomeHS">
                         <img src={logo} width="73" alt="Logo" />
                     </a>
                 </div>
@@ -228,7 +232,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                         </div>
                         <div className="col-2">
                             <div className="groupScssH2">
-                                <Login/>
+                                <Login />
                             </div>
                         </div>
                     </div>
