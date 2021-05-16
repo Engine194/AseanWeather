@@ -64,6 +64,7 @@ const Login = ({ className }) => {
     setIsOpen(!isOpen);
   }
 
+  if (isSignedIn && !isClickLogin) {
   return (
     <>
       <div className="dropdown" style={{ fontSize: (isHome ? "18px" : '15px'), }}>
@@ -83,7 +84,6 @@ const Login = ({ className }) => {
 
     </>
   );
-  if (isSignedIn && !isClickLogin) {
   } else if (!isSignedIn && !isClickLogin) {
     return (
       <>
