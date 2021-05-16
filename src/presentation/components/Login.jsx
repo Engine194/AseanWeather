@@ -67,9 +67,9 @@ const Login = ({ className }) => {
   if (isSignedIn && !isClickLogin) {
   return (
     <>
-      <div className="dropdown" style={{fontSize: (isHome? "19px": '15px'),}}>
-        <button type="button" onClick={handleDropdown} className="headerLogin" style={{height: (isHome? "46px": '40px'), width: (isHome? "160px": '120px')}} ><big>Hi, {displayName}!</big></button>
-        <div id="myDropdown" className="dropdown-content" style={{width: (isHome? "160px": '120px')}} >
+      <div className="dropdown" style={{fontSize: (isHome? "18px": '15px'),}}>
+        <button type="button" onClick={handleDropdown} className="headerLogin" style={{height: (isHome? "44px": '40px'), width: (isHome? "150px": '120px')}} ><big>Hi, {displayName}!</big></button>
+        <div id="myDropdown" className="dropdown-content" style={{width: (isHome? "150px": '120px')}} >
           {isOpen ? (<a href="#about">Yêu thích</a>) : null}
           {isOpen ? (<a href="#about">Log out</a>) : null}
         </div>
