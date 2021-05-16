@@ -64,11 +64,10 @@ const Login = ({ className }) => {
     setIsOpen(!isOpen);
   }
   
-  if (isSignedIn && !isClickLogin) {
   return (
     <>
       <div className="dropdown" style={{fontSize: (isHome? "18px": '15px'),}}>
-        <button type="button" onClick={handleDropdown} className="headerLogin" style={{height: (isHome? "42px": '40px'), width: (isHome? "150px": '120px')}} ><big>Hi, {displayName? displayName: "User"}! </big> <sup style={{fontSize: (isHome? "15px": '12px')}}><i className="fa fa-sort-desc"  aria-hidden="true"></i></sup></button>
+        <button type="button" onClick={handleDropdown} onBlur={handleDropdown} className="headerLogin" style={{height: (isHome? "42px": '40px'), width: (isHome? "150px": '120px')}} ><big>Hi, {displayName? displayName: "User"}! </big> <sup style={{fontSize: (isHome? "15px": '12px')}}><i className="fa fa-sort-desc"  aria-hidden="true"></i></sup></button>
         <div id="myDropdown" className="dropdown-content" style={{width: (isHome? "150px": '120px')}} >
           {isOpen ? (<a href="#about">Yêu thích</a>) : null}
           {isOpen ? (<a href="#about">Log out</a>) : null}
@@ -77,6 +76,7 @@ const Login = ({ className }) => {
 
     </>
   );
+  if (isSignedIn && !isClickLogin) {
   } else if (!isSignedIn && !isClickLogin) {
     return (
       <>

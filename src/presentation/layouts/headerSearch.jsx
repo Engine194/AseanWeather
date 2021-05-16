@@ -152,7 +152,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                         <div className="col-6 offset-4">
                             <div className="row">
                                 <form id="searchFormHS" onSubmit={handleSearch}>
-                                    <div className="input-group groupScssH1">
+                                    <div className="groupScssH1" style={{width: "100%"}}>
                                         <Autocomplete
                                             value={searchItem}
                                             onChange={(event, newValue) => {
