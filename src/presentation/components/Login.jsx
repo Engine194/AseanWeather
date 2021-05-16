@@ -71,7 +71,7 @@ const Login = ({ className }) => {
         <button type="button" onClick={handleDropdown} onBlur={handleDropdown}
           className="headerLogin"
           style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
-          <big>Hi, {displayName ? displayName : "Từ"}! </big>
+          <big>Hi, {displayName ? displayName : "User"}! </big>
           <span style={{ fontSize: (isHome ? "20px" : '18px'), float: "right", position: "relative", bottom: "4px", right: (isHome ? "5px" : '3px') }}>
             <i className="fa fa-sort-desc" aria-hidden="true"></i>
           </span>

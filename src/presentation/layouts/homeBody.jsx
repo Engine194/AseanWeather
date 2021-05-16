@@ -17,7 +17,7 @@ const HomeBody = ({ propsSearchApi,
 }) => {
     useEffect(() => {
         getSearchApiE1Request("Hanoi");
-        getSearchApiE2Request("Viangchan");
+        getSearchApiE2Request("Singapore");
         getSearchApiE3Request("Bangkok")
     }, [])
 
