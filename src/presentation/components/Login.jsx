@@ -4,6 +4,7 @@ import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../css/HomeHeader.css';
 import linkHome from '../../data/api/linkHome';
+import { postDataUser } from '../../data/api/apiRequest';
 
 // Gọi API từ Firebase
 const config = {
@@ -54,6 +55,12 @@ const Login = ({ className }) => {
         setDisplayName(user.displayName.split(" ")[0]);
         console.log("user.email", user.email);
         console.log("user.photoURL", user.photoURL);
+        const data = {
+          name: user.displayName,
+          email: user.email,
+          facebookId: user.uid,
+        }
+        postDataUser(data);
       }
 
     });

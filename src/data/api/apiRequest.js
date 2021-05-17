@@ -84,6 +84,16 @@ const getSearchV2 = searchValue =>
     return Api(axiosType.BE).get(`${urlBE.SEARCHV2}`, { params: parameters })
 }
 
+const postDataUser = (data) => {
+    const {name, email, facebookId} = data;
+    const body = {
+        name,
+        email,
+        facebookId,
+    }
+    return Api(axiosType.BE).post(`${urlBE.USERS}`, body)
+}
+
 export {
     convertCity,
     getCurrentByCity,
@@ -93,6 +103,7 @@ export {
     getSearch,
     getSearchV2,
     getDailyByCity,
+    postDataUser,
 };
 
 
