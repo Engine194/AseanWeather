@@ -8,6 +8,7 @@ import searchV2Reducer from "./searchV2Reducer";
 import searchV3Reducer from "./searchV3Reducer";
 import dailyReducer from "./dailyReducer";
 import searchApiReducer from "./searchApiReducer";
+import favoriteReducer from "./favoriteReducer";
 
 export default combineReducers({
     currentReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
     searchV3Reducer,
     dailyReducer,
     searchApiReducer,
+    favoriteReducer,
 })
