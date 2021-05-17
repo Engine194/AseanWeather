@@ -8,7 +8,7 @@ import HourlyWeatherPage from "../pages/hourlyWeatherPage";
 import Footer from "../layouts/footer";
 import MainFrame from "../layouts/mainFrame";
 import NotFound404 from "../components/NotFound404";
-import FavoriteCities from "../pages/favoriteCities";
+import FavoriteCities from "../pages/favoriteCitiesPage";
 
 const Routes = () => {
     return (
