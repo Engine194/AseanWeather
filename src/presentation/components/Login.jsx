@@ -7,7 +7,9 @@ import linkHome from '../../data/api/linkHome';
 import { postDataUser } from '../../data/api/apiRequest';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {getUserRequest} from "../redux/effects/getUserEffect"
+import {getUserRequest} from "../redux/effects/getUserEffect";
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 // Gọi API từ Firebase
 const config = {
