@@ -44,6 +44,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const [displayName, setDisplayName] = useState("");
 
+  const [fullname, setFullname] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
 
   const [isHome, setIsHome] = useState(false);
@@ -57,7 +59,14 @@ const Login = ({ className, propsUser, getUserRequest }) => {
       setIsSignedIn(!!user);
       if (!!user) {
         console.log("user", user);
-        setDisplayName(user.displayName.split(" ")[0]);
+        let name = user.displayName
+        setFullname(name);
+
+        const nameSplited = name.split(" ");
+        const n = nameSplited.length;
+        if (n > 0) {
+          setDisplayName(nameSplited[n-1]);
+        }
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
         if (propsUser.success == 1) {
@@ -82,7 +91,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const successNotify = () => {
-    toast.warning(`Chào mừng ${displayName}`, {
+    toast.warning(`Chào mừng ${fullname}`, {
         position: "top-center",
         autoClose: 8000,
         hideProgressBar: true,

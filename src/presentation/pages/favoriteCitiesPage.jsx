@@ -16,7 +16,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     const history = useHistory();
     
        // Gọi api ở đây mỗi khi có kết quả từ propsSearch
-    useEffect(() => {
+    useEffect(async () => {
         // Mark menu
         markMenuInComponent(menuType.FAVORITE);
 
@@ -35,13 +35,13 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
             }
             
             if (results.length > 0) {
-                getFavoriteCurrentRequest(results);
+                await getFavoriteCurrentRequest(results);
             } else {
                 warningNotify("Bạn chưa có thành phố yêu thích nào!");
             }
         } else {
-            document.querySelector("a.linkHomeHS").click();
             warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")
+            document.querySelector("a.linkHomeHS").click();
         }
         
 
@@ -68,7 +68,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     } else {
         return (
             <>
-            <FavoriteMainList dataWeather={propsFavorite.data} />
+            <FavoriteMainList dataWeather={propsFavorite.data.favorite} />
             </>
         );
     }
