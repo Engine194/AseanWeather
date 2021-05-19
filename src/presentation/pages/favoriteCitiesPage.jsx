@@ -30,14 +30,15 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
                 results.push(element.name);
             }
             setFavorites(results);
+            if (favorites.length > 0) {
+                getFavoriteCurrentRequest(favorites);
+            } else {
+                warningNotify();
+                const linkHomeHS = document.querySelector("a.linkHomeHS");
+                linkHomeHS.click();
+            }
         }
-        if (favorites.length > 0) {
-            getFavoriteCurrentRequest(favorites);
-        } else {
-            warningNotify();
-            const linkHomeHS = document.querySelector("a.linkHomeHS");
-            linkHomeHS.click();
-        }
+        
 
     },[])
 
