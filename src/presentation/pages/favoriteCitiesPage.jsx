@@ -14,24 +14,28 @@ import FavoriteMainList from "../components/favoriteMainList";
 const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     
     const history = useHistory();
-    const [favorites, setFavorites] = useState([]);
+    
        // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
         // Mark menu
         markMenuInComponent(menuType.FAVORITE);
 
         let user = localStorage.getItem("user");
+        console.log("user", user);
+        debugger
         if (user) {
             user = JSON.parse(user);
+            console.log("user", user);
             const favouriteCities = user.favouriteCities;
+
             const results = [];
             for (let index = 0; index < favouriteCities.length; index++) {
                 const element = favouriteCities[index];
                 results.push(element.name);
             }
-            setFavorites(results);
-            if (favorites.length > 0) {
-                getFavoriteCurrentRequest(favorites);
+            
+            if (results.length > 0) {
+                getFavoriteCurrentRequest(results);
             } else {
                 warningNotify("Bạn chưa có thành phố yêu thích nào!");
             }
@@ -56,7 +60,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     }
 
     console.log("propsFavorite.data",propsFavorite.data);
-    console.log("favorites",favorites);
+    
     if (propsFavorite.success != 1) {
         return (
             <Loading/>

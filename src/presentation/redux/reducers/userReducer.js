@@ -11,15 +11,15 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case getUserActionType.GET_USER_SUCCESS:
-            let user = action.payload;
-            user = {
+            
+            const user = {
                 ...action.payload,
                 favouriteCities: [
                     ...action.payload.favouriteCities,
                     {id: 1, name: "Ha Noi"},
                     {id: 2, name: "Da Nang"},
                     {id: 3, name: "Singapore"},
-                    {id: 4, name: "Kampot"}
+                    {id: 4, name: "Kampot"},
                 ],
             };
             localStorage.setItem('user', JSON.stringify(user))
