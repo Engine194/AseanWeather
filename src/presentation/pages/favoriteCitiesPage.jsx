@@ -7,21 +7,53 @@ import { getFavoriteCurrentRequest } from "../redux/effects/favoriteCurrentEffec
 import '../scss/currentPage.scss';
 import { markMenuInComponent, menuType } from "../../data/configMenu";
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
+    
     const history = useHistory();
-    const [favorites, setFavorites] = useState(["Ha noi", "Da nang", "Kampot", "Singapore"]);
+    const [favorites, setFavorites] = useState([]);
        // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
         // Mark menu
         markMenuInComponent(menuType.FAVORITE);
+
+        let user = localStorage.getItem("user");
+        if (user) {
+            user = JSON.parse(user);
+            const favouriteCities = user.favouriteCities;
+            const results = [];
+            for (let index = 0; index < favouriteCities.length; index++) {
+                const element = favouriteCities[index];
+                results.push(element.name);
+            }
+            setFavorites(results);
+        }
         if (favorites.length > 0) {
             getFavoriteCurrentRequest(favorites);
+        } else {
+            warningNotify();
+            const linkHomeHS = document.querySelector("a.linkHomeHS");
+            linkHomeHS.click();
         }
+
     },[])
 
-console.log(propsFavorite.data);
+    const warningNotify = () => {
+        toast.warning("Vui lòng đăng nhập để trải nghiệm tính năng này", {
+            position: "top-center",
+            autoClose: 3000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+            });
+    }
 
+    console.log(propsFavorite.data);
+    console.log("favorites",favorites);
     if (propsFavorite.success != 1) {
         return (
             <Loading/>
@@ -29,7 +61,7 @@ console.log(propsFavorite.data);
     } else {
         return (
             <>
-            <h1>aaaaaaaaaaaaaaaaaaaaaaa</h1>
+            <h1>FAVORITES</h1>
             </>
         );
     }

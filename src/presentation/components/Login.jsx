@@ -59,6 +59,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
         if (propsUser.success == 1) {
+          console.log("propsUser.data.user",propsUser.data.user);
           if (!propsUser.data.user) {
             const data = {
               name: user.displayName,
@@ -66,8 +67,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               facebookId: user.uid,
             }
             postDataUser(data);
-          } else {
-            localStorage.setItem('user', JSON.stringify(propsUser.data.user));
           }
         }
       }

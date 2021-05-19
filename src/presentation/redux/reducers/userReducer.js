@@ -11,6 +11,9 @@ const initialState = {
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
         case getUserActionType.GET_USER_SUCCESS:
+            localStorage.setItem('user', JSON.stringify(action.payload))
+            debugger
+
             return {
                 ...state,
                 loading: false,
