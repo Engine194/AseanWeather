@@ -66,7 +66,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               email: user.email,
               facebookId: user.uid,
             }
-            postDataUser(data);
+            await postDataUser(data);
+            successNotify();
           }
         }
       }
@@ -77,6 +78,18 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   }
+
+  const successNotify = () => {
+    toast.warning(`Chào mừng ${displayName}`, {
+        position: "top-center",
+        autoClose: 8000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: true,
+        progress: undefined,
+        });
+}
 
   if (isSignedIn && !isClickLogin) {
   return (

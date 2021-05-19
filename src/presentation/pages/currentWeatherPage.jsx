@@ -58,12 +58,10 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                     getCurrentRequest(cityName);
                     getAstroRequest(cityName);
                 } else {
-                    const linkHomeHS = document.querySelector("a.linkHomeHS");
-                    linkHomeHS.click();
+                    document.querySelector("a.linkHomeHS").click();
                 }
             }
         }
-       console.log("111111111111111");
     }, [propsSearch.data.search])
 
     // Kiểm tra dữ liệu trả vể

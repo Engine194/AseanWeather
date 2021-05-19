@@ -33,19 +33,20 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
             if (favorites.length > 0) {
                 getFavoriteCurrentRequest(favorites);
             } else {
-                warningNotify();
-                const linkHomeHS = document.querySelector("a.linkHomeHS");
-                linkHomeHS.click();
+                warningNotify("Bạn chưa có thành phố yêu thích nào!");
             }
+        } else {
+            document.querySelector("a.linkHomeHS").click();
+            warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")
         }
         
 
     },[])
 
-    const warningNotify = () => {
-        toast.warning("Vui lòng đăng nhập để trải nghiệm tính năng này", {
+    const warningNotify = (message) => {
+        toast.warning(message, {
             position: "top-center",
-            autoClose: 8000,
+            autoClose: 5000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
