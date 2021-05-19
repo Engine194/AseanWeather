@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
-import CurrentMain from "../components/currentMain";
 import Loading from "../components/loading";
 import { getFavoriteCurrentRequest } from "../redux/effects/favoriteCurrentEffect";
 import '../scss/currentPage.scss';
@@ -19,13 +18,10 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     useEffect(async () => {
         // Mark menu
         markMenuInComponent(menuType.FAVORITE);
-
+        
         let user = localStorage.getItem("user");
-        console.log("user", user);
-        debugger
         if (user) {
             user = JSON.parse(user);
-            console.log("user", user);
             const favouriteCities = user.favouriteCities;
 
             const results = [];
@@ -33,7 +29,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
                 const element = favouriteCities[index];
                 results.push(element.name);
             }
-            
+
             if (results.length > 0) {
                 await getFavoriteCurrentRequest(results);
             } else {
@@ -43,8 +39,6 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
             warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")
             document.querySelector("a.linkHomeHS").click();
         }
-        
-
     },[])
 
     const warningNotify = (message) => {
@@ -59,8 +53,6 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
             });
     }
 
-    console.log("propsFavorite.data",propsFavorite.data);
-    
     if (propsFavorite.success != 1) {
         return (
             <Loading/>
@@ -73,10 +65,6 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
         );
     }
 }
-
-
-
-
 
 // Lấy state của currentReducer và astroReducer từ store ra
 const mapStateToProps = (state) => {
