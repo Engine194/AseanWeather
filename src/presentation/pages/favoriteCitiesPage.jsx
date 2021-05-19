@@ -9,6 +9,7 @@ import { markMenuInComponent, menuType } from "../../data/configMenu";
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import FavoriteMainList from "../components/favoriteMainList";
 
 const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     
@@ -43,7 +44,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     const warningNotify = () => {
         toast.warning("Vui lòng đăng nhập để trải nghiệm tính năng này", {
             position: "top-center",
-            autoClose: 3000,
+            autoClose: 8000,
             hideProgressBar: true,
             closeOnClick: true,
             pauseOnHover: false,
@@ -52,7 +53,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
             });
     }
 
-    console.log(propsFavorite.data);
+    console.log("propsFavorite.data",propsFavorite.data);
     console.log("favorites",favorites);
     if (propsFavorite.success != 1) {
         return (
@@ -61,7 +62,7 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     } else {
         return (
             <>
-            <h1>FAVORITES</h1>
+            <FavoriteMainList dataWeather={propsFavorite.data} />
             </>
         );
     }
