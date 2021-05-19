@@ -5,6 +5,9 @@ import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../css/HomeHeader.css';
 import linkHome from '../../data/api/linkHome';
 import { postDataUser } from '../../data/api/apiRequest';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import {getUserRequest} from "../redux/effects/getUserEffect"
 
 // Gọi API từ Firebase
 const config = {
@@ -23,7 +26,7 @@ const uiConfig = {
   ],
 };
 
-const Login = ({ className }) => {
+const Login = ({ className, propsUser, getUserRequest }) => {
 
   const [modal, setModal] = useState(false);
 
@@ -53,16 +56,21 @@ const Login = ({ className }) => {
       if (!!user) {
         console.log("user", user);
         setDisplayName(user.displayName.split(" ")[0]);
-        console.log("user.email", user.email);
-        console.log("user.photoURL", user.photoURL);
-        const data = {
-          name: user.displayName,
-          email: user.email,
-          facebookId: user.uid,
+        localStorage.setItem("facebookId", user.uid);
+        await getUserRequest(user.uid);
+        if (propsUser.success == 1) {
+          if (!propsUser.data.user) {
+            const data = {
+              name: user.displayName,
+              email: user.email,
+              facebookId: user.uid,
+            }
+            postDataUser(data);
+          } else {
+            localStorage.setItem('user', JSON.stringify(propsUser.data.user));
+          }
         }
-        postDataUser(data);
       }
-
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
@@ -130,4 +138,16 @@ const Login = ({ className }) => {
   }
 }
 
-export default Login;
+const mapStateToProps = (state) => {
+  return {
+      propsUser: state.userReducer,
+  }
+}
+
+const mapDispatchToProps = (dispatch) => bindActionCreators({
+  getUserRequest,
+},
+  dispatch
+)
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

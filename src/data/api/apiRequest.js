@@ -94,6 +94,13 @@ const postDataUser = (data) => {
     return Api(axiosType.BE).post(`${urlBE.USERS}`, body)
 }
 
+const getDataUser = (fbId) => {
+    const parameters = {
+        fbId,
+    }
+    return Api(axiosType.BE).get(`${urlBE.FBID}`, {params : parameters})
+} 
+
 export {
     convertCity,
     getCurrentByCity,
@@ -104,6 +111,7 @@ export {
     getSearchV2,
     getDailyByCity,
     postDataUser,
+    getDataUser,
 };
 
 

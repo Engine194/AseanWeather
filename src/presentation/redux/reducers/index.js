@@ -9,6 +9,7 @@ import searchV3Reducer from "./searchV3Reducer";
 import dailyReducer from "./dailyReducer";
 import searchApiReducer from "./searchApiReducer";
 import favoriteReducer from "./favoriteReducer";
+import userReducer from "./userReducer";
 
 export default combineReducers({
     currentReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
     dailyReducer,
     searchApiReducer,
     favoriteReducer,
+    userReducer,
 })
