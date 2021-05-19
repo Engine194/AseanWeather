@@ -1,14 +1,13 @@
-import CurrentMain from "./currentMain";
+import FavoriteMain from "./favoriteMain";
 
 const FavoriteMainList = ({dataWeather}) => {
-
-    const {location, current} = dataWeather;
 
     return (
         <>
             {dataWeather.map(item => {
+                const {location, current} = item;
                 return (
-                    <CurrentMain location={location} current={current} />
+                    <FavoriteMain key={location.name} location={location} current={current} />
                 );
             })}
         </>
