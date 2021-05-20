@@ -99,7 +99,28 @@ const getDataUser = (fbId) => {
         fbId,
     }
     return Api(axiosType.BE).get(`${urlBE.FBID}`, {params : parameters})
-} 
+}
+
+const addFavoBE = (fbId, cityName) => {
+    const parameters = {
+        fbId,
+    } 
+    const body = {
+        name: cityName,
+    }
+
+    return Api(axiosType.BE).post(`${urlBE.FAVORITE}`, body, {params : parameters})
+}
+
+const removeFavoBE = (fbId, cityName) => {
+    const parameters = {
+        fbId,
+    } 
+    const body = {
+        name: cityName,
+    }
+    return Api(axiosType.BE).delete(`${urlBE.FAVORITE}`,{data: { name: cityName}, params : parameters})
+}
 
 export {
     convertCity,
@@ -112,6 +133,8 @@ export {
     getDailyByCity,
     postDataUser,
     getDataUser,
+    addFavoBE,
+    removeFavoBE,
 };
 
 

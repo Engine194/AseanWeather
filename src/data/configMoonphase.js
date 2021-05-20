@@ -6,7 +6,7 @@ export const moonPhaseToVi = moonphase => {
                 return "Trăng mới";
             case "Waning Crescent":
                 return "Lưỡi liềm đầu tháng";
-            case "Third Quater":
+            case "First Quarter":
                 return "Bán nguyệt đầu tháng";
             case "Waning Gibbous":
                 return "Trăng khuyết đầu tháng";
@@ -14,7 +14,7 @@ export const moonPhaseToVi = moonphase => {
                 return "Trăng tròn";
             case "Waxing Gibbous":
                 return "Trăng khuyết cuối tháng";
-            case "First Quater":
+            case "Third Quarter":
                 return "Bán nguyệt cuối tháng";
             case "Waxing Crescent":
                 return "Lưỡi liềm cuối tháng";
