@@ -9,6 +9,7 @@ import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteMainList from "../components/favoriteMainList";
+import { getFavoList } from "../../data/getFavoList";
 
 const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
     
@@ -22,18 +23,12 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
         let user = localStorage.getItem("user");
         if (user) {
             user = JSON.parse(user);
-            const favouriteCities = user.favouriteCities;
-
-            const results = [];
-            for (let index = 0; index < favouriteCities.length; index++) {
-                const element = favouriteCities[index];
-                results.push(element.name);
-            }
-
+            const results = getFavoList(user.favouriteCities);
             if (results.length > 0) {
                 await getFavoriteCurrentRequest(results);
             } else {
                 warningNotify("Bạn chưa có thành phố yêu thích nào!");
+                document.querySelector("a.linkHomeHS").click();
             }
         } else {
             warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")

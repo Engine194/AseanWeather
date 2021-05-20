@@ -7,8 +7,8 @@ $yellowGmail: rgba(244,180,0,1);
     color: $grey;
     height: 30px;
     background-color: rgba(235,235,235,1);
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
     border-bottom-left-radius: 0px;
     border-bottom-right-radius: 0px;
     border: none !important;
@@ -17,5 +17,5 @@ $yellowGmail: rgba(244,180,0,1);
 
 .btnScssNB1:hover {
     color: black !important;
-    background-color: white !important;
+    background-color: rgb(255, 255, 255) !important;
 }

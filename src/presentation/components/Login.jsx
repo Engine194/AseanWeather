@@ -61,7 +61,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         console.log("user", user);
         let name = user.displayName
         setFullname(name);
-
         const nameSplited = name.split(" ");
         const n = nameSplited.length;
         if (n > 0) {
