@@ -34,15 +34,15 @@ const HomeBody = ({ propsSearchApi,
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
                 setIsLove2(true);
-                getSearchApiE1Request(results[1]);
+                getSearchApiE2Request(results[1]);
                 getSearchApiE3Request("Bangkok")
             } else if (results.length == 3) {
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
                 setIsLove2(true);
-                getSearchApiE1Request(results[1]);
+                getSearchApiE2Request(results[1]);
                 setIsLove3(true);
-                getSearchApiE1Request(results[2]);
+                getSearchApiE3Request(results[2]);
             } else if (results.length > 3) {
                 setIsLove1(true);
                 setIsLove2(true);
