@@ -145,7 +145,7 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
             setTimeout(() => {
                 setIsShow(false);
             }, 500);
-        }, 2000);
+        }, 2500);
     }
 
     return (

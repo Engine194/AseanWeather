@@ -7,7 +7,7 @@ import linkHome from '../../data/api/linkHome';
 import { postDataUser } from '../../data/api/apiRequest';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import {getUserRequest} from "../redux/effects/getUserEffect";
+import { getUserRequest } from "../redux/effects/getUserEffect";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 
@@ -64,12 +64,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         const nameSplited = name.split(" ");
         const n = nameSplited.length;
         if (n > 0) {
-          setDisplayName(nameSplited[n-1]);
+          setDisplayName(nameSplited[n - 1]);
         }
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
         if (propsUser.success == 1) {
-          console.log("propsUser.data.user",propsUser.data.user);
+          console.log("propsUser.data.user", propsUser.data.user);
           if (!propsUser.data.user) {
             const data = {
               name: user.displayName,
@@ -86,9 +86,20 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }, []);
 
   const handleLogOut = () => {
-    indexedDB.deleteDatabase("firebaseLocalStorageDb");
-    indexedDB.deleteDatabase("firebaseLocalStorageDB");
+
+    let DBDeleteRequest = window.indexedDB.deleteDatabase("firebaseLocalStorageDb");
+
+    DBDeleteRequest.onerror = function (event) {
+      console.log("Error deleting database.");
+    };
+
+    DBDeleteRequest.onsuccess = function (event) {
+      console.log("Database deleted successfully");
+
+      console.log(event.result); // should be undefined
+    };
     localStorage.removeItem('user');
+    document.querySelector("a.linkHomeHS").click();
   }
 
   const handleDropdown = () => {
@@ -97,36 +108,36 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const successNotify = () => {
     toast.warning(`Chào mừng ${fullname}`, {
-        position: "top-center",
-        autoClose: 8000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: true,
-        progress: undefined,
-        });
-}
+      position: "top-center",
+      autoClose: 8000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: true,
+      progress: undefined,
+    });
+  }
 
   if (isSignedIn && !isClickLogin) {
-  return (
-    <>
-      <div className="dropdown" style={{ fontSize: (isHome ? "18px" : '15px'), }}>
-        <button type="button" onClick={handleDropdown} onBlur={handleDropdown}
-          className="headerLogin"
-          style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
-          <big>Hi, {displayName ? displayName : "User"}! </big>
-          <span style={{ fontSize: (isHome ? "20px" : '18px'), float: "right", position: "relative", bottom: "4px", right: (isHome ? "5px" : '3px') }}>
-            <i className="fa fa-sort-desc" aria-hidden="true"></i>
-          </span>
-        </button>
-        <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-          {isOpen ? (<a href="#about">Yêu thích</a>) : null}
-          {isOpen ? (<a onClick={handleLogOut} href= {linkHome}>Log out</a>) : null}
+    return (
+      <>
+        <div className="dropdown" style={{ fontSize: (isHome ? "18px" : '15px'), }}>
+          <button type="button" onClick={handleDropdown} onBlur={handleDropdown}
+            className="headerLogin"
+            style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
+            <big>Hi, {displayName ? displayName : "User"}! </big>
+            <span style={{ fontSize: (isHome ? "20px" : '18px'), float: "right", position: "relative", bottom: "4px", right: (isHome ? "5px" : '3px') }}>
+              <i className="fa fa-sort-desc" aria-hidden="true"></i>
+            </span>
+          </button>
+          <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
+            {isOpen ? (<a href="#about">Yêu thích</a>) : null}
+            {isOpen ? (<a onClick={handleLogOut} href={linkHome}>Log out</a>) : null}
+          </div>
         </div>
-      </div>
 
-    </>
-  );
+      </>
+    );
   } else if (!isSignedIn && !isClickLogin) {
     return (
       <>
@@ -168,7 +179,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
 const mapStateToProps = (state) => {
   return {
-      propsUser: state.userReducer,
+    propsUser: state.userReducer,
   }
 }
 

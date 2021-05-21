@@ -12,11 +12,13 @@ import FavoriteMainList from "../components/favoriteMainList";
 import { getFavoList } from "../../data/getFavoList";
 import { removeFavoRequest } from "../redux/effects/removeFavoEffect";
 import { getUserRequest } from "../redux/effects/getUserEffect";
-import { Modal } from "react-bootstrap";
+import { Modal, Button } from "react-bootstrap";
 
 const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, removeFavoRequest, getUserRequest }) => {
     const [fbId, setFbId] = useState("");
     const [isShow, setIsShow] = useState(false);
+    const [isAlert, setIsAlert] = useState(false);
+    const [city, setCity] = useState("");
     const history = useHistory();
 
     // Gọi api ở đây mỗi khi có kết quả từ propsSearch
@@ -105,17 +107,35 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
         }
     }
 
-    const handleDeleteFavo = (city) => {
-
+    const handleDeleteFavo = (cityName) => {
+        setCity(cityName);
+        setIsAlert(true);
+    }
+    
+    const confirmDeleteFavo = () => {
+        setIsAlert(false);
         setIsShow(true)
         removeFavoRequest(fbId, city);
-
+    
         setTimeout(() => {
             getUserRequest(fbId);
             setTimeout(() => {
                 setIsShow(false);
+                deleteSuccessNotify("Đã xóa thành công!")
             }, 500);
-        }, 2000);
+        }, 2500);
+    }
+
+    const deleteSuccessNotify = (message) => {
+        toast.success(message, {
+            position: "top-center",
+            autoClose: 2000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: false,
+            draggable: true,
+            progress: undefined,
+        });
     }
 
     const warningNotify = (message) => {
@@ -130,6 +150,13 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
         });
     }
 
+    const handlePush = (cityName) => {
+        localStorage.setItem("cityName", cityName);
+        document.querySelector("button.btnJS1").click();
+    }
+
+    const handleClose = () => setIsAlert(false);
+
     if (propsFavorite.success != 1) {
         return (
             <Loading />
@@ -137,11 +164,25 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
     } else {
         return (
             <>
-                <FavoriteMainList dataWeather={propsFavorite.data.favorite} handleDelete={handleDeleteFavo} />
+                <FavoriteMainList dataWeather={propsFavorite.data.favorite} handleDelete={handleDeleteFavo} handlePush = {handlePush} />
                 <Modal show={isShow}>
                     <Modal.Body>
                         <h1>Loading ...</h1>
                     </Modal.Body>
+                </Modal>
+                <Modal show={isAlert} onHide={handleClose} animation={false}>
+                    <Modal.Header>
+                        <Modal.Title>Cảnh Báo từ AseanWeather</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>Bạn có chắc chắn xóa <b>{city}</b> khỏi danh sách yêu thích?</Modal.Body>
+                    <Modal.Footer>
+                        <Button variant="danger" onClick={confirmDeleteFavo}>
+                            Xóa
+                        </Button>
+                        <Button variant="secondary" onClick={handleClose}>
+                            Đóng
+                        </Button>
+                    </Modal.Footer>
                 </Modal>
             </>
         );

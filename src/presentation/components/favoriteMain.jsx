@@ -5,7 +5,7 @@ import getImage128URL from "../../data/configImage";
 import { fixColorByTemp } from "../../data/configTempColor";
 
 // Thẻ show ra thông tin thời tiết chung của địa phương
-const FavoriteMain = ({ location, current, handleDelete, city }) => {
+const FavoriteMain = ({ location, current, handleDelete, handlePush, city }) => {
     
     let name =location.name;
     name = name.replace(" ", "");
@@ -32,10 +32,10 @@ const FavoriteMain = ({ location, current, handleDelete, city }) => {
     return (
         <>
             <div className="row mt-3 mb-1">
-                <div className="col-12 card-custom">
+                <div className="col-12 card-custom ">
                     <Card.Body>
                         <div className="row">
-                            <div className="col-6 text-center">
+                            <div className="col-6 text-center card-hover" onClick={()=> handlePush(city)}>
                                 <div className="leftSide mt-1">
                                     <Card.Title>{location.name}, {location.country}</Card.Title>
                                     <Card.Subtitle className="text-muted">Cập nhật lần cuối: {getFormatDate(current.last_updated).time} {getFormatDate(current.last_updated).date}</Card.Subtitle>
