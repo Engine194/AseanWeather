@@ -142,7 +142,9 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
         }
         setTimeout(() => {
             getUserRequest(fbId);
-            setIsShow(false);
+            setTimeout(() => {
+                setIsShow(false);
+            }, 500);
         }, 2000);
     }
 

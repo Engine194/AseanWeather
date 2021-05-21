@@ -85,6 +85,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
+  const handleLogOut = () => {
+    indexedDB.deleteDatabase("firebaseLocalStorageDb");
+    indexedDB.deleteDatabase("firebaseLocalStorageDB");
+    localStorage.removeItem('user');
+  }
+
   const handleDropdown = () => {
     setIsOpen(!isOpen);
   }
@@ -115,7 +121,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         </button>
         <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
           {isOpen ? (<a href="#about">Yêu thích</a>) : null}
-          {isOpen ? (<a href="#about">Log out</a>) : null}
+          {isOpen ? (<a onClick={handleLogOut} href= {linkHome}>Log out</a>) : null}
         </div>
       </div>
 

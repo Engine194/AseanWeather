@@ -11,7 +11,11 @@ export const getFavoriteCurrentRequest = listCities => {
         for(let i = 0; i < listCities.length; i ++) {
             const q = convertCity(listCities[i]);
             await getCurrentByCity(q).then(resolve => {
-                results.push(resolve);
+                const data = {
+                    ... resolve,
+                    city: listCities[i],
+                }
+                results.push(data);
             }).catch(err=> {
                 errors.push(err)
             })
