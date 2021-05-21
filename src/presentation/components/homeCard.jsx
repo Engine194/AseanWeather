@@ -20,10 +20,17 @@ const HomeCart = ({location, current, isLove}) => {
     }
     
     return (
-        <div className="col mt-3 card_home" onClick={handlePush} name="hanoi" title="Click for more information">
-                    <div className="row mt-2">
-                        <div className="col text-center" style={{ fontSize: "30px" }}>
-                            {location.name} { isLove? <i className="fa fa-heart colorScssLB3" aria-hidden="true"></i>: null}
+        <div className="col mt-4 card_home" onClick={handlePush} name="hanoi" title="Click for more information">
+            <div className="row">
+                <div className="col"  style={{minHeight: "122px"}}>
+                <div className="row mt-2">
+                        <div className="col offset- text-center" style={{ fontSize: "30px", position: "relative" }}>
+                            <div className="row">
+                                <div className="col-10 offset-1">
+                                    {location.name}
+                                </div>
+                            </div>
+                             { isLove? <i className="fa fa-heart colorScssLB3" style={{position: "absolute", top: "-2px", right: "9px"}} aria-hidden="true"></i>: null}
                         </div>
                     </div>
                     <div className="row">
@@ -31,6 +38,9 @@ const HomeCart = ({location, current, isLove}) => {
                             <i><small>{location.country}</small></i>
                         </div>
                     </div>
+                </div>
+            </div>
+                    
                     <div className="row">
                         <div className="col">
                             <div className="row">
