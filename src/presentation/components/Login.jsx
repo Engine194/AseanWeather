@@ -86,7 +86,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }, []);
 
   const handleLogOut = () => {
-
+    console.log("LOGOUT");
     let DBDeleteRequest = window.indexedDB.deleteDatabase("firebaseLocalStorageDb");
 
     DBDeleteRequest.onerror = function (event) {
@@ -131,8 +131,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
             </span>
           </button>
           <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-            {isOpen ? (<a href="#about">Yêu thích</a>) : null}
-            {isOpen ? (<a onClick={handleLogOut} href={linkHome}>Log out</a>) : null}
+            {isOpen ? (<span >Yêu thích</span>) : null}
+            {isOpen ? (<span style={{zIndex: "1000"}} onClick={handleLogOut}>Log out</span>) : null}
           </div>
         </div>
 
