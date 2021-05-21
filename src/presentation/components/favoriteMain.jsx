@@ -5,7 +5,7 @@ import getImage128URL from "../../data/configImage";
 import { fixColorByTemp } from "../../data/configTempColor";
 
 // Thẻ show ra thông tin thời tiết chung của địa phương
-const FavoriteMain = ({ location, current }) => {
+const FavoriteMain = ({ location, current, handleDelete, city }) => {
     
     let name =location.name;
     name = name.replace(" ", "");
@@ -29,7 +29,6 @@ const FavoriteMain = ({ location, current }) => {
         fixColorByTemp(current.feelslike_c, $realfeelId);
     },[current.temp_c,current.feelslike_c])
     
-
     return (
         <>
             <div className="row mt-3 mb-1">
@@ -54,7 +53,7 @@ const FavoriteMain = ({ location, current }) => {
                             <div className="col-6 text-center">
                                 <div className="row">
                                     <div className="col-12 delete-city" style={{fontSize: "25px", position: "relative", top: "4px", color: "#bfbfbf"}}>
-                                        <i className="fa fa-times" style={{float: "right"}} aria-hidden="true"></i>
+                                        <i className="fa fa-times" onClick={()=> handleDelete(city)} style={{float: "right"}} aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div className="row condition-img" style={{position: "relative", bottom: "20px"}}>

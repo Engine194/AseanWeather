@@ -10,31 +10,113 @@ import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteMainList from "../components/favoriteMainList";
 import { getFavoList } from "../../data/getFavoList";
+import { removeFavoRequest } from "../redux/effects/removeFavoEffect";
+import { getUserRequest } from "../redux/effects/getUserEffect";
+import { Modal } from "react-bootstrap";
 
-const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
-    
+const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, removeFavoRequest, getUserRequest }) => {
+    const [fbId, setFbId] = useState("");
+    const [isShow, setIsShow] = useState(false);
     const history = useHistory();
-    
-       // Gọi api ở đây mỗi khi có kết quả từ propsSearch
-    useEffect(async () => {
+
+    // Gọi api ở đây mỗi khi có kết quả từ propsSearch
+    useEffect(() => {
+        setIsShow(false);
         // Mark menu
         markMenuInComponent(menuType.FAVORITE);
-        
-        let user = localStorage.getItem("user");
-        if (user) {
+
+        // const user = {
+        //     id: 2,
+        //     name: "Nguyễn Hoàng Giang",
+        //     email: "nghoanggiang@gmail.com",
+        //     facebookId: "1000000000000000",
+        //     loginDate: "2021-05-10 00:00:00",
+        //     favouriteCities: [
+        //         {
+        //             id: 1,
+        //             name: "Bandar Seri Begawan"
+        //         },
+        //         {
+        //             id: 2,
+        //             name: "Kampung Kota Batu"
+        //         },
+
+        //         {
+        //             id: 4,
+        //             name: "Temburong"
+        //         },
+        //         {
+        //             id: 5,
+        //             name: "Melilas"
+        //         },
+        //         {
+        //             id: 7,
+        //             name: "Sihanoukville"
+        //         },
+        //         {
+        //             id: 9,
+        //             name: "Phnom Penh"
+        //         },
+        //         {
+        //             id: 10,
+        //             name: "Kratie"
+        //         },
+        //         {
+        //             id: 11,
+        //             name: "Bukittinggi"
+        //         },
+        //         {
+        //             id: 12,
+        //             name: "Yogyakarta"
+        //         },
+        //         {
+        //             id: 47,
+        //             name: "Ho Chi Minh City"
+        //         }
+        //     ]
+        // }
+
+        // localStorage.setItem('user', JSON.stringify(user));
+
+        if (propUser.success == 1) {
+            handleProcessUser(propUser.data.user);
+        }
+
+        if (propUser.success != 1) {
+            let user = localStorage.getItem("user");
             user = JSON.parse(user);
-            const results = getFavoList(user.favouriteCities);
-            if (results.length > 0) {
-                await getFavoriteCurrentRequest(results);
+            if (user) {
+                handleProcessUser(user);
             } else {
-                warningNotify("Bạn chưa có thành phố yêu thích nào!");
+                warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")
                 document.querySelector("a.linkHomeHS").click();
             }
+        }
+    }, [propUser])
+
+    const handleProcessUser = async (user) => {
+        setFbId(user.facebookId);
+        const results = getFavoList(user.favouriteCities);
+        if (results.length > 0) {
+            await getFavoriteCurrentRequest(results);
         } else {
-            warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")
+            warningNotify("Bạn chưa có thành phố yêu thích nào!");
             document.querySelector("a.linkHomeHS").click();
         }
-    },[])
+    }
+
+    const handleDeleteFavo = (city) => {
+
+        setIsShow(true)
+        removeFavoRequest(fbId, city);
+
+        setTimeout(() => {
+            getUserRequest(fbId);
+            setTimeout(() => {
+                setIsShow(false);
+            }, 500);
+        }, 2000);
+    }
 
     const warningNotify = (message) => {
         toast.warning(message, {
@@ -45,17 +127,22 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
             pauseOnHover: false,
             draggable: true,
             progress: undefined,
-            });
+        });
     }
 
     if (propsFavorite.success != 1) {
         return (
-            <Loading/>
+            <Loading />
         );
     } else {
         return (
             <>
-            <FavoriteMainList dataWeather={propsFavorite.data.favorite} />
+                <FavoriteMainList dataWeather={propsFavorite.data.favorite} handleDelete={handleDeleteFavo} />
+                <Modal show={isShow}>
+                    <Modal.Body>
+                        <h1>Loading ...</h1>
+                    </Modal.Body>
+                </Modal>
             </>
         );
     }
@@ -65,12 +152,15 @@ const FavoriteCities = ({ propsFavorite, getFavoriteCurrentRequest }) => {
 const mapStateToProps = (state) => {
     return {
         propsFavorite: state.favoriteReducer,
+        propUser: state.userReducer,
     }
 }
 
 // Đẩy hai action lấy api thời tiết hiện tại và thông tin thiên văn vào props của component
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getFavoriteCurrentRequest,
+    removeFavoRequest,
+    getUserRequest,
 },
     dispatch
 )
