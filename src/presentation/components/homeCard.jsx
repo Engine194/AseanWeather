@@ -2,7 +2,7 @@ import { useHistory } from "react-router";
 import getFormatDate from "../../data/configDate";
 import getImage128URL from "../../data/configImage";
 
-const HomeCart = ({location, current}) => {
+const HomeCart = ({location, current, isLove}) => {
     
     const history = useHistory();
 
@@ -23,7 +23,7 @@ const HomeCart = ({location, current}) => {
         <div className="col mt-3 card_home" onClick={handlePush} name="hanoi" title="Click for more information">
                     <div className="row mt-2">
                         <div className="col text-center" style={{ fontSize: "30px" }}>
-                            {location.name}
+                            {location.name} { isLove? <i className="fa fa-heart colorScssLB3" aria-hidden="true"></i>: null}
                         </div>
                     </div>
                     <div className="row">
