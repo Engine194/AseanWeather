@@ -15,7 +15,7 @@ const HeaderHome = () => {
             style={{ backgroundImage: `url(${background})` }}
         >
             <div className="Home_logo">
-                <a href={linkHome}>
+                <a href={linkHome} className="linkHomeHS" >
                     <img src={logo} alt="Home Logo" />
                 </a>
             </div>
