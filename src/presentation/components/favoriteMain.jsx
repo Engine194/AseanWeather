@@ -54,7 +54,7 @@ const FavoriteMain = ({ location, current }) => {
                             <div className="col-6 text-center">
                                 <div className="row">
                                     <div className="col-12 delete-city" style={{fontSize: "25px", position: "relative", top: "4px", color: "#bfbfbf"}}>
-                                        <i class="fa fa-times" style={{float: "right"}} aria-hidden="true"></i>
+                                        <i className="fa fa-times" style={{float: "right"}} aria-hidden="true"></i>
                                     </div>
                                 </div>
                                 <div className="row condition-img" style={{position: "relative", bottom: "20px"}}>

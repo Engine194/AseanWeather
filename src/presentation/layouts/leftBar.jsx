@@ -10,14 +10,20 @@ import { removeFavoRequest } from "../redux/effects/removeFavoEffect";
 import { Modal } from 'react-bootstrap';
 
 
-const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoRequest }) => {
+const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserRequest, removeFavoRequest }) => {
     const [isFavo, setIsFavo] = useState(false);
     const [city, setCity] = useState('');
     const [searchEmail, setSearchEmail] = useState("");
     const [isLove, setIsLove] = useState(false);
     const [fbId, setFbId] = useState("");
     const [isShow, setIsShow] = useState(false);
+
     useEffect(() => {
+        setIsFavo(false)
+        const pathname = window.location.pathname;
+        if (pathname == "/main/favorite_cities") {
+            setIsFavo(true);
+        }
         setIsLove(false);
         // const user = {
         //     id: 2,
@@ -34,22 +40,45 @@ const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoReques
         //             id: 2,
         //             name: "Kampung Kota Batu"
         //         },
-        //         {
-        //             id: 3,
-        //             name: "Tutong"
-        //         },
+                
         //         {
         //             id: 4,
         //             name: "Temburong"
+        //         },
+        //         {
+        //             id: 5,
+        //             name: "Melilas"
+        //         },
+        //         {
+        //             id: 7,
+        //             name: "Sihanoukville"
+        //         },
+        //         {
+        //             id: 9,
+        //             name: "Phnom Penh"
+        //         },
+        //         {
+        //             id: 10,
+        //             name: "Kratie"
+        //         },
+        //         {
+        //             id: 11,
+        //             name: "Bukittinggi"
+        //         },
+        //         {
+        //             id: 12,
+        //             name: "Yogyakarta"
+        //         },
+        //         {
+        //             id: 47,
+        //             name: "Ho Chi Minh City"
         //         }
         //     ]
         // }
 
         // localStorage.setItem('user', JSON.stringify(user));
-        const pathname = window.location.pathname;
-        if (pathname == "/main/favorite_cities") {
-            setIsFavo(true);
-        }
+
+        
         if (propsSearch.success == 1) {
             let cityName = propsSearch.data.search;
             setCity(cityName);
@@ -62,7 +91,22 @@ const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoReques
             }
         }
 
-        const user = JSON.parse(localStorage.getItem("user"));
+        console.log("propUser.success",propUser.success);
+        if (propUser.success == 1) {
+            console.log("propUser111111111111", propUser.data.user);
+            handleReceiveUser(propUser.data.user,city)
+            console.log("111111111111111111111111111111111111111111");
+        }
+        if (propUser.success != 1) {
+            console.log("000000000000000000000000000000000000000000");
+            const user = JSON.parse(localStorage.getItem("user"));
+            if (!!user) {
+                handleReceiveUser(user,city);
+            }
+        }
+    }, [searchEmail, propsSearch.data.search, isFavo, isLove, propUser,isShow, propMenu])
+
+    const handleReceiveUser = (user, city) => {
         if (!!user) {
             setFbId(user.facebookId);
             const results = getFavoList(user.favouriteCities);
@@ -72,8 +116,7 @@ const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoReques
                 }
             }
         }
-
-    }, [searchEmail, propsSearch.data.search, isFavo, isLove])
+    }
 
     const handleConverCityToURL = (name) => {
         name = name.replace(" ", "_");
@@ -90,21 +133,18 @@ const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoReques
     const hrefEmail = `https://mail.google.com/mail/u/0/?view=cm&fs=1&to&su=${emailSubject}&body=${emailBody}`;
     const handleFavorite = async () => {
         if (isLove == false) {
-            console.log("fbId", fbId);
             setIsShow(true);
             await addFavoRequest(fbId, city);
-            await getUserRequest(fbId);
-            setIsShow(false);
+            
         } else if (isLove == true) {
             setIsShow(true)
             await removeFavoRequest(fbId, city);
-            await getUserRequest(fbId);
-            setIsShow(false);
         }
-        setIsLove(!isLove);
-        
+        setTimeout(() => {
+            getUserRequest(fbId);
+            setIsShow(false);
+        }, 2000);
     }
-
 
     return (
         <>
@@ -121,7 +161,7 @@ const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoReques
                         <a target="_blank" href={hrefFB} title="Share the weather of this city on Facebook" className="fb-xfbml-parse-ignore"><i className="fa fa-facebook-square colorScssLB2 onHover" aria-hidden="true" data-layout="button"></i></a>
                     </div>
                 </div>
-                {(!!fbId ? (<div className="row">
+                {(!!fbId && !isFavo ? (<div className="row">
                     <div className="col-12 mt-2">
                         <a onClick={handleFavorite} className="fb-xfbml-parse-ignore">{(!isFavo ? <Heart isLove={isLove} /> : null)}</a>
                     </div>
@@ -140,6 +180,8 @@ const LeftBar = ({ propsSearch, addFavoRequest, getUserRequest, removeFavoReques
 const mapStateToProps = (state) => {
     return {
         propsSearch: state.searchV3Reducer,
+        propUser: state.userReducer,
+        propMenu: state.naviBarReducer,
     }
 }
 
