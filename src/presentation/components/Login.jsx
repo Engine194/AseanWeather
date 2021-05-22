@@ -100,10 +100,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   useEffect(() => {
     if (!!userGlobal) {
-      if (isBack && !isNew) {
-        successNotify(`Chào mừng ${userGlobal.displayName}!`)
-      } else if (isBack && isNew) {
-        successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
+      if (!!userGlobal.displayName) {
+        if (isBack == true && isNew == false) {
+          successNotify(`Chào mừng ${userGlobal.displayName}!`)
+        } else if (isBack == true && isNew == true) {
+          successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
+        }
       }
     }
   }, [isNew, isBack, userGlobal]);
