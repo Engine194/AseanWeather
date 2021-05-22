@@ -121,7 +121,27 @@ const removeFavoBE = (fbId, cityName) => {
     }
     return Api(axiosType.BE).delete(`${urlBE.FAVORITE}`,{data: { name: cityName}, params : parameters})
 }
-
+const loginApi = (email,password) => {
+    return  Api(axiosType.BE).get(`${urlBE.ADMINLOGIN}`,{
+         auth: {
+           username: `${email}`,
+           password: `${password}`
+         }
+       }
+      )
+ };
+ 
+ const getListUsers = (email,password) => {
+     debugger
+     return  Api(axiosType.BE).get(`${urlBE.USERS}`,{
+          auth: {
+            username: `${email}`,
+            password: `${password}`
+          }
+        }
+       )
+  };
+ 
 export {
     convertCity,
     getCurrentByCity,
@@ -135,6 +155,8 @@ export {
     getDataUser,
     addFavoBE,
     removeFavoBE,
+    loginApi,
+    getListUsers
 };
 
 

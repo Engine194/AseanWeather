@@ -11,6 +11,7 @@ import { getUserRequest } from "../redux/effects/getUserEffect";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router';
+import LoginAdmin from './LoginAdmin';
 
 // Gọi API từ Firebase
 const config = {
@@ -131,7 +132,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     return (
       <>
         <div className="dropdown" onBlur={handleDropdown} style={{ fontSize: (isHome ? "18px" : '15px'), }}>
-          <button type="button" onClick={handleDropdown} 
+          <button type="button" onClick={handleDropdown}
             className="headerLogin"
             style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
             <big>Hi, {displayName ? displayName : "User"}! </big>
@@ -161,26 +162,14 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               <StyledFirebaseAuth onClick={() => setIsClickLogin(true)} uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </FormGroup>
             <FormGroup className="text-center">
-              <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }}><i><u>Click Here </u></i></a> To Login</div>
+              <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }} className="click-Here"><i><u>Click Here </u></i></a> To Login</div>
               <Modal isOpen={modal1} toggle={toggle1} className={className}>
                 <ModalHeader toggle={toggle1}>SIGN IN ADMIN</ModalHeader>
-                <ModalBody>
-                  <Form>
-                    <FormGroup>
-                      <Label for="exampleEmail">Email</Label>
-                      <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="examplePassword">Password</Label>
-                      <Input type="password" name="password" id="examplePassword" placeholder="Password" />
-                    </FormGroup>
-                  </Form>
-                  <Button style={{ marginTop: 20 }} color="primary" onClick={toggle}>Summit</Button>
-                </ModalBody>
-              </Modal>
-            </FormGroup>
+                <LoginAdmin />
+                </Modal>
+              </FormGroup>
           </ModalBody>
-        </Modal>
+         </Modal>
       </>
     );
   }
@@ -188,12 +177,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
 const mapStateToProps = (state) => {
   return {
-    propsUser: state.userReducer,
+          propsUser: state.userReducer,
   }
 }
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
-  getUserRequest,
+          getUserRequest,
 },
   dispatch
 )
