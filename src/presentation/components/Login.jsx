@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { getUserRequest } from "../redux/effects/getUserEffect";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from 'react-router';
 
 // Gọi API từ Firebase
 const config = {
@@ -49,6 +50,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isHome, setIsHome] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     const pathname = window.location.pathname;
@@ -106,6 +109,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     setIsOpen(!isOpen);
   }
 
+  const handlePushFavo = () => {
+    history.push({
+      pathname: "/main/favorite_cities",
+    })
+  }
+
   const successNotify = () => {
     toast.warning(`Chào mừng ${fullname}`, {
       position: "top-center",
@@ -121,8 +130,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   if (isSignedIn && !isClickLogin) {
     return (
       <>
-        <div className="dropdown" style={{ fontSize: (isHome ? "18px" : '15px'), }}>
-          <button type="button" onClick={handleDropdown} onBlur={handleDropdown}
+        <div className="dropdown" onBlur={handleDropdown} style={{ fontSize: (isHome ? "18px" : '15px'), }}>
+          <button type="button" onClick={handleDropdown} 
             className="headerLogin"
             style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
             <big>Hi, {displayName ? displayName : "User"}! </big>
@@ -131,8 +140,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
             </span>
           </button>
           <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-            {isOpen ? (<span >Yêu thích</span>) : null}
-            {isOpen ? (<span style={{zIndex: "1000"}} onClick={handleLogOut}>Log out</span>) : null}
+            {isOpen ? (<a onClick={handlePushFavo} >Yêu thích</a>) : null}
+            {isOpen ? (<a onClick={handleLogOut}>Log out</a>) : null}
           </div>
         </div>
 

@@ -27,10 +27,6 @@
     font-size: 150%;
 }
 
-.mgIcon :hover {
-    cursor: pointer;
-}
-
 .mgCard{
     margin-bottom: 10px;
 }
@@ -65,4 +61,8 @@
 .leftSizeHour{
     position: relative;
     left: 4%;
+}
+
+.dropdown-hover :hover {
+    cursor: pointer;
 }

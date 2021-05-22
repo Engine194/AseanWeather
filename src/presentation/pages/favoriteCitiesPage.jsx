@@ -103,7 +103,7 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
             await getFavoriteCurrentRequest(results);
         } else {
             warningNotify("Bạn chưa có thành phố yêu thích nào!");
-            document.querySelector("btn.btnJS1").click();
+            document.querySelector("button.btnJS1").click();
         }
     }
 
