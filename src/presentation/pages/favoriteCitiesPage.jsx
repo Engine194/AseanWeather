@@ -80,10 +80,6 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
 
         // localStorage.setItem('user', JSON.stringify(user));
 
-        if (propUser.success == 1) {
-            handleProcessUser(propUser.data.user);
-        }
-
         if (propUser.success != 1) {
             let user = localStorage.getItem("user");
             user = JSON.parse(user);
