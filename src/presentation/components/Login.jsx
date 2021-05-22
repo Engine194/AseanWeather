@@ -87,7 +87,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           email: userGlobal.email,
           facebookId: userGlobal.uid,
         }
-        await postDataUser(data);
+        postDataUser(data);
         successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
       }
     }
