@@ -24,8 +24,11 @@ const HomeBody = ({ propsSearchApi,
         const user = JSON.parse(localStorage.getItem("user"));
         if (!!user) {
             let results = getFavoList(user.favouriteCities);
-            console.log("resultsBefore",results);
-            if (results.length == 1) {
+            console.log("resultsBefore", results);
+
+            if (results.length == 0) {
+                handleNoneFavo()
+            } else if (results.length == 1) {
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
                 getSearchApiE2Request("Singapore");
@@ -47,47 +50,51 @@ const HomeBody = ({ propsSearchApi,
                 setIsLove1(true);
                 setIsLove2(true);
                 setIsLove3(true);
-                
+
                 results = shuffle(results);
-                console.log("resultsAfter",results);
+                console.log("resultsAfter", results);
                 getSearchApiE1Request(results[0]);
                 getSearchApiE2Request(results[1]);
                 getSearchApiE3Request(results[2]);
             }
         } else {
-            setIsLove1(false);
-            setIsLove2(false);
-            setIsLove3(false);
-            getSearchApiE1Request("Hanoi");
-            getSearchApiE2Request("Singapore");
-            getSearchApiE3Request("Bangkok");
+            handleNoneFavo();
         }
     }, [])
+
+    const handleNoneFavo = () => {
+        setIsLove1(false);
+        setIsLove2(false);
+        setIsLove3(false);
+        getSearchApiE1Request("Hanoi");
+        getSearchApiE2Request("Singapore");
+        getSearchApiE3Request("Bangkok");
+    }
 
     const shuffle = (array) => {
         let currentIndex = array.length;
         let temporaryValue = 0;
         let randomIndex = 0;
-      
+
         // While there remain elements to shuffle...
         while (0 != currentIndex) {
-      
-          // Pick a remaining element...
-          randomIndex = Math.floor(Math.random() * currentIndex);
-          currentIndex -= 1;
-      
-          // And swap it with the current element.
-          temporaryValue = array[currentIndex];
-          array[currentIndex] = array[randomIndex];
-          array[randomIndex] = temporaryValue;
+
+            // Pick a remaining element...
+            randomIndex = Math.floor(Math.random() * currentIndex);
+            currentIndex -= 1;
+
+            // And swap it with the current element.
+            temporaryValue = array[currentIndex];
+            array[currentIndex] = array[randomIndex];
+            array[randomIndex] = temporaryValue;
         }
-      
+
         return array;
-      }
+    }
 
     // console.log(propsSearchApi);
     const success = propsSearchApi.success;
-    console.log("propsSearchApi",propsSearchApi);
+    console.log("propsSearchApi", propsSearchApi);
 
     if (success.E1 == 1 && success.E2 == 1 && success.E3 == 1) {
         const E1 = propsSearchApi.data.E1;
@@ -110,11 +117,11 @@ const HomeBody = ({ propsSearchApi,
                     <div className="row">
                         <HomeCart location={locationE1} current={currentE1} isLove={isLove1} />
                         <div className="col-1"></div>
-                        <HomeCart location={locationE2} current={currentE2} isLove={isLove2}/>
+                        <HomeCart location={locationE2} current={currentE2} isLove={isLove2} />
                         <div className="col-1"></div>
-                        <HomeCart location={locationE3} current={currentE3} isLove={isLove3}/>
+                        <HomeCart location={locationE3} current={currentE3} isLove={isLove3} />
                     </div>
-                <div className="col-2"></div>
+                    <div className="col-2"></div>
                 </div>
             </div>
         )
