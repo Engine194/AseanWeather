@@ -12,6 +12,8 @@ import '../scss/currentPage.scss';
 import CurrentAstronomyMoon from "../components/currentAstronomyMoon";
 import { markMenuInComponent, menuType } from "../../data/configMenu";
 import { useHistory } from 'react-router';
+import { toast } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest, propsSearch }) => {
     const history = useHistory();
@@ -58,11 +60,25 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                     getCurrentRequest(cityName);
                     getAstroRequest(cityName);
                 } else {
+                    warningNotify("Tìm kiếm một thành phố trước đã bạn ơi!");
                     document.querySelector("a.linkHomeHS").click();
                 }
             }
         }
     }, [propsSearch.data.search])
+
+    const warningNotify = (message) => {
+        toast.warning(message, {
+          position: "top-left",
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: false,
+          draggable: true,
+          progress: undefined,
+        });
+      }
+    
 
     // Kiểm tra dữ liệu trả vể
     // console.log("Astro", propsAstro);

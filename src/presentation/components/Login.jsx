@@ -10,6 +10,7 @@ import { connect } from 'react-redux';
 import { getUserRequest } from "../redux/effects/getUserEffect";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { useHistory } from 'react-router';
 
 // Gọi API từ Firebase
 const config = {
@@ -49,6 +50,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const [isHome, setIsHome] = useState(false);
+
+  const history = useHistory();
 
   useEffect(() => {
     const pathname = window.location.pathname;
@@ -106,6 +109,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     setIsOpen(!isOpen);
   }
 
+  const handlePushFavo = () => {
+    history.push({
+      pathname: "/main/favorite_cities",
+    })
+  }
+
   const successNotify = () => {
     toast.warning(`Chào mừng ${fullname}`, {
       position: "top-center",
@@ -131,8 +140,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
             </span>
           </button>
           <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-            {isOpen ? (<a >Yêu thích</a>) : null}
-            {isOpen ? (<a style={{zIndex: "1000"}} onClick={handleLogOut}>Log out</a>) : null}
+            {isOpen ? (<a onClick={handlePushFavo} >Yêu thích</a>) : null}
+            {isOpen ? (<a onClick={handleLogOut}>Log out</a>) : null}
           </div>
         </div>
 
