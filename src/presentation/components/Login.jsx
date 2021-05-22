@@ -108,9 +108,13 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const handlePushFavo = () => {
-    history.push({
-      pathname: "/main/favorite_cities",
-    })
+    if (isHome) {
+      history.push({
+        pathname: "/main/favorite_cities",
+      })
+    } else {
+      document.querySelector("button.btnJS4").click();
+    }
   }
 
   const successNotify = (message) => {
