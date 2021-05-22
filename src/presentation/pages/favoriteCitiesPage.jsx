@@ -80,7 +80,9 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
 
         // localStorage.setItem('user', JSON.stringify(user));
 
-        if (propUser.success != 1) {
+        if (!!propUser.data.user) {
+            handleProcessUser(propUser.data.user);
+        } else {
             let user = localStorage.getItem("user");
             user = JSON.parse(user);
             if (user) {
@@ -107,12 +109,12 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
         setCity(cityName);
         setIsAlert(true);
     }
-    
+
     const confirmDeleteFavo = () => {
         setIsAlert(false);
         setIsShow(true)
         removeFavoRequest(fbId, city);
-    
+
         setTimeout(() => {
             getUserRequest(fbId);
             setTimeout(() => {
@@ -160,7 +162,7 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
     } else {
         return (
             <>
-                <FavoriteMainList dataWeather={propsFavorite.data.favorite} handleDelete={handleDeleteFavo} handlePush = {handlePush} />
+                <FavoriteMainList dataWeather={propsFavorite.data.favorite} handleDelete={handleDeleteFavo} handlePush={handlePush} />
                 <Modal show={isShow}>
                     <Modal.Body>
                         <h1>Loading ...</h1>
