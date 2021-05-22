@@ -93,6 +93,7 @@ button.headerLogin:hover {
  }
 
 .dropdown a:hover {
+    cursor: pointer !important;
     background-color: #0095ff;
     color: white;
 }
