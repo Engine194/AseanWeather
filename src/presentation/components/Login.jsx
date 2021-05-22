@@ -121,8 +121,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   if (isSignedIn && !isClickLogin) {
     return (
       <>
-        <div className="dropdown" style={{ fontSize: (isHome ? "18px" : '15px'), }}>
-          <button type="button" onClick={handleDropdown} onBlur={handleDropdown}
+        <div className="dropdown" onBlur={handleDropdown} style={{ fontSize: (isHome ? "18px" : '15px'), }}>
+          <button type="button" onClick={handleDropdown} 
             className="headerLogin"
             style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
             <big>Hi, {displayName ? displayName : "User"}! </big>
@@ -131,8 +131,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
             </span>
           </button>
           <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-            {isOpen ? (<span >Yêu thích</span>) : null}
-            {isOpen ? (<span style={{zIndex: "1000"}} onClick={handleLogOut}>Log out</span>) : null}
+            {isOpen ? (<a >Yêu thích</a>) : null}
+            {isOpen ? (<a style={{zIndex: "1000"}} onClick={handleLogOut}>Log out</a>) : null}
           </div>
         </div>
 
