@@ -98,6 +98,7 @@ const HomeBody = ({ propsSearchApi,
                 getSearchApiE2Request(results[1]);
                 getSearchApiE3Request(filteredListCities[0])
             } else if (results.length == 3) {
+                results = shuffle(results);
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
                 setIsLove2(true);
