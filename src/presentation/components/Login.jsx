@@ -44,8 +44,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const [displayName, setDisplayName] = useState("");
 
-  const [fullname, setFullname] = useState("");
-
   const [isOpen, setIsOpen] = useState(false);
 
   const [isHome, setIsHome] = useState(false);
@@ -62,13 +60,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
       if (!!user) {
         console.log("user", user);
         let name = user.displayName
-        setFullname(name);
         const nameSplited = name.split(" ");
         const n = nameSplited.length;
         if (n > 0) {
           setDisplayName(nameSplited[n - 1]);
         }
-        successNotify(`Chào mừng ${fullname}!`)
+        successNotify(`Chào mừng ${name}!`)
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
         if (propsUser.success == 1) {
@@ -80,7 +77,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               facebookId: user.uid,
             }
             await postDataUser(data);
-            successNotify(`Chào mừng ${fullname} đến với Asean Weather!`)
+            successNotify(`Chào mừng ${name} đến với Asean Weather!`)
           }
         }
       }
@@ -117,7 +114,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const successNotify = (message) => {
-    toast.warning(message, {
+    toast.success(message, {
       position: "top-center",
       autoClose: 2500,
       hideProgressBar: true,
