@@ -76,7 +76,7 @@ const DailyMain = ({ forecastDay }) =>
                                     </div>
                                 </div>
                             </div>
-                            <div className="col-1">
+                            <div className="col-1 dropdown-hover">
                                 <i className="fa fa-sort-desc mgIcon" aria-hidden="true" onClick={toggle}></i>
                             </div>
                         </div>
