@@ -11,7 +11,7 @@ import { getFavoList } from '../../data/getFavoList';
 import { fitlerArr } from '../../data/configArrays';
 
 
-const citiesAll = [
+let citiesAll = [
     'Bandar Seri Begawan',
     'Kampung Kota Batu',
     'Tutong',
