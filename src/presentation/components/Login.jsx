@@ -22,7 +22,7 @@ firebase.initializeApp(config);
 // Configure FirebaseUI.
 const uiConfig = {
   signInFlow: 'popup',
-  signInSuccessUrl: linkHome,
+  // signInSuccessUrl: linkHome,
   // Hiển thị Facebook là nhà cung cấp xác thực.
   signInOptions: [
     firebase.auth.FacebookAuthProvider.PROVIDER_ID
@@ -106,6 +106,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const handleDropdown = () => {
+    console.log("handleDropdown");
     setIsOpen(!isOpen);
   }
 
@@ -130,7 +131,9 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   if (isSignedIn && !isClickLogin) {
     return (
       <>
-        <div className="dropdown" onBlur={handleDropdown} style={{ fontSize: (isHome ? "18px" : '15px'), }}>
+        <div className="dropdown" 
+        // onBlur={handleDropdown}
+        style={{ fontSize: (isHome ? "18px" : '15px'), }}>
           <button type="button" onClick={handleDropdown} 
             className="headerLogin"
             style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
