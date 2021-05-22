@@ -48,6 +48,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const [isHome, setIsHome] = useState(false);
 
+  const [userGlobal, setUserGlobal] = useState({});
+
   const history = useHistory();
 
   useEffect(() => {
@@ -58,8 +60,9 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
+        setUserGlobal(user);
         console.log("user", user);
-        let name = user.displayName
+        let name = user.displayName;
         const nameSplited = name.split(" ");
         const n = nameSplited.length;
         if (n > 0) {
@@ -68,22 +71,27 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         successNotify(`Chào mừng ${name}!`)
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
-        if (propsUser.success == 1) {
-          console.log("propsUser.data.user", propsUser.data.user);
-          if (!propsUser.data.user) {
-            const data = {
-              name: user.displayName,
-              email: user.email,
-              facebookId: user.uid,
-            }
-            await postDataUser(data);
-            successNotify(`Chào mừng ${name} đến với Asean Weather!`)
-          }
-        }
       }
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
+
+  useEffect(() => {
+    if (propsUser.success == 1) {
+      console.log("userGlobal", userGlobal);
+      console.log("propsUser.data.user",propsUser.data.user)
+      if (!propsUser.data.user && !!userGlobal) {
+        console.log("send post request here");
+        const data = {
+          name: userGlobal.displayName,
+          email: userGlobal.email,
+          facebookId: userGlobal.uid,
+        }
+        await postDataUser(data);
+        successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
+      }
+    }
+  }, [propsUser.success]);
 
   const handleLogOut = () => {
     console.log("LOGOUT");
@@ -99,6 +107,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
       console.log(event.result); // should be undefined
     };
     localStorage.removeItem('user');
+    localStorage.removeItem("facebookId");
     document.querySelector("a.linkHomeHS").click();
   }
 
