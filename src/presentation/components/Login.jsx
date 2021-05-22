@@ -50,6 +50,10 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const [userGlobal, setUserGlobal] = useState({});
 
+  const [isNew, setIsNew] = useState(false);
+
+  const [isBack, setIsBack] = useState(false);
+
   const history = useHistory();
 
   useEffect(() => {
@@ -60,6 +64,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
+        setIsBack(true);
         setUserGlobal(user);
         console.log("user", user);
         let name = user.displayName;
@@ -68,7 +73,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         if (n > 0) {
           setDisplayName(nameSplited[n - 1]);
         }
-        successNotify(`Chào mừng ${name}!`)
+        
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
       }
@@ -82,16 +87,24 @@ const Login = ({ className, propsUser, getUserRequest }) => {
       console.log("propsUser.data.user",propsUser.data.user)
       if (!propsUser.data.user && !!userGlobal) {
         console.log("send post request here");
+        setIsNew(true);
         const data = {
           name: userGlobal.displayName,
           email: userGlobal.email,
           facebookId: userGlobal.uid,
         }
         postDataUser(data);
-        successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
       }
     }
   }, [propsUser.success]);
+
+  useEffect(() => {
+    if (isBack && !isNew && !!userGlobal) {
+      successNotify(`Chào mừng ${userGlobal.displayName}!`)
+    } else if (isBack && isNew && !!userGlobal) {
+      successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
+    }
+  }, [isNew, isBack]);
 
   const handleLogOut = () => {
     console.log("LOGOUT");
