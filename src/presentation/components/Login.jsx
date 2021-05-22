@@ -73,7 +73,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         if (n > 0) {
           setDisplayName(nameSplited[n - 1]);
         }
-        
+
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
       }
@@ -84,7 +84,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   useEffect(() => {
     if (propsUser.success == 1) {
       console.log("userGlobal", userGlobal);
-      console.log("propsUser.data.user",propsUser.data.user)
+      console.log("propsUser.data.user", propsUser.data.user)
       if (!propsUser.data.user && !!userGlobal) {
         console.log("send post request here");
         setIsNew(true);
@@ -99,12 +99,14 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }, [propsUser.success]);
 
   useEffect(() => {
-    if (isBack && !isNew && !!userGlobal) {
-      successNotify(`Chào mừng ${userGlobal.displayName}!`)
-    } else if (isBack && isNew && !!userGlobal) {
-      successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
+    if (!!userGlobal) {
+      if (isBack && !isNew) {
+        successNotify(`Chào mừng ${userGlobal.displayName}!`)
+      } else if (isBack && isNew) {
+        successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
+      }
     }
-  }, [isNew, isBack]);
+  }, [isNew, isBack, userGlobal]);
 
   const handleLogOut = () => {
     console.log("LOGOUT");
@@ -154,10 +156,10 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   if (isSignedIn && !isClickLogin) {
     return (
       <>
-        <div className="dropdown" 
-        // onBlur={handleDropdown}
-        style={{ fontSize: (isHome ? "18px" : '15px'), }}>
-          <button type="button" onClick={handleDropdown} 
+        <div className="dropdown"
+          // onBlur={handleDropdown}
+          style={{ fontSize: (isHome ? "18px" : '15px'), }}>
+          <button type="button" onClick={handleDropdown}
             className="headerLogin"
             style={{ height: (isHome ? "42px" : '40px'), width: (isHome ? "150px" : '120px') }} >
             <big>Hi, {displayName ? displayName : "User"}! </big>
@@ -165,14 +167,14 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               <i className="fa fa-sort-desc" aria-hidden="true"></i>
             </span>
           </button>
-          
-          {(isOpen? (
+
+          {(isOpen ? (
             <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
               <a onClick={handlePushFavo} >Yêu thích</a>
               <a onClick={handleLogOut}>Log out</a>
             </div>
-          ): null)}
-          
+          ) : null)}
+
         </div>
 
       </>
