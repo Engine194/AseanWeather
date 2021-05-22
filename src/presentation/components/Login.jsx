@@ -102,8 +102,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     if (!!userGlobal) {
       if (!!userGlobal.displayName) {
         if (isBack == true && isNew == false) {
-          successNotify(`Chào mừng ${userGlobal.displayName}!`)
-        } else if (isBack == true && isNew == true) {
           successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
         }
       }
