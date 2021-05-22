@@ -69,7 +69,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         if (n > 0) {
           setDisplayName(nameSplited[n - 1]);
         }
-
+        
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
       }
@@ -118,11 +118,13 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const handlePushFavo = () => {
-    if (isHome) {
+    if (isHome && !!userGlobal.uid) {
+      
+      getUserRequest(userGlobal.uid);
       history.push({
         pathname: "/main/favorite_cities",
       })
-    } else {
+    } else if (isHome == false) {
       document.querySelector("button.btnJS4").click();
     }
   }
