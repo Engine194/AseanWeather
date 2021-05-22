@@ -81,7 +81,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     if (propsUser.success == 1) {
       console.log("userGlobal", userGlobal);
       console.log("propsUser.data.user", propsUser.data.user)
-      if (!propsUser.data.user && !!userGlobal) {
+      if (!propsUser.data.user && !!userGlobal.displayName) {
         console.log("send post request here");
         const data = {
           name: userGlobal.displayName,
