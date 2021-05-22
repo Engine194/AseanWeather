@@ -8,7 +8,61 @@ import Loading from '../components/loading';
 import "../scss/homePage.scss";
 import HomeCart from '../components/homeCard';
 import { getFavoList } from '../../data/getFavoList';
+import { fitlerArr } from '../../data/configArrays';
 
+
+const citiesAll = [
+    'Bandar Seri Begawan',
+    'Kampung Kota Batu',
+    'Tutong',
+    'Temburong',
+    'Melilas',
+    'Koh Rong',
+    'Sihanoukville',
+    'Kampot',
+    'Phnom Penh',
+    'Kratie',
+    'Bukittinggi',
+    'Yogyakarta',
+    'Jakarta',
+    'Bandung',
+    'Manado',
+    'Pakxe',
+    'Vientiane',
+    'Vang Vieng',
+    'Champasak',
+    'Luang Prabang',
+    'Malacca',
+    'Langkawi',
+    'Kuantan',
+    'Perhentian',
+    'Kuala Lumpur',
+    'Yangon',
+    'Mandalay',
+    'Bagan',
+    'Mrauk-U',
+    'Nyaung Shwe',
+    'Manila',
+    'Palawan',
+    'Cebu',
+    'Padre Burgos',
+    'Bacolod',
+    'Singapore',
+    'Sembawang',
+    'Jurong West',
+    'Bukit Batok',
+    'Lim Chu Kang',
+    'Bangkok',
+    'Phuket',
+    'Ayutthaya',
+    'Dok Mai',
+    'Pattaya',
+    'Ha Noi',
+    'Ho Chi Minh City',
+    'Hai Phong',
+    'Da Nang',
+    'Hoi An',
+]
 
 
 const HomeBody = ({ propsSearchApi,
@@ -26,19 +80,23 @@ const HomeBody = ({ propsSearchApi,
             let results = getFavoList(user.favouriteCities);
             console.log("resultsBefore", results);
 
+            const filteredListCities = shuffle(fitlerArr(citiesAll,results));
+
+
+
             if (results.length == 0) {
                 handleNoneFavo()
             } else if (results.length == 1) {
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
-                getSearchApiE2Request("Singapore");
-                getSearchApiE3Request("Bangkok");
+                getSearchApiE2Request(filteredListCities[0]);
+                getSearchApiE3Request(filteredListCities[1]);
             } else if (results.length == 2) {
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
                 setIsLove2(true);
                 getSearchApiE2Request(results[1]);
-                getSearchApiE3Request("Bangkok")
+                getSearchApiE3Request(filteredListCities[0])
             } else if (results.length == 3) {
                 setIsLove1(true);
                 getSearchApiE1Request(results[0]);
@@ -66,9 +124,10 @@ const HomeBody = ({ propsSearchApi,
         setIsLove1(false);
         setIsLove2(false);
         setIsLove3(false);
-        getSearchApiE1Request("Hanoi");
-        getSearchApiE2Request("Singapore");
-        getSearchApiE3Request("Bangkok");
+        citiesAll = shuffle(citiesAll);
+        getSearchApiE1Request(citiesAll[0]);
+        getSearchApiE2Request(citiesAll[1]);
+        getSearchApiE3Request(citiesAll[2]);
     }
 
     const shuffle = (array) => {
@@ -91,6 +150,8 @@ const HomeBody = ({ propsSearchApi,
 
         return array;
     }
+
+
 
     // console.log(propsSearchApi);
     const success = propsSearchApi.success;
