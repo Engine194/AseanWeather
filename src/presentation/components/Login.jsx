@@ -3,7 +3,6 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, La
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../css/HomeHeader.css';
-import linkHome from '../../data/api/linkHome';
 import { postDataUser } from '../../data/api/apiRequest';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -69,6 +68,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         if (n > 0) {
           setDisplayName(nameSplited[n - 1]);
         }
+        successNotify(`Chào mừng ${fullname}!`)
         localStorage.setItem("facebookId", user.uid);
         await getUserRequest(user.uid);
         if (propsUser.success == 1) {
@@ -80,7 +80,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               facebookId: user.uid,
             }
             await postDataUser(data);
-            successNotify();
+            successNotify(`Chào mừng ${fullname} đến với Asean Weather!`)
           }
         }
       }
@@ -116,10 +116,10 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     })
   }
 
-  const successNotify = () => {
-    toast.warning(`Chào mừng ${fullname}`, {
+  const successNotify = (message) => {
+    toast.warning(message, {
       position: "top-center",
-      autoClose: 8000,
+      autoClose: 2500,
       hideProgressBar: true,
       closeOnClick: true,
       pauseOnHover: false,
@@ -142,10 +142,14 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               <i className="fa fa-sort-desc" aria-hidden="true"></i>
             </span>
           </button>
-          <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-            {isOpen ? (<a onClick={handlePushFavo} >Yêu thích</a>) : null}
-            {isOpen ? (<a onClick={handleLogOut}>Log out</a>) : null}
-          </div>
+          
+          {(isOpen? (
+            <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
+              <a onClick={handlePushFavo} >Yêu thích</a>
+              <a onClick={handleLogOut}>Log out</a>
+            </div>
+          ): null)}
+          
         </div>
 
       </>
