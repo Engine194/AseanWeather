@@ -61,7 +61,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
-        setIsBack(true);
         setUserGlobal(user);
         console.log("user", user);
         let name = user.displayName;
