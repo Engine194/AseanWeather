@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../css/HomeHeader.css';
@@ -10,6 +10,7 @@ import { getUserRequest } from "../redux/effects/getUserEffect";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router';
+// import linkHome from '../../data/api/linkHome';
 
 // Gọi API từ Firebase
 const config = {
@@ -50,10 +51,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const [userGlobal, setUserGlobal] = useState({});
 
-  const [isNew, setIsNew] = useState(false);
-
-  const [isBack, setIsBack] = useState(false);
-
   const history = useHistory();
 
   useEffect(() => {
@@ -87,26 +84,16 @@ const Login = ({ className, propsUser, getUserRequest }) => {
       console.log("propsUser.data.user", propsUser.data.user)
       if (!propsUser.data.user && !!userGlobal) {
         console.log("send post request here");
-        setIsNew(true);
         const data = {
           name: userGlobal.displayName,
           email: userGlobal.email,
           facebookId: userGlobal.uid,
         }
         postDataUser(data);
+        successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
       }
     }
   }, [propsUser.success]);
-
-  useEffect(() => {
-    if (!!userGlobal) {
-      if (!!userGlobal.displayName) {
-        if (isBack == true && isNew == false) {
-          successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
-        }
-      }
-    }
-  }, [isNew, isBack, userGlobal]);
 
   const handleLogOut = () => {
     console.log("LOGOUT");
