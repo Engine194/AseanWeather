@@ -12,8 +12,9 @@ import { removeFavoRequest } from "../redux/effects/removeFavoEffect";
 import { getUserRequest } from "../redux/effects/getUserEffect";
 import { Modal, Button } from "react-bootstrap";
 import { successNotify, warningNotify } from "../../data/configNotify";
+import getSearchV3 from "../redux/actions/searchV3Action"
 
-const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, removeFavoRequest, getUserRequest }) => {
+const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, removeFavoRequest, getUserRequest, getSearchV3}) => {
     const [fbId, setFbId] = useState("");
     const [isShow, setIsShow] = useState(false);
     const [isAlert, setIsAlert] = useState(false);
@@ -122,12 +123,9 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
         }, 2500);
     }
 
-    
-
-    
-
     const handlePush = (cityName) => {
-        localStorage.setItem("cityName", cityName);
+        console.log("handlePush-cityName", cityName);
+        getSearchV3(cityName);
         document.querySelector("button.btnJS1").click();
     }
 
@@ -178,6 +176,7 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     getFavoriteCurrentRequest,
     removeFavoRequest,
     getUserRequest,
+    getSearchV3,
 },
     dispatch
 )
