@@ -232,8 +232,12 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                             </div>
                             <div className="row">
                                 <div className="col text-center">
-                                    {!(isShowErr && isSumimited) ? null : (<i><small>Không tìm thấy thành phố</small></i>)}
-                                    {!(isShowEmpty && isSumimited) ? null : (<i><small>Hãy nhập thông tin</small></i>)}
+                                    {!(isShowErr && isSumimited) ? null : (<i><small>Không tìm thấy kết quả nào, hãy nhập lại tên thành phố</small></i>)}
+                                </div>
+                            </div>
+                            <div className="row">
+                                <div className="col text-center">
+                                    {!(isShowEmpty && isSumimited) ? null : (<i><small>Hãy nhập tên thành phố</small></i>)}
                                 </div>
                             </div>
                         </div>

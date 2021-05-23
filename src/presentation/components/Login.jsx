@@ -10,6 +10,7 @@ import { getUserRequest } from "../redux/effects/getUserEffect";
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router';
+import LoginAdmin from './LoginAdmin';
 // import linkHome from '../../data/api/linkHome';
 
 // Gọi API từ Firebase
@@ -181,22 +182,10 @@ const Login = ({ className, propsUser, getUserRequest }) => {
               <StyledFirebaseAuth onClick={() => setIsClickLogin(true)} uiConfig={uiConfig} firebaseAuth={firebase.auth()} />
             </FormGroup>
             <FormGroup className="text-center">
-              <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }}><i><u>Click Here </u></i></a> To Login</div>
+              <div>If You Are Admin, <a onClick={toggle1} style={{ color: "Highlight" }} className="click-Here" ><i><u>Click Here </u></i></a> To Login</div>
               <Modal isOpen={modal1} toggle={toggle1} className={className}>
                 <ModalHeader toggle={toggle1}>SIGN IN ADMIN</ModalHeader>
-                <ModalBody>
-                  <Form>
-                    <FormGroup>
-                      <Label for="exampleEmail">Email</Label>
-                      <Input type="email" name="email" id="exampleEmail" placeholder="Email" />
-                    </FormGroup>
-                    <FormGroup>
-                      <Label for="examplePassword">Password</Label>
-                      <Input type="password" name="password" id="examplePassword" placeholder="Password" />
-                    </FormGroup>
-                  </Form>
-                  <Button style={{ marginTop: 20 }} color="primary" onClick={toggle}>Summit</Button>
-                </ModalBody>
+                <LoginAdmin />
               </Modal>
             </FormGroup>
           </ModalBody>
