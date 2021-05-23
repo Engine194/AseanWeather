@@ -92,7 +92,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           facebookId: userGlobal.facebookId,
         }
         try {
-          localStorage.setItem("isBack", "true");
           postDataUser(data);
           successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`);
         } catch (err) {
@@ -101,19 +100,13 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         }
         
       }
-    }
-  }, [propsUser.success]);
-
-  useEffect(() => {
-    const isBack = localStorage.getItem("isBack");
-    if (isBack == "true") {
-      if (isClickLogin == true && isSignedIn == true ) {
+      if (!!propsUser.data.user && isClickLogin) {
         successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
       }
     }
-  }, [isClickLogin, isSignedIn]);
+  }, [propsUser.success]);
 
-  const handleLogOut = () => {
+    const handleLogOut = () => {
     let DBDeleteRequest = window.indexedDB.deleteDatabase("firebaseLocalStorageDb");
 
     DBDeleteRequest.onerror = function (event) {
