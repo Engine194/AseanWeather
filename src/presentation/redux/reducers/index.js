@@ -12,6 +12,8 @@ import favoriteReducer from "./favoriteReducer";
 import userReducer from "./userReducer";
 import addFavoReducer from "./addFavoReducer";
 import removeFavoReducer from "./removeFavoReducer";
+import loginAdminReducer from "./loginAdminReducer";
+import listUsersReducer from "./listUsersReducer"
 
 
 export default combineReducers({
@@ -28,4 +30,6 @@ export default combineReducers({
     userReducer,
     addFavoReducer,
     removeFavoReducer,
+    loginAdminReducer,
+    listUsersReducer,
 })
