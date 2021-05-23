@@ -106,7 +106,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   useEffect(() => {
     const isBack = localStorage.getItem("isBack");
-    if (!!isBack) {
+    if (isBack == "true") {
       if (isClickLogin == true && isSignedIn == true ) {
         successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
       }
