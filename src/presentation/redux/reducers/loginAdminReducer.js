@@ -23,6 +23,7 @@ export default function loginAdminReducer(state = initialState, action) {
                 }
             }
         case loginAdminActionType.GET_lOGINADMIN_FAIL :
+            debugger
             return {
                 ...state,
                 loading: false,

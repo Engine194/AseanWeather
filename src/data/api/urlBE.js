@@ -3,7 +3,7 @@ const url = {
     SEARCHV2: "/cities",
     USERS : '/users',
     FAVORITE: "users/fbId/favourite",
-    ADMINLOGIN: "/admin"
+    ADMINLOGIN: "/admin",
 }
 
 export default url;

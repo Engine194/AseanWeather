@@ -10,7 +10,7 @@ import { getUserRequest } from "../redux/effects/getUserEffect";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router';
 import LoginAdmin from './LoginAdmin';
-import { successNotify } from '../../data/configNotify';
+import { errorNotify, successNotify } from '../../data/configNotify';
 // import linkHome from '../../data/api/linkHome';
 
 // Gọi API từ Firebase
@@ -97,6 +97,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`);
         } catch (err) {
           console.log("error post new user", err);
+          errorNotify("Đăng nhập không thành công, vui lòng thử lại!");
         }
         
       }
