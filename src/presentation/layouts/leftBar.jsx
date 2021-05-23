@@ -11,7 +11,6 @@ import { Modal } from 'react-bootstrap';
 
 
 const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserRequest, removeFavoRequest }) => {
-    const [isFavo, setIsFavo] = useState(false);
     const [isFavoPage, setIsFavoPage] = useState(false);
     const [city, setCity] = useState('');
     const [searchEmail, setSearchEmail] = useState("");
@@ -20,7 +19,7 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
     const [isShow, setIsShow] = useState(false);
 
     useEffect(() => {
-        setIsFavo(false)
+        setIsFavoPage(false)
         const pathname = window.location.pathname;
         if (pathname == "/main/favorite_cities") {
             setIsFavoPage(true);
@@ -41,7 +40,7 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
         //             id: 2,
         //             name: "Kampung Kota Batu"
         //         },
-                
+
         //         {
         //             id: 4,
         //             name: "Temburong"
@@ -80,13 +79,13 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
         // localStorage.setItem('user', JSON.stringify(user));
 
         const user = JSON.parse(localStorage.getItem("user"));
-        
+
         if (propsSearch.success == 1) {
             let cityName = propsSearch.data.search;
             setCity(cityName);
             handleConverCityToURL(cityName);
             if (!!user) {
-                handleReceiveUser(user,cityName);
+                handleReceiveUser(user, cityName);
             }
         } else {
             let cityName = localStorage.getItem("cityName");
@@ -97,14 +96,14 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
         }
 
         if (propUser.success == 1) {
-            handleReceiveUser(propUser.data.user,city)
+            handleReceiveUser(propUser.data.user, city)
         }
         if (propUser.success != 1) {
             if (!!user) {
-                handleReceiveUser(user,city);
+                handleReceiveUser(user, city);
             }
         }
-    }, [searchEmail, propsSearch.data.search, isFavo, isLove, propUser,isShow, propMenu])
+    }, [searchEmail, propsSearch.data.search, isFavoPage, isLove, propUser, isShow, propMenu])
 
     const handleReceiveUser = (user, city) => {
         if (!!user) {
@@ -134,7 +133,7 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
         if (isLove == false) {
             setIsShow(true);
             await addFavoRequest(fbId, city);
-            
+
         } else if (isLove == true) {
             setIsShow(true)
             await removeFavoRequest(fbId, city);
@@ -149,26 +148,30 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
 
     return (
         <>
-            <div id="fb-root"></div>
-            <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=521933395496343&autoLogAppEvents=1" nonce="e5CdrVam"></script>
-            <div className="container-fluid">
-                <div className="row">
-                    <div className="col-12 mt-3">
-                        <a target="_blank" href={hrefEmail} title="Share By Email Automatically"><i className="fa fa-envelope-square colorScssLB1 onHover" aria-hidden="true"></i></a>
+            {(!isFavoPage ? (
+                <>
+                    <div id="fb-root"></div>
+                    <script async defer crossOrigin="anonymous" src="https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v10.0&appId=521933395496343&autoLogAppEvents=1" nonce="e5CdrVam"></script>
+                    <div className="container-fluid">
+                        <div className="row">
+                            <div className="col-12 mt-3">
+                                <a target="_blank" href={hrefEmail} title="Share By Email Automatically"><i className="fa fa-envelope-square colorScssLB1 onHover" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col-12 mt-2">
+                                <a target="_blank" href={hrefFB} title="Share the weather of this city on Facebook" className="fb-xfbml-parse-ignore"><i className="fa fa-facebook-square colorScssLB2 onHover" aria-hidden="true" data-layout="button"></i></a>
+                            </div>
+                        </div>
+                        {(!!fbId && !isFavoPage ? (<div className="row">
+                            <div className="col-12 mt-2">
+                                <a onClick={handleFavorite} className="fb-xfbml-parse-ignore">{(!isFavoPage ? <Heart isLove={isLove} /> : null)}</a>
+                            </div>
+                        </div>) : null)}
                     </div>
-                </div>
-                <div className="row">
-                    <div className="col-12 mt-2">
-                        <a target="_blank" href={hrefFB} title="Share the weather of this city on Facebook" className="fb-xfbml-parse-ignore"><i className="fa fa-facebook-square colorScssLB2 onHover" aria-hidden="true" data-layout="button"></i></a>
-                    </div>
-                </div>
-                {(!!fbId && !isFavoPage ? (<div className="row">
-                    <div className="col-12 mt-2">
-                        <a onClick={handleFavorite} className="fb-xfbml-parse-ignore">{(!isFavoPage ? <Heart isLove={isLove} /> : null)}</a>
-                    </div>
-                </div>) : null)}
+                </>
+            ) : null)}
 
-            </div>
             <Modal show={isShow}>
                 <Modal.Body>
                     <h1>Loading ...</h1>
