@@ -4,6 +4,7 @@ const url = {
     USERS : '/users',
     FBID : "/users/fbId",
     FAVORITE: "users/fbId/favourite",
+    ADMINLOGIN: "/admin"
 }
 
 export default url;
