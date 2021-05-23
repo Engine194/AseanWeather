@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Modal, ModalHeader, ModalBody, Form, FormGroup, Label, Input } from 'reactstrap';
+import { Modal, ModalHeader, ModalBody, FormGroup } from 'reactstrap';
 import firebase from 'firebase';
 import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth';
 import '../css/HomeHeader.css';
@@ -7,10 +7,10 @@ import { postDataUser } from '../../data/api/apiRequest';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { getUserRequest } from "../redux/effects/getUserEffect";
-import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router';
 import LoginAdmin from './LoginAdmin';
+import { successNotify } from '../../data/configNotify';
 // import linkHome from '../../data/api/linkHome';
 
 // Gọi API từ Firebase
@@ -62,8 +62,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
-        setUserGlobal(user);
-        console.log("user", user);
+        let token = user.getIdToken();
+        setUserGlobal({
+          displayName: user.displayName,
+          email: user.email,
+          token,
+        });
         let name = user.displayName;
         const nameSplited = name.split(" ");
         const n = nameSplited.length;
@@ -71,8 +75,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           setDisplayName(nameSplited[n - 1]);
         }
         
-        localStorage.setItem("facebookId", user.uid);
-        await getUserRequest(user.uid);
+        localStorage.setItem("facebookId", token);
+        await getUserRequest(token);
       }
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
@@ -80,14 +84,11 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   useEffect(() => {
     if (propsUser.success == 1) {
-      console.log("userGlobal", userGlobal);
-      console.log("propsUser.data.user", propsUser.data.user)
-      if (!propsUser.data.user && !!userGlobal.displayName) {
-        console.log("send post request here");
+      if (!propsUser.data.user && !!userGlobal) {
         const data = {
           name: userGlobal.displayName,
           email: userGlobal.email,
-          facebookId: userGlobal.uid,
+          facebookId: userGlobal.token,
         }
         postDataUser(data);
         successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`)
@@ -96,7 +97,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }, [propsUser.success]);
 
   const handleLogOut = () => {
-    console.log("LOGOUT");
     let DBDeleteRequest = window.indexedDB.deleteDatabase("firebaseLocalStorageDb");
 
     DBDeleteRequest.onerror = function (event) {
@@ -114,14 +114,13 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const handleDropdown = () => {
-    console.log("handleDropdown");
     setIsOpen(!isOpen);
   }
 
   const handlePushFavo = () => {
-    if (isHome && !!userGlobal.uid) {
+    if (isHome && !!userGlobal) {
       
-      getUserRequest(userGlobal.uid);
+      getUserRequest(userGlobal.token);
       history.push({
         pathname: "/main/favorite_cities",
       })
@@ -130,17 +129,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     }
   }
 
-  const successNotify = (message) => {
-    toast.success(message, {
-      position: "top-center",
-      autoClose: 2500,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: true,
-      progress: undefined,
-    });
-  }
 
   if (isSignedIn && !isClickLogin) {
     return (

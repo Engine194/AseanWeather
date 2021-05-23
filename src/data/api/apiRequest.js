@@ -116,9 +116,6 @@ const removeFavoBE = (fbId, cityName) => {
     const parameters = {
         fbId,
     } 
-    const body = {
-        name: cityName,
-    }
     return Api(axiosType.BE).delete(`${urlBE.FAVORITE}`,{data: { name: cityName}, params : parameters})
 }
 const loginApi = (email,password) => {

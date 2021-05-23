@@ -1,9 +1,6 @@
 import { Collapse, Card } from 'reactstrap';
 import React, { useState } from 'react';
-import getFormatDate from '../../data/configDate';
 import "../scss/hourlyPage.scss";
-import CurrentDetail from './currentDetail';
-import CurrentAqi from './currentAqi';
 import DailyCurrentMain from './dailyCurrentMain';
 import DailyCurrentDetail from './dailyCurrentDetail';
 import CurrentAstronomySun2 from './currentAstronomySun2';

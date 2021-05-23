@@ -78,8 +78,6 @@ const HomeBody = ({ propsSearchApi,
         const user = JSON.parse(localStorage.getItem("user"));
         if (!!user) {
             let results = getFavoList(user.favouriteCities);
-            console.log("resultsBefore", results);
-
             const filteredListCities = shuffle(fitlerArr(citiesAll,results));
 
 
@@ -156,7 +154,6 @@ const HomeBody = ({ propsSearchApi,
 
     // console.log(propsSearchApi);
     const success = propsSearchApi.success;
-    console.log("propsSearchApi", propsSearchApi);
 
     if (success.E1 == 1 && success.E2 == 1 && success.E3 == 1) {
         const E1 = propsSearchApi.data.E1;

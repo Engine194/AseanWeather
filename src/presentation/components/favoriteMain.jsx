@@ -12,7 +12,6 @@ const FavoriteMain = ({ location, current, handleDelete, handlePush, city }) => 
     name = name.replace(" ", "");
     name = name.replace(" ", "");
     name = name.replace(" ", "");
-    name = name.replace(" ", "");
     
     const tempId = `temperature${name}`;
     const realfeelId = `realFeel${name}`;

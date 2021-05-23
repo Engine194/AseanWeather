@@ -14,6 +14,7 @@ import { markMenuInComponent, menuType } from "../../data/configMenu";
 import { useHistory } from 'react-router';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import { warningNotify } from "../../data/configNotify";
 
 const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest, propsSearch }) => {
     const history = useHistory();
@@ -66,19 +67,6 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
             }
         }
     }, [propsSearch.data.search])
-
-    const warningNotify = (message) => {
-        toast.warning(message, {
-          position: "top-left",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: false,
-          draggable: true,
-          progress: undefined,
-        });
-      }
-    
 
     // Kiểm tra dữ liệu trả vể
     // console.log("Astro", propsAstro);

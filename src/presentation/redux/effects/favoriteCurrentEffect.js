@@ -19,8 +19,7 @@ export const getFavoriteCurrentRequest = listCities => {
             }).catch(err=> {
                 errors.push(err)
             })
-        } 
-        
+        }
         if (results.length > 0 && errors.length < 1) {
             dispatch(favoriteActions.getFavoriteCurrentSuccess(results)); 
         } else if (results < 1 && errors > 0) {

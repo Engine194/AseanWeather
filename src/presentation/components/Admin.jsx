@@ -4,13 +4,12 @@ import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import logo from "../../data/weatherImgs/logo.png";
 import linkHome from "../../data/api/linkHome";
-import { TabContent, TabPane, Nav, NavItem, NavLink } from 'reactstrap';
-import classnames from 'classnames';
 import Footer from "../layouts/footer";
 import { connect } from "react-redux";
 import { getListUsersRequest } from "../redux/effects/listUsersEffect";
 import { bindActionCreators } from "redux";
-import { useHistory } from "react-router";
+import "../scss/mainFrame.scss";
+
 
 const tableColumns = [
   {
@@ -40,7 +39,7 @@ const defaultSorted = [{
   order: 'desc'
 }];
 
-const Admin = ({ propsAdmin, propsListUsers, getListUsersRequest }) => {
+const Admin = ({ propsListUsers, getListUsersRequest }) => {
   const [tableData, setTableData] = useState([]);
   const [email, setEmail] = useState("");
 
@@ -81,62 +80,66 @@ const Admin = ({ propsAdmin, propsListUsers, getListUsersRequest }) => {
 
   return (
     <>
-      <div className="row" style={{ height: 610 }}>
-        <div className="col-2" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", backgroundColor: "#7a6c7d" }}>
-          <div>
-            <div style={{ textAlign: "center", height: 80, borderBlockColor: "Highlight" }}>
-              <a id="homeAdmin" href={linkHome}>
-                <img src={logo} width="73" alt="Logo" />
-              </a>
-            </div>
-            <div className="row ml-2 mt-3">
-              <div className="col btn btn-primary mt-1" >
-                USERS
+      <div id="content">
+        <div className="container-fluid">
+          <div className="row" style={{ height: "100%" }}>
+            <div className="col-2" style={{ display: "flex", flexDirection: "column", justifyContent: "space-between", backgroundColor: "#7a6c7d" }}>
+              <div>
+                <div style={{ textAlign: "center", height: 80, borderBlockColor: "Highlight" }}>
+                  <a id="homeAdmin" href={linkHome}>
+                    <img src={logo} width="73" alt="Logo" />
+                  </a>
+                </div>
+                <div className="row ml-2 mt-3">
+                  <div className="col btn btn-primary mt-1" >
+                    USERS
               </div>
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col text-center">
-              <button className="btn btn-primary" style={{ width: 95 }} onClick={handleLogout}>LOG OUT</button>
-            </div>
-          </div>
-        </div>
-        <div className="col-10">
-          <Container fluid className="p-0">
-            <div className="row mt-1">
-              <div className="col-6 mb-4 ml-2">
-                <h3 style={{ marginTop: 30 }}><i class="fa fa-list" aria-hidden="true"></i> LIST USER</h3>
+                </div>
               </div>
-              <div className="col-4 offset-2 mt-4">
-                <div className="row mt-2">
-                  <div className="col">
-                    {!!email ? (
-                      <span> Welcome, <b>{email}</b> </span>
-                    ) : null}
-                  </div>
+              <div className="row mb-3">
+                <div className="col text-center">
+                  <button className="btn btn-primary" style={{ width: 95 }} onClick={handleLogout}>LOG OUT</button>
                 </div>
               </div>
             </div>
-            <Card>
-              <CardBody>
-                <BootstrapTable
-                  keyField="name"
-                  headerWrapperClasses="foo"
-                  data={tableData}
-                  bootstrap4
-                  columns={tableColumns}
-                  defaultSorted={defaultSorted}
-                  hover
-                  bordered
-                  pagination={paginationFactory({
-                    sizePerPage: 10,
-                    hideSizePerPage : true,
-                  }) 
-                }
-                />
-              </CardBody>
-            </Card>
-          </Container>
+            <div className="col-10">
+              <Container fluid className="p-0">
+                <div className="row mt-1">
+                  <div className="col-6 mb-4 ml-2">
+                    <h3 style={{ marginTop: 30 }}><i class="fa fa-list" aria-hidden="true"></i> LIST USER</h3>
+                  </div>
+                  <div className="col-4 offset-2 mt-4">
+                    <div className="row mt-2">
+                      <div className="col">
+                        {!!email ? (
+                          <span> Welcome, <b>{email}</b> </span>
+                        ) : null}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <Card>
+                  <CardBody>
+                    <BootstrapTable
+                      keyField="name"
+                      headerWrapperClasses="foo"
+                      data={tableData}
+                      bootstrap4
+                      columns={tableColumns}
+                      defaultSorted={defaultSorted}
+                      hover
+                      bordered
+                      pagination={paginationFactory({
+                        sizePerPage: 10,
+                        hideSizePerPage: true,
+                      })
+                      }
+                    />
+                  </CardBody>
+                </Card>
+              </Container>
+            </div>
+          </div>
         </div>
       </div>
       <footer>
@@ -149,7 +152,7 @@ const Admin = ({ propsAdmin, propsListUsers, getListUsersRequest }) => {
 const mapStateToProps = (state) => {
   return {
     propsListUsers: state.listUsersReducer,
-    propsAdmin: state.loginAdminReducer,
+    
   }
 }
 const mapDispatchToProps = (dispatch) => bindActionCreators({

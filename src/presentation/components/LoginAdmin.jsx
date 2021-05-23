@@ -1,41 +1,19 @@
 import { Formik, FastField, Form, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { ReactstrapInput } from "reactstrap-formik";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter, FormGroup, Label, Input } from 'reactstrap';
+import { Button, FormGroup } from 'reactstrap';
 import { useHistory } from 'react-router';
 import logo from "../../data/weatherImgs/logo.png";
-import { loginApi } from '../../data/api/apiRequest';
-import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import {getLoginAdminRequest} from '../redux/effects/loginAdminEffect' 
+import { getLoginAdminRequest } from '../redux/effects/loginAdminEffect'
+import { errorNotify, successNotify } from '../../data/configNotify';
 
-const LoginAdmin = ({propsAdmin,getLoginAdminRequest}) => {
-   
+const LoginAdmin = ({ getLoginAdminRequest }) => {
+
     const history = useHistory();
-    const warningNotify = (message) => {
-        toast.error(message, {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            });
-    }
-    const successNotify = (message) => {
-        toast.success(message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            });
-    }
+
     return (
         <>
             <Formik
@@ -49,30 +27,25 @@ const LoginAdmin = ({propsAdmin,getLoginAdminRequest}) => {
                     Yup.object({
                         email: Yup.string()
                             .required('Required'),
-                         
-
                         password: Yup.string()
                             .max(50, 'Must be between 8 to 50 characters')
                             .min(8, 'Must be between 8 to 50 characters')
                             .required('Required'),
-
                     })
                 }
                 onSubmit={
                     async (values) => {
                         try {
                             // call api
-                            getLoginAdminRequest(values.email,values.password)
-                            console.log("1111111111",propsAdmin);
+                            getLoginAdminRequest(values.email, values.password)
                             successNotify("Đăng nhập thành công!")
-                            localStorage.setItem("emailAdmin",values.email);
-                            localStorage.setItem("token",values.password); 
+                            localStorage.setItem("emailAdmin", values.email);
+                            localStorage.setItem("token", values.password);
                             //redirect to page Admin
                             history.push({ pathname: "/main/admin" })
-
                         } catch (error) {
                             if (error.status === 401) {
-                                warningNotify("Sai tên đăng nhập hoặc mật khẩu!")
+                                errorNotify("Sai tên đăng nhập hoặc mật khẩu!")
                             } else {
                             }
                         }
@@ -82,15 +55,13 @@ const LoginAdmin = ({propsAdmin,getLoginAdminRequest}) => {
                 validateOnBlur={false}
             >
                 {({ isSubmitting }) => (
-
                     <div className="m-sm-4">
                         <Form>
                             <FormGroup>
                                 <div className="text-center">
-                                        <img src={logo} width="73" alt="Logo" />
+                                    <img src={logo} width="73" alt="Logo" />
                                 </div>
                             </FormGroup>
-
                             {/* email */}
                             <FormGroup>
                                 <FastField
@@ -102,7 +73,6 @@ const LoginAdmin = ({propsAdmin,getLoginAdminRequest}) => {
                                     component={ReactstrapInput}
                                 />
                             </FormGroup>
-
                             {/* password */}
                             <FormGroup>
                                 <FastField
@@ -114,29 +84,20 @@ const LoginAdmin = ({propsAdmin,getLoginAdminRequest}) => {
                                     component={ReactstrapInput}
                                 />
                             </FormGroup>
-
                             <ErrorMessage name="errorForm" component={"div"} className="invalid-feedback" style={{ display: "block" }} />
-
                             {/* submit */}
                             <div className="text-center mt-3">
                                 <Button type="submit" color="primary" size="lg" disabled={isSubmitting}>
                                     Sign up
-             </Button>
+                                </Button>
                             </div>
                         </Form>
                     </div>
-
-
                 )}
             </Formik>
         </>
     );
 };
-const mapStateToProps = (state) => {
-    return {
-        propsAdmin: state.loginAdminReducer ,
-    }
-}
 
 const mapDispatchToProps = (dispatch) => bindActionCreators({
     getLoginAdminRequest,
@@ -144,4 +105,4 @@ const mapDispatchToProps = (dispatch) => bindActionCreators({
     dispatch
 )
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginAdmin);
+export default connect(null, mapDispatchToProps)(LoginAdmin);

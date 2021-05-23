@@ -5,21 +5,19 @@ import Loading from "../components/loading";
 import { getFavoriteCurrentRequest } from "../redux/effects/favoriteCurrentEffect";
 import '../scss/currentPage.scss';
 import { markMenuInComponent, menuType } from "../../data/configMenu";
-import { useHistory } from 'react-router';
-import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import FavoriteMainList from "../components/favoriteMainList";
 import { getFavoList } from "../../data/getFavoList";
 import { removeFavoRequest } from "../redux/effects/removeFavoEffect";
 import { getUserRequest } from "../redux/effects/getUserEffect";
 import { Modal, Button } from "react-bootstrap";
+import { successNotify, warningNotify } from "../../data/configNotify";
 
 const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, removeFavoRequest, getUserRequest }) => {
     const [fbId, setFbId] = useState("");
     const [isShow, setIsShow] = useState(false);
     const [isAlert, setIsAlert] = useState(false);
     const [city, setCity] = useState("");
-    const history = useHistory();
 
     // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
@@ -119,34 +117,14 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
             getUserRequest(fbId);
             setTimeout(() => {
                 setIsShow(false);
-                deleteSuccessNotify("Đã xóa thành công!")
+                successNotify("Đã xóa thành công!")
             }, 500);
         }, 2500);
     }
 
-    const deleteSuccessNotify = (message) => {
-        toast.success(message, {
-            position: "top-center",
-            autoClose: 2000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-        });
-    }
+    
 
-    const warningNotify = (message) => {
-        toast.warning(message, {
-            position: "top-center",
-            autoClose: 5000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-        });
-    }
+    
 
     const handlePush = (cityName) => {
         localStorage.setItem("cityName", cityName);

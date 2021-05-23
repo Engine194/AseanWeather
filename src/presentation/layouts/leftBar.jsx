@@ -91,14 +91,10 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
             }
         }
 
-        console.log("propUser.success",propUser.success);
         if (propUser.success == 1) {
-            console.log("propUser111111111111", propUser.data.user);
             handleReceiveUser(propUser.data.user,city)
-            console.log("111111111111111111111111111111111111111111");
         }
         if (propUser.success != 1) {
-            console.log("000000000000000000000000000000000000000000");
             const user = JSON.parse(localStorage.getItem("user"));
             if (!!user) {
                 handleReceiveUser(user,city);
@@ -119,7 +115,6 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
     }
 
     const handleConverCityToURL = (name) => {
-        name = name.replace(" ", "_");
         name = name.replace(" ", "_");
         name = name.replace(" ", "_");
         name = name.replace(" ", "_");

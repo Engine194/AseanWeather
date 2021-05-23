@@ -4,7 +4,6 @@ const HourlyMainList = ({hourlyList}) => {
     <>
         {
             hourlyList.map(item => {
-              console.log("item",item);
               return (
                 <HourlyMain key={item.time} hour={item} />
               );  

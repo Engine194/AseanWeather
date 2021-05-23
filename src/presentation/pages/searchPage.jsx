@@ -32,12 +32,10 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
             if (typeof searchItem === 'string') {
                 const value = searchItem.trim();
                 if (value) {
-                    console.log("options",options);
                     const results = optionBEs.filter(item => {
                     const match = item.title.toLowerCase().indexOf(value.toLowerCase());
                         return match !== -1;
                     })
-                    console.log("results",results);
                     if (results.length > 0) {
                         setIsMatch(true)
                         getSearchV3(results[0].title);
@@ -50,7 +48,6 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
 
             // Nếu người dùng gõ một chuỗi và select từ gợi ý
             if (typeof searchItem === 'object') {
-                
                 const value = searchItem.title.trim();
                 // nếu có searchItem thì mới gọi API
                 if (value && optionBEs.length > 0) {
@@ -66,14 +63,12 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
                     if (!isMatch) {
                         setIsShowErr(true);
                     }
-
                 }
             }
         } else {
             // xử lý khi searchItem rỗng
             setIsShowEmpty(true);
         }
-
     }
 
     // Gọi API mỗi khi searchItem thay đổi
@@ -114,7 +109,6 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
             <form onSubmit={handleSearch}>
                 <div className="row">
                     <div className="col">
-
                         <Autocomplete
                             value={searchItem}
                             onChange={(event, newValue) => {
@@ -192,8 +186,6 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
                     </div>
                 </div>
             </form>
-
-
         </>
     );
 }

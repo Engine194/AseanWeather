@@ -12,7 +12,7 @@ import getSearchV3 from '../redux/actions/searchV3Action';
 import { toast } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Login from '../components/Login';
-
+import { successNotify } from '../../data/configNotify';
 
 const filter = createFilterOptions();
 
@@ -44,7 +44,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                     if (results.length > 0) {
                         setIsMatch(true)
                         getSearchV3(results[0].title);
-                        successNotify();
+                        successNotify("Loading Success");
                     }
                 }
             }
@@ -60,38 +60,23 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                             // Nếu từ khóa nhập vào trùng với một trong các dữ liệu trả về mới
                             // gọi action lưu kết quả lại vào trong redux
                             getSearchV3(value);
-                            successNotify();
+                            successNotify("Loading Success");
                         }
                     });
                 }
             }
         }
-        
-
     }
 
-    // Show notify when search success
-    const successNotify = () => {
-        toast.success("Loading Success", {
-            position: "top-center",
-            autoClose: 3000,
-            hideProgressBar: true,
-            closeOnClick: true,
-            pauseOnHover: false,
-            draggable: true,
-            progress: undefined,
-            });
-    }
-
-    useEffect(()=>{
+    useEffect(() => {
         // Nếu trong DB ko có city thì trả về not found
         if (isMatch) {
             resetForm();
-            
+
         } else {
             setIsShowErr(true);
         }
-    },[isMatch, isSumimited])
+    }, [isMatch, isSumimited])
 
     const resetForm = () => {
         setSearchItem('');
@@ -111,24 +96,23 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             setOptionBEs(results);
         }
     }, [searchItem]);
-    
+
     // Binding input khi gõ vào ô input
     const handleChange = (e) => {
         setSearchItem(e.target.value)
     }
 
-    useEffect(()=> {
+    useEffect(() => {
         // sau khi đã có data thì thực hiện lệnh chuyển trang 
         if (propsSearchV3.success == 1) {
-            const menu1 = document.querySelector("button.btnJS1");
-            menu1.click();
+            document.querySelector("button.btnJS1").click();
             history.push({
                 pathname: "/main/current",
             })
         }
     }, [propsSearchV3]);
 
-    
+
 
 
     // Khi có data search trả về, đẩy vào trong options 
@@ -143,7 +127,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
         <div className="container-fluid">
             <div className="row rowScssH1">
                 <div className="col-1 offset-3">
-                    <a href={linkHome} className="linkHomeHS"> 
+                    <a href={linkHome} className="linkHomeHS">
                         <img src={logo} width="73" alt="Logo" />
                     </a>
                 </div>
@@ -152,7 +136,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                         <div className="col-6 offset-4">
                             <div className="row">
                                 <form id="searchFormHS" onSubmit={handleSearch}>
-                                    <div className="groupScssH1" style={{width: "80%", float: 'left'}}>
+                                    <div className="groupScssH1" style={{ width: "80%", float: 'left' }}>
                                         <Autocomplete
                                             value={searchItem}
                                             onChange={(event, newValue) => {
@@ -243,7 +227,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
                         </div>
                         <div className="col-2">
                             <div className="groupScssH2">
-                                <Login/>
+                                <Login />
                             </div>
                         </div>
                     </div>
