@@ -62,11 +62,11 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     const unregisterAuthObserver = firebase.auth().onAuthStateChanged(async user => {
       setIsSignedIn(!!user);
       if (!!user) {
-        let token = user.getIdToken();
+        let fbiD = user.uid;
         setUserGlobal({
           displayName: user.displayName,
           email: user.email,
-          token,
+          facebookId: fbiD,
         });
         let name = user.displayName;
         const nameSplited = name.split(" ");
@@ -75,8 +75,8 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           setDisplayName(nameSplited[n - 1]);
         }
         
-        localStorage.setItem("facebookId", token);
-        await getUserRequest(token);
+        localStorage.setItem("facebookId", fbiD);
+        await getUserRequest(fbiD);
       }
     });
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
@@ -84,12 +84,12 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   useEffect(() => {
     if (propsUser.success == 1) {
-      if (!propsUser.data.user && !!userGlobal.token) {
+      if (!propsUser.data.user && !!userGlobal.facebookId) {
         console.log(userGlobal);
         const data = {
           name: userGlobal.displayName,
           email: userGlobal.email,
-          facebookId: userGlobal.token,
+          facebookId: userGlobal.facebookId,
         }
         try {
           localStorage.setItem("isBack", "true");
@@ -134,9 +134,9 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   }
 
   const handlePushFavo = () => {
-    if (isHome && !!userGlobal.token) {
+    if (isHome && !!userGlobal.facebookId) {
       
-      getUserRequest(userGlobal.token);
+      getUserRequest(userGlobal.facebookId);
       history.push({
         pathname: "/main/favorite_cities",
       })
