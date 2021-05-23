@@ -130,7 +130,7 @@ const Admin = ({ propsAdmin, propsListUsers, getListUsersRequest }) => {
                   bordered
                   pagination={paginationFactory({
                     sizePerPage: 10,
-                    HideSizePerPage : true,
+                    hideSizePerPage : true,
                   }) 
                 }
                 />
