@@ -95,10 +95,7 @@ const postDataUser = (data) => {
 }
 
 const getDataUser = (fbId) => {
-    const parameters = {
-        fbId,
-    }
-    return Api(axiosType.BE).get(`${urlBE.FBID}`, {params : parameters})
+    return Api(axiosType.BE).get(`${urlBE.USERS}/${fbId}`)
 }
 
 const addFavoBE = (fbId, cityName) => {
@@ -118,6 +115,7 @@ const removeFavoBE = (fbId, cityName) => {
     } 
     return Api(axiosType.BE).delete(`${urlBE.FAVORITE}`,{data: { name: cityName}, params : parameters})
 }
+
 const loginApi = (email,password) => {
     return  Api(axiosType.BE).get(`${urlBE.ADMINLOGIN}`,{
          auth: {
