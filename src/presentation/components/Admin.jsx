@@ -129,8 +129,10 @@ const Admin = ({ propsAdmin, propsListUsers, getListUsersRequest }) => {
                   hover
                   bordered
                   pagination={paginationFactory({
-                    sizePerPage: 10
-                  })}
+                    sizePerPage: 10,
+                    HideSizePerPage : true,
+                  }) 
+                }
                 />
               </CardBody>
             </Card>
