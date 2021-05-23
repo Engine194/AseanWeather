@@ -12,6 +12,7 @@ import { Modal } from 'react-bootstrap';
 
 const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserRequest, removeFavoRequest }) => {
     const [isFavo, setIsFavo] = useState(false);
+    const [isFavoPage, setIsFavoPage] = useState(false);
     const [city, setCity] = useState('');
     const [searchEmail, setSearchEmail] = useState("");
     const [isLove, setIsLove] = useState(false);
@@ -22,7 +23,7 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
         setIsFavo(false)
         const pathname = window.location.pathname;
         if (pathname == "/main/favorite_cities") {
-            setIsFavo(true);
+            setIsFavoPage(true);
         }
         setIsLove(false);
         // const user = {
@@ -78,11 +79,15 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
 
         // localStorage.setItem('user', JSON.stringify(user));
 
+        const user = JSON.parse(localStorage.getItem("user"));
         
         if (propsSearch.success == 1) {
             let cityName = propsSearch.data.search;
             setCity(cityName);
             handleConverCityToURL(cityName);
+            if (!!user) {
+                handleReceiveUser(user,cityName);
+            }
         } else {
             let cityName = localStorage.getItem("cityName");
             setCity(cityName);
@@ -95,7 +100,6 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
             handleReceiveUser(propUser.data.user,city)
         }
         if (propUser.success != 1) {
-            const user = JSON.parse(localStorage.getItem("user"));
             if (!!user) {
                 handleReceiveUser(user,city);
             }
@@ -158,9 +162,9 @@ const LeftBar = ({ propsSearch, propUser, propMenu, addFavoRequest, getUserReque
                         <a target="_blank" href={hrefFB} title="Share the weather of this city on Facebook" className="fb-xfbml-parse-ignore"><i className="fa fa-facebook-square colorScssLB2 onHover" aria-hidden="true" data-layout="button"></i></a>
                     </div>
                 </div>
-                {(!!fbId && !isFavo ? (<div className="row">
+                {(!!fbId && !isFavoPage ? (<div className="row">
                     <div className="col-12 mt-2">
-                        <a onClick={handleFavorite} className="fb-xfbml-parse-ignore">{(!isFavo ? <Heart isLove={isLove} /> : null)}</a>
+                        <a onClick={handleFavorite} className="fb-xfbml-parse-ignore">{(!isFavoPage ? <Heart isLove={isLove} /> : null)}</a>
                     </div>
                 </div>) : null)}
 

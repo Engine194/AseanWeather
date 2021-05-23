@@ -17,13 +17,14 @@ const LoginAdmin = ({ propsLoginAdmin, getLoginAdminRequest }) => {
 
     const [pass, setPass] = useState("");
 
+    const [isSubmit, setIsSubmit] = useState(false);
+
     const history = useHistory();
 
     useEffect(() => {
         if (propsLoginAdmin.success == 0) {
-            console.log(propsLoginAdmin.error);
             if (!!propsLoginAdmin.error) {
-                if (propsLoginAdmin.error.status == 401) {
+                if (propsLoginAdmin.error.status == 401 && isSubmit == true) {
                     errorNotify("Sai email hoặc mật khẩu!")
                 }
             }
@@ -58,6 +59,7 @@ const LoginAdmin = ({ propsLoginAdmin, getLoginAdminRequest }) => {
                     })
                 }
                 onSubmit={async (values) => {
+                    setIsSubmit(true);
                     setEmail(values.email);
                     setPass(values.password);
                     await getLoginAdminRequest(values.email, values.password)
