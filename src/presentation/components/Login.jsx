@@ -106,7 +106,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         }
         try {
           postDataUser(data);
-          successNotify(`Chào mừng ${userGlobal.displayName} đến với Asean Weather!`);
         } catch (err) {
           console.log("error post new user", err);
           errorNotify("Đăng nhập không thành công, vui lòng thử lại!");
