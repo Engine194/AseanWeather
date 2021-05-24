@@ -104,7 +104,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
       }
     }
-  }, [propsUser.success]);
+  }, [propsUser.data,isClickLogin]);
 
     const handleLogOut = () => {
     let DBDeleteRequest = window.indexedDB.deleteDatabase("firebaseLocalStorageDb");
