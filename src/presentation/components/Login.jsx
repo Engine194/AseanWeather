@@ -98,7 +98,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
   useEffect(() => {
     if (propsUser.success == 1) {
       if (!propsUser.data.user && !!userGlobal.facebookId) {
-        console.log(userGlobal);
         const data = {
           name: userGlobal.displayName,
           email: userGlobal.email,
