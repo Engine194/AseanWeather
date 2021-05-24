@@ -37,19 +37,9 @@ const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
       // User successfully signed in.
-      console.log("authResult",authResult);
-      // if (!!propsUser.data.user && isClickLogin) {
-      //   successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
-      // }
-      // Return type determines whether we continue the redirect automatically
-      // or whether we leave that to developer to handle.
+      successNotify(`Chào mừng ${authResult.user.displayName}!`);
       return true;
     },
-    uiShown: function() {
-      // The widget is rendered.
-      // Hide the loader.
-      document.getElementById('loader').style.display = 'none';
-    }
   }
 };
 
