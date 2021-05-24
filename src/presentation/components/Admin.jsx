@@ -35,7 +35,7 @@ const tableColumns = [
   },
 ];
 const defaultSorted = [{
-  dataField: 'Registed Time',
+  dataField: 'loginDate',
   order: "desc"
 }];
 
