@@ -37,9 +37,10 @@ const uiConfig = {
   callbacks: {
     signInSuccessWithAuthResult: function(authResult, redirectUrl) {
       // User successfully signed in.
-      if (!!propsUser.data.user && isClickLogin) {
-        successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
-      }
+      console.log("authResult",authResult);
+      // if (!!propsUser.data.user && isClickLogin) {
+      //   successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
+      // }
       // Return type determines whether we continue the redirect automatically
       // or whether we leave that to developer to handle.
       return true;
