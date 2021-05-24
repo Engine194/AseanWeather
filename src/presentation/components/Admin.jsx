@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Card, CardBody, Container } from "reactstrap";
+import { Card, CardBody, CardFooter, Container } from "reactstrap";
 import BootstrapTable from "react-bootstrap-table-next";
 import paginationFactory from "react-bootstrap-table2-paginator";
 import logo from "../../data/weatherImgs/logo.png";
@@ -43,6 +43,8 @@ const Admin = ({ propsListUsers, getListUsersRequest }) => {
   const [tableData, setTableData] = useState([]);
   const [email, setEmail] = useState("");
 
+  const [totalUser, setTotalUser] = useState(0);
+
   const handleLogout = () => {
     localStorage.removeItem("emailAdmin");
     localStorage.removeItem("token");
@@ -71,9 +73,10 @@ const Admin = ({ propsListUsers, getListUsersRequest }) => {
         }
         list.push(newItem);
       }
+      setTotalUser(list.length);
       setTableData(list);
     }
-  }, [propsListUsers.success])
+  }, [propsListUsers.success, totalUser])
 
 
 
@@ -136,6 +139,13 @@ const Admin = ({ propsListUsers, getListUsersRequest }) => {
                       }
                     />
                   </CardBody>
+                  <CardFooter>
+                    <div className="row">
+                      <div className="col text-center">
+                        - Total Users: {totalUser} -
+                      </div>
+                    </div>
+                  </CardFooter>
                 </Card>
               </Container>
             </div>
