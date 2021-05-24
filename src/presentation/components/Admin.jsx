@@ -35,8 +35,8 @@ const tableColumns = [
   },
 ];
 const defaultSorted = [{
-  dataField: 'name',
-  order: 'desc'
+  dataField: 'Registed Time',
+  order: 'asc'
 }];
 
 const Admin = ({ propsListUsers, getListUsersRequest }) => {

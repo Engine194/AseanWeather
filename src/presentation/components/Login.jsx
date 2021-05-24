@@ -26,8 +26,30 @@ const uiConfig = {
   // signInSuccessUrl: linkHome,
   // Hiển thị Facebook là nhà cung cấp xác thực.
   signInOptions: [
-    firebase.auth.FacebookAuthProvider.PROVIDER_ID
+    {
+      provider: firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+      scopes: [
+        'public_profile',
+        'email',
+      ]
+    },
   ],
+  callbacks: {
+    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+      // User successfully signed in.
+      if (!!propsUser.data.user && isClickLogin) {
+        successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
+      }
+      // Return type determines whether we continue the redirect automatically
+      // or whether we leave that to developer to handle.
+      return true;
+    },
+    uiShown: function() {
+      // The widget is rendered.
+      // Hide the loader.
+      document.getElementById('loader').style.display = 'none';
+    }
+  }
 };
 
 const Login = ({ className, propsUser, getUserRequest }) => {
@@ -99,9 +121,6 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           errorNotify("Đăng nhập không thành công, vui lòng thử lại!");
         }
         
-      }
-      if (!!propsUser.data.user && isClickLogin) {
-        successNotify(`Chào mừng ${userGlobal.displayName} quay trở lại!`)
       }
     }
   }, [propsUser.data,isClickLogin]);
