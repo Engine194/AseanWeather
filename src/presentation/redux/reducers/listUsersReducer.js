@@ -12,7 +12,6 @@ export default function listUsersReducer(state = initialState, action) {
     switch (action.type) {
         case listUsersActionType.GET_LISTUSERS_SUCCESS :
             localStorage.setItem("listUsers",JSON.stringify(action.payload.content));
-            console.log(action.payload.content);
             // const loginAdmin = JSON.parse( localStorage.getItem("loginAdmin"));
             return {
                 ...state,

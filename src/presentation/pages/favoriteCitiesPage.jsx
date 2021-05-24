@@ -124,7 +124,6 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
     }
 
     const handlePush = (cityName) => {
-        console.log("handlePush-cityName", cityName);
         getSearchV3(cityName);
         document.querySelector("button.btnJS1").click();
     }
