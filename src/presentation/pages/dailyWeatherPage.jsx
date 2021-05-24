@@ -18,7 +18,6 @@ const DailyWeatherPage = ({ getDailyRequest, propsSearch, propsDaily }) => {
     const history = useHistory();
     useEffect(() => {
         if (propsSearch.success == 1) {
-
             if (propsSearch.data.search) {
                 // Gọi Api ở đây
                 const q = propsSearch.data.search;
