@@ -4,12 +4,12 @@ import { ReactstrapInput } from "reactstrap-formik";
 import { Button, FormGroup } from 'reactstrap';
 import { useHistory } from 'react-router';
 import logo from "../../data/weatherImgs/logo.png";
-import "react-toastify/dist/ReactToastify.css";
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getLoginAdminRequest } from '../redux/effects/loginAdminEffect';
-import { errorNotify, successNotify } from '../../data/configNotify';
 import { useEffect, useState } from 'react';
+import { toastr } from "react-redux-toastr";
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 const LoginAdmin = ({ propsLoginAdmin, getLoginAdminRequest }) => {
 
@@ -20,6 +20,28 @@ const LoginAdmin = ({ propsLoginAdmin, getLoginAdminRequest }) => {
     const [isSubmit, setIsSubmit] = useState(false);
 
     const history = useHistory();
+
+    const successNotify = (message) => {
+        const options = {
+            timeOut: 2500,
+            type: "success",
+            showCloseButton: true,
+            progressBar: false,
+            position: "top-center",
+        };
+        toastr.success("AseanWeather", message, options)
+    }
+
+    const errorNotify = (message) => {
+        const options = {
+            timeOut: 2500,
+            type: "error",
+            showCloseButton: true,
+            progressBar: false,
+            position: "top-center",
+        };
+        toastr.error("AseanWeather", message, options)
+    }
 
     useEffect(() => {
         if (propsLoginAdmin.success == 0) {
