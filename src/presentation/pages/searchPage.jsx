@@ -62,6 +62,16 @@ const cityList = [
     'Hoi An',
 ]
 
+const convertList = (cityList) => {
+    let results = [];
+    for (let index = 0; index < cityList.length; index++) {
+        const element = cityList[index];
+        results.push({title: element})
+    }
+
+    return results;
+}
+
 const filter = createFilterOptions();
 
 const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3 }) => {
@@ -72,7 +82,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
     const [optionBEs, setOptionBEs] = useState([]);
-    const options = cityList;
+    const options = convertList(cityList);
     const history = useHistory();
 
     const handleSearch = async (e) => {

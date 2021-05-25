@@ -16,6 +16,69 @@ import { successNotify } from '../../data/configNotify';
 
 const filter = createFilterOptions();
 
+const cityList = [
+    'Bandar Seri Begawan',
+    'Kampung Kota Batu',
+    'Tutong',
+    'Temburong',
+    'Melilas',
+    'Koh Rong',
+    'Sihanoukville',
+    'Kampot',
+    'Phnom Penh',
+    'Kratie',
+    'Bukittinggi',
+    'Yogyakarta',
+    'Jakarta',
+    'Bandung',
+    'Manado',
+    'Pakxe',
+    'Vientiane',
+    'Vang Vieng',
+    'Champasak',
+    'Luang Prabang',
+    'Malacca',
+    'Langkawi',
+    'Kuantan',
+    'Perhentian',
+    'Kuala Lumpur',
+    'Yangon',
+    'Mandalay',
+    'Bagan',
+    'Mrauk-U',
+    'Nyaung Shwe',
+    'Manila',
+    'Palawan',
+    'Cebu',
+    'Padre Burgos',
+    'Bacolod',
+    'Singapore',
+    'Sembawang',
+    'Jurong West',
+    'Bukit Batok',
+    'Lim Chu Kang',
+    'Bangkok',
+    'Phuket',
+    'Ayutthaya',
+    'Dok Mai',
+    'Pattaya',
+    'Ha Noi',
+    'Ho Chi Minh City',
+    'Hai Phong',
+    'Da Nang',
+    'Hoi An',
+]
+
+const convertList = (cityList) => {
+    let results = [];
+    for (let index = 0; index < cityList.length; index++) {
+        const element = cityList[index];
+        results.push({title: element})
+    }
+
+    return results;
+}
+
 toast.configure();
 const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3, propMenu }) => {
     const [searchItem, setSearchItem] = useState(null);
@@ -23,7 +86,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
     const [isShowErr, setIsShowErr] = useState(false);
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
-    const options = [];
+    const options = convertList(cityList);
     const [optionBEs, setOptionBEs] = useState([]);
     const history = useHistory();
 
@@ -37,7 +100,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             if (typeof searchItem === 'string') {
                 const value = searchItem.trim();
                 if (value) {
-                    const results = optionBEs.filter(item => {
+                    const results = options.filter(item => {
                         const match = item.title.toLowerCase().indexOf(value.toLowerCase());
                         return match !== -1;
                     })
@@ -53,8 +116,8 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             if (typeof searchItem === 'object') {
                 const value = searchItem.title.trim();
                 // nếu có searchItem thì mới gọi API
-                if (value && optionBEs.length > 0) {
-                    optionBEs.forEach(element => {
+                if (value && options.length > 0) {
+                    options.forEach(element => {
                         if (value.toLowerCase() == element.title.toLowerCase()) {
                             setIsMatch(true);
                             // Nếu từ khóa nhập vào trùng với một trong các dữ liệu trả về mới
@@ -85,17 +148,17 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
     }
 
     // Gọi API mỗi khi searchItem thay đổi
-    useEffect(async () => {
-        await getSearchV2Request(searchItem);
-        if (propsSearchV2.success == 1) {
-            const searches = propsSearchV2.data.search;
-            const results = []
-            searches.forEach(element => {
-                results.push({ title: element.name });
-            });
-            setOptionBEs(results);
-        }
-    }, [searchItem]);
+    // useEffect(async () => {
+    //     await getSearchV2Request(searchItem);
+    //     if (propsSearchV2.success == 1) {
+    //         const searches = propsSearchV2.data.search;
+    //         const results = []
+    //         searches.forEach(element => {
+    //             results.push({ title: element.name });
+    //         });
+    //         setOptionBEs(results);
+    //     }
+    // }, [searchItem]);
 
     // Binding input khi gõ vào ô input
     const handleChange = (e) => {
@@ -116,12 +179,12 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
 
 
     // Khi có data search trả về, đẩy vào trong options 
-    if (propsSearchV2.success == 1) {
-        const searches = propsSearchV2.data.search;
-        searches.forEach(element => {
-            options.push({ title: element.name });
-        });
-    }
+    // if (propsSearchV2.success == 1) {
+    //     const searches = propsSearchV2.data.search;
+    //     searches.forEach(element => {
+    //         options.push({ title: element.name });
+    //     });
+    // }
 
     return (
         <div className="container-fluid">
