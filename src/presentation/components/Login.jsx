@@ -16,7 +16,7 @@ import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 const successNotify = (message) => {
   const options = {
-    timeOut: 2500,
+    timeOut: 3000,
     type: "success",
     showCloseButton: true,
     progressBar: false,
@@ -27,7 +27,7 @@ const successNotify = (message) => {
 
 const errorNotify = (message) => {
   const options = {
-    timeOut: 2500,
+    timeOut: 3000,
     type: "error",
     showCloseButton: true,
     progressBar: false,
@@ -117,7 +117,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     return () => unregisterAuthObserver(); // Make sure we un-register Firebase observers when the component unmounts.
   }, []);
 
-  useEffect(() => {
+  useEffect(async () => {
     if (propsUser.success == 1) {
       if (!propsUser.data.user && !!userGlobal.facebookId) {
         const data = {
@@ -126,10 +126,10 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           facebookId: userGlobal.facebookId,
         }
         try {
-          postDataUser(data);
+          await postDataUser(data);
           setTimeout(() => {
             getUserRequest(userGlobal.facebookId);
-          }, 2000);
+          }, 1200);
         } catch (err) {
           console.log("error post new user", err);
           errorNotify("Đăng nhập không thành công, vui lòng thử lại!");
@@ -190,7 +190,13 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
           {(isOpen ? (
             <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-              <a onClick={handlePushFavo} >Yêu thích</a>
+              {() => {
+                setTimeout(() => {
+                  return (
+                    <a onClick={handlePushFavo} >Yêu thích</a>
+                  )
+                }, 2000);
+              }}
               <a onClick={handleLogOut}>Log out</a>
             </div>
           ) : null)}

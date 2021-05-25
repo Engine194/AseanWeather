@@ -23,7 +23,7 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
 
     const warningNotify = (message) => {
         const options = {
-            timeOut: 2500,
+            timeOut: 3000,
             type: "warning",
             showCloseButton: true,
             progressBar: false,
@@ -34,7 +34,7 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
 
     const successNotify = (message) => {
         const options = {
-            timeOut: 2500,
+            timeOut: 3000,
             type: "success",
             showCloseButton: true,
             progressBar: false,
