@@ -79,6 +79,14 @@ const convertList = (cityList) => {
     return results;
 }
 
+const searchedList = (searchItem, list) => {
+    list = list.filter(item=> {
+        const match = item.title.toLowerCase().indexOf(searchItem.toLowerCase());
+        return match == 0; 
+    })
+    return list;
+}
+
 toast.configure();
 const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3, propMenu }) => {
     const [searchItem, setSearchItem] = useState(null);
@@ -86,7 +94,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
     const [isShowErr, setIsShowErr] = useState(false);
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
-    const options = convertList(cityList);
+    const [options, setOptions] = useState(convertList(cityList))
     const [optionBEs, setOptionBEs] = useState([]);
     const history = useHistory();
 
@@ -162,7 +170,8 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
 
     // Binding input khi gõ vào ô input
     const handleChange = (e) => {
-        setSearchItem(e.target.value)
+        setSearchItem(e.target.value);
+        setOptions(searchedList(e.target.value, options));
     }
 
     useEffect(() => {

@@ -72,6 +72,14 @@ const convertList = (cityList) => {
     return results;
 }
 
+const searchedList = (searchItem, list) => {
+    list = list.filter(item=> {
+        const match = item.title.toLowerCase().indexOf(searchItem.toLowerCase());
+        return match == 0; 
+    })
+    return list;
+}
+
 const filter = createFilterOptions();
 
 const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3 }) => {
@@ -82,7 +90,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
     const [optionBEs, setOptionBEs] = useState([]);
-    const options = convertList(cityList);
+    const [options, setOptions] = useState(convertList(cityList))
     const history = useHistory();
 
     const handleSearch = async (e) => {
@@ -150,6 +158,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     // binding searchItem vào ô input
     const handleChange = (e) => {
         setSearchItem(e.target.value)
+        setOptions(searchedList(e.target.value, options));
     }
 
     // sau khi đã có data thì thực hiện lệnh chuyển trang 
