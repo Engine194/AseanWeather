@@ -10,7 +10,6 @@ import HomeCart from '../components/homeCard';
 import { getFavoList } from '../../data/getFavoList';
 import { fitlerArr } from '../../data/configArrays';
 
-
 let citiesAll = [
     'Bandar Seri Begawan',
     'Kampung Kota Batu',

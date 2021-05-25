@@ -9,6 +9,59 @@ import getSearchV3 from '../redux/actions/searchV3Action';
 import Autocomplete, { createFilterOptions } from '@material-ui/lab/Autocomplete';
 import "../scss/homePage.scss";
 
+const cityList = [
+    'Bandar Seri Begawan',
+    'Kampung Kota Batu',
+    'Tutong',
+    'Temburong',
+    'Melilas',
+    'Koh Rong',
+    'Sihanoukville',
+    'Kampot',
+    'Phnom Penh',
+    'Kratie',
+    'Bukittinggi',
+    'Yogyakarta',
+    'Jakarta',
+    'Bandung',
+    'Manado',
+    'Pakxe',
+    'Vientiane',
+    'Vang Vieng',
+    'Champasak',
+    'Luang Prabang',
+    'Malacca',
+    'Langkawi',
+    'Kuantan',
+    'Perhentian',
+    'Kuala Lumpur',
+    'Yangon',
+    'Mandalay',
+    'Bagan',
+    'Mrauk-U',
+    'Nyaung Shwe',
+    'Manila',
+    'Palawan',
+    'Cebu',
+    'Padre Burgos',
+    'Bacolod',
+    'Singapore',
+    'Sembawang',
+    'Jurong West',
+    'Bukit Batok',
+    'Lim Chu Kang',
+    'Bangkok',
+    'Phuket',
+    'Ayutthaya',
+    'Dok Mai',
+    'Pattaya',
+    'Ha Noi',
+    'Ho Chi Minh City',
+    'Hai Phong',
+    'Da Nang',
+    'Hoi An',
+]
+
 const filter = createFilterOptions();
 
 const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3 }) => {
@@ -19,7 +72,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     const [isShowEmpty, setIsShowEmpty] = useState(false);
     const [isSumimited, setIsSumimited] = useState(false);
     const [optionBEs, setOptionBEs] = useState([]);
-    const options = [];
+    const options = cityList;
     const history = useHistory();
 
     const handleSearch = async (e) => {
@@ -32,7 +85,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
             if (typeof searchItem === 'string') {
                 const value = searchItem.trim();
                 if (value) {
-                    const results = optionBEs.filter(item => {
+                    const results = options.filter(item => {
                     const match = item.title.toLowerCase().indexOf(value.toLowerCase());
                         return match !== -1;
                     })
@@ -50,8 +103,8 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
             if (typeof searchItem === 'object') {
                 const value = searchItem.title.trim();
                 // nếu có searchItem thì mới gọi API
-                if (value && optionBEs.length > 0) {
-                    optionBEs.forEach(element => {
+                if (value && options.length > 0) {
+                    options.forEach(element => {
                         if (value.toLowerCase() == element.title.toLowerCase()) {
                             setIsMatch(true);
                             // Nếu từ khóa nhập vào trùng với một trong các dữ liệu trả về mới
@@ -72,17 +125,17 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     }
 
     // Gọi API mỗi khi searchItem thay đổi
-    useEffect( async () => {
-        await getSearchV2Request(searchItem);
-        if (propsSearchV2.success == 1) {
-            const searches = propsSearchV2.data.search;
-            const results = []
-            searches.forEach(element => {
-                results.push({ title: element.name });
-            });
-            setOptionBEs(results);
-        }
-    }, [searchItem]);
+    // useEffect( async () => {
+    //     await getSearchV2Request(searchItem);
+    //     if (propsSearchV2.success == 1) {
+    //         const searches = propsSearchV2.data.search;
+    //         const results = []
+    //         searches.forEach(element => {
+    //             results.push({ title: element.name });
+    //         });
+    //         setOptionBEs(results);
+    //     }
+    // }, [searchItem]);
 
     // binding searchItem vào ô input
     const handleChange = (e) => {
@@ -97,12 +150,12 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
     }
 
     // Khi có data search trả về, đẩy vào trong options 
-    if (propsSearchV2.success == 1) {
-        const searches = propsSearchV2.data.search;
-        searches.forEach(element => {
-            options.push({ title: element.name });
-        });
-    }
+    // if (propsSearchV2.success == 1) {
+    //     const searches = propsSearchV2.data.search;
+    //     searches.forEach(element => {
+    //         options.push({ title: element.name });
+    //     });
+    // }
 
     return (
         <>
