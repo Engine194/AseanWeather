@@ -66,7 +66,7 @@ const convertList = (cityList) => {
     let results = [];
     for (let index = 0; index < cityList.length; index++) {
         const element = cityList[index];
-        results.push({title: element})
+        results.push({ title: element })
     }
 
     return results;
@@ -96,7 +96,7 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
                 const value = searchItem.trim();
                 if (value) {
                     const results = options.filter(item => {
-                    const match = item.title.toLowerCase().indexOf(value.toLowerCase());
+                        const match = item.title.toLowerCase().indexOf(value.toLowerCase());
                         return match !== -1;
                     })
                     if (results.length > 0) {
@@ -242,12 +242,21 @@ const SearchPage = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearc
                         />
                     </div>
                 </div>
-                <div className="row">
-                    <div className="col text-center notfound">
-                        {!(isShowErr && isSumimited) ? null : (<i><big>Không tìm thấy thành phố</big></i>)}
-                        {!(isShowEmpty && isSumimited) ? null : (<i><big>Hãy nhập thông tin</big></i>)}
+
+                {!(isShowErr && isSumimited) ? null : (
+                    <div className="row">
+                        <div className="col text-center notfound">
+                            <i><big>Không tìm thấy thành phố, hãy nhập lại</big></i>
+                        </div>
                     </div>
-                </div>
+                )}
+                {!(isShowEmpty && isSumimited) ? null : (
+                    <div className="row">
+                        <div className="col text-center notfound">
+                            <i><big>Hãy nhập tên thành phố</big></i>
+                        </div>
+                    </div>
+                )}
             </form>
         </>
     );

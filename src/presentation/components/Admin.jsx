@@ -109,7 +109,7 @@ const Admin = ({ propsListUsers, getListUsersRequest }) => {
               <Container fluid className="p-0">
                 <div className="row mt-1">
                   <div className="col-6 mb-4 ml-2">
-                    <h3 style={{ marginTop: 30 }}><i class="fa fa-list" aria-hidden="true"></i> LIST USER</h3>
+                    <h3 style={{ marginTop: 30 }}><i className="fa fa-list" aria-hidden="true"></i> LIST USER</h3>
                   </div>
                   <div className="col-4 offset-2 mt-4">
                     <div className="row mt-2">
