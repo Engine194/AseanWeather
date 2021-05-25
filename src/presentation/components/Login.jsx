@@ -22,7 +22,7 @@ const successNotify = (message) => {
     progressBar: false,
     position: "top-center",
   };
-  toastr.success("Thông báo từ AseanWeather", message, options)
+  toastr.success("AseanWeather", message, options)
 }
 
 const errorNotify = (message) => {
@@ -33,7 +33,7 @@ const errorNotify = (message) => {
     progressBar: false,
     position: "top-center",
   };
-  toastr.error("Thông báo từ AseanWeather", message, options)
+  toastr.error("AseanWeather", message, options)
 }
 // Gọi API từ Firebase
 const config = {

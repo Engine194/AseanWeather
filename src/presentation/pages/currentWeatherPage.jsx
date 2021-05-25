@@ -25,7 +25,7 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
             progressBar: false,
             position: "top-center",
         };
-        toastr.warning("Thông báo từ AseanWeather", message, options)
+        toastr.warning("AseanWeather", message, options)
     }
     // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
@@ -70,7 +70,9 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
                     getAstroRequest(cityName);
                 } else {
                     warningNotify("Tìm kiếm một thành phố trước đã bạn ơi!");
-                    document.querySelector("a.linkHomeHS").click();
+                    setTimeout(() => {
+                        document.querySelector("a.linkHomeHS").click();
+                    }, 2500);
                 }
             }
         }

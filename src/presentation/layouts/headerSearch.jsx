@@ -105,7 +105,7 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
             progressBar: false,
             position: "top-center",
         };
-        toastr.success("Thông báo từ AseanWeather", message, options)
+        toastr.success("AseanWeather", message, options)
     }
 
     const handleSearch = async (e) => {

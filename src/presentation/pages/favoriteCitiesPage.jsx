@@ -29,7 +29,7 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
             progressBar: false,
             position: "top-center",
         };
-        toastr.warning("Thông báo từ AseanWeather", message, options)
+        toastr.warning("AseanWeather", message, options)
     }
 
     const successNotify = (message) => {
@@ -40,7 +40,7 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
             progressBar: false,
             position: "top-center",
         };
-        toastr.success("Thông báo từ AseanWeather", message, options)
+        toastr.success("AseanWeather", message, options)
     }
     // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
@@ -110,7 +110,9 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
                 handleProcessUser(user);
             } else {
                 warningNotify("Hãy đăng nhập để trải nghiệm tính năng này!")
-                document.querySelector("a.linkHomeHS").click();
+                setTimeout(() => {
+                    document.querySelector("a.linkHomeHS").click();
+                }, 2500);
             }
         }
     }, [propUser])
