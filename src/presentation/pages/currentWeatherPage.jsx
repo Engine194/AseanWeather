@@ -12,27 +12,35 @@ import '../scss/currentPage.scss';
 import CurrentAstronomyMoon from "../components/currentAstronomyMoon";
 import { markMenuInComponent, menuType } from "../../data/configMenu";
 import { useHistory } from 'react-router';
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
-import { warningNotify } from "../../data/configNotify";
+import { toastr } from "react-redux-toastr";
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAstroRequest, propsSearch }) => {
     const history = useHistory();
-    
-       // Gọi api ở đây mỗi khi có kết quả từ propsSearch
+    const warningNotify = (message) => {
+        const options = {
+            timeOut: 2500,
+            type: "warning",
+            showCloseButton: true,
+            progressBar: false,
+            position: "top-center",
+        };
+        toastr.warning("Thông báo từ AseanWeather", message, options)
+    }
+    // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
         // Mark menu
         markMenuInComponent(menuType.CURRENT);
 
         if (history.location.search) {
-            console.log("history.location.search",history.location.search);
+            console.log("history.location.search", history.location.search);
             let search = history.location.search;
             search = search.replace("?", " ");
             search = search.trim();
             if (search.endsWith("%7C")) {
                 search = search.replace("%7C", " ");
                 search = search.trim();
-            } else if ( search.indexOf("%7C") != -1 ) {
+            } else if (search.indexOf("%7C") != -1) {
                 const searchSplited = search.split("%7C");
                 search = searchSplited[0];
                 search = search.replace("_", " ");
@@ -43,10 +51,10 @@ const CurrentWeatherPage = ({ propsCurrent, propsAstro, getCurrentRequest, getAs
             } else {
                 search = "Ha Noi";
             }
-                
+
             getCurrentRequest(search);
             getAstroRequest(search);
-            localStorage.setItem("cityName",search);
+            localStorage.setItem("cityName", search);
         } else {
             if (propsSearch.success == 1) {
                 if (propsSearch.data.search) {

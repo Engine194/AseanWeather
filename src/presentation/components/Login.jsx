@@ -10,9 +10,31 @@ import { getUserRequest } from "../redux/effects/getUserEffect";
 import "react-toastify/dist/ReactToastify.css";
 import { useHistory } from 'react-router';
 import LoginAdmin from './LoginAdmin';
-import { errorNotify, successNotify } from '../../data/configNotify';
+import { toastr } from "react-redux-toastr";
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 // import linkHome from '../../data/api/linkHome';
 
+const successNotify = (message) => {
+  const options = {
+    timeOut: 2500,
+    type: "success",
+    showCloseButton: true,
+    progressBar: false,
+    position: "top-center",
+  };
+  toastr.success("Thông báo từ AseanWeather", message, options)
+}
+
+const errorNotify = (message) => {
+  const options = {
+    timeOut: 2500,
+    type: "error",
+    showCloseButton: true,
+    progressBar: false,
+    position: "top-center",
+  };
+  toastr.error("Thông báo từ AseanWeather", message, options)
+}
 // Gọi API từ Firebase
 const config = {
   apiKey: 'AIzaSyCFvyqD96SjvtTIQv2wIOdCg11l3dKCDGE',
@@ -35,7 +57,7 @@ const uiConfig = {
     },
   ],
   callbacks: {
-    signInSuccessWithAuthResult: function(authResult, redirectUrl) {
+    signInSuccessWithAuthResult: function (authResult, redirectUrl) {
       // User successfully signed in.
       successNotify(`Chào mừng ${authResult.user.displayName}!`);
       return true;
@@ -87,7 +109,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         if (n > 0) {
           setDisplayName(nameSplited[n - 1]);
         }
-        
+
         localStorage.setItem("facebookId", fbiD);
         await getUserRequest(fbiD);
       }
@@ -105,16 +127,19 @@ const Login = ({ className, propsUser, getUserRequest }) => {
         }
         try {
           postDataUser(data);
+          setTimeout(() => {
+            getUserRequest(userGlobal.facebookId);
+          }, 2000);
         } catch (err) {
           console.log("error post new user", err);
           errorNotify("Đăng nhập không thành công, vui lòng thử lại!");
         }
-        
+
       }
     }
-  }, [propsUser.data,isClickLogin]);
+  }, [propsUser.data, isClickLogin]);
 
-    const handleLogOut = () => {
+  const handleLogOut = () => {
     let DBDeleteRequest = window.indexedDB.deleteDatabase("firebaseLocalStorageDb");
 
     DBDeleteRequest.onerror = function (event) {
@@ -137,7 +162,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
   const handlePushFavo = () => {
     if (isHome && !!userGlobal.facebookId) {
-      
+
       getUserRequest(userGlobal.facebookId);
       history.push({
         pathname: "/main/favorite_cities",

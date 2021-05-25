@@ -11,8 +11,9 @@ import { getFavoList } from "../../data/getFavoList";
 import { removeFavoRequest } from "../redux/effects/removeFavoEffect";
 import { getUserRequest } from "../redux/effects/getUserEffect";
 import { Modal, Button } from "react-bootstrap";
-import { successNotify, warningNotify } from "../../data/configNotify";
-import getSearchV3 from "../redux/actions/searchV3Action"
+import getSearchV3 from "../redux/actions/searchV3Action";
+import { toastr } from "react-redux-toastr";
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css';
 
 const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, removeFavoRequest, getUserRequest, getSearchV3}) => {
     const [fbId, setFbId] = useState("");
@@ -20,6 +21,27 @@ const FavoriteCities = ({ propsFavorite, propUser, getFavoriteCurrentRequest, re
     const [isAlert, setIsAlert] = useState(false);
     const [city, setCity] = useState("");
 
+    const warningNotify = (message) => {
+        const options = {
+            timeOut: 2500,
+            type: "warning",
+            showCloseButton: true,
+            progressBar: false,
+            position: "top-center",
+        };
+        toastr.warning("Thông báo từ AseanWeather", message, options)
+    }
+
+    const successNotify = (message) => {
+        const options = {
+            timeOut: 2500,
+            type: "success",
+            showCloseButton: true,
+            progressBar: false,
+            position: "top-center",
+        };
+        toastr.success("Thông báo từ AseanWeather", message, options)
+    }
     // Gọi api ở đây mỗi khi có kết quả từ propsSearch
     useEffect(() => {
         setIsShow(false);

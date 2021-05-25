@@ -14,7 +14,7 @@ import addFavoReducer from "./addFavoReducer";
 import removeFavoReducer from "./removeFavoReducer";
 import loginAdminReducer from "./loginAdminReducer";
 import listUsersReducer from "./listUsersReducer"
-
+import { reducer as toastr } from "react-redux-toastr";
 
 export default combineReducers({
     currentReducer,
@@ -32,4 +32,5 @@ export default combineReducers({
     removeFavoReducer,
     loginAdminReducer,
     listUsersReducer,
+    toastr,
 })

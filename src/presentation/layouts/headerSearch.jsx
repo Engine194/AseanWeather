@@ -9,10 +9,9 @@ import { connect } from "react-redux";
 import { bindActionCreators } from 'redux';
 import { getSearchV2Request } from '../redux/effects/searchV2Effect';
 import getSearchV3 from '../redux/actions/searchV3Action';
-import { toast } from 'react-toastify';
-import "react-toastify/dist/ReactToastify.css";
 import Login from '../components/Login';
-import { successNotify } from '../../data/configNotify';
+import { toastr } from "react-redux-toastr";
+import 'react-redux-toastr/lib/css/react-redux-toastr.min.css'
 
 const filter = createFilterOptions();
 
@@ -87,7 +86,7 @@ const searchedList = (searchItem, list) => {
     return list;
 }
 
-toast.configure();
+
 const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSearchV3, propMenu }) => {
     const [searchItem, setSearchItem] = useState(null);
     const [isMatch, setIsMatch] = useState(false);
@@ -97,6 +96,17 @@ const HeaderSearch = ({ getSearchV2Request, propsSearchV2, getSearchV3, propsSea
     const [options, setOptions] = useState(convertList(cityList))
     const [optionBEs, setOptionBEs] = useState([]);
     const history = useHistory();
+
+    const successNotify = (message) => {
+        const options = {
+            timeOut: 2500,
+            type: "success",
+            showCloseButton: true,
+            progressBar: false,
+            position: "top-center",
+        };
+        toastr.success("Thông báo từ AseanWeather", message, options)
+    }
 
     const handleSearch = async (e) => {
         e.preventDefault();
