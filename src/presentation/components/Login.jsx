@@ -129,7 +129,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
           await postDataUser(data);
           setTimeout(() => {
             getUserRequest(userGlobal.facebookId);
-          }, 1200);
+          }, 1000);
         } catch (err) {
           console.log("error post new user", err);
           errorNotify("Đăng nhập không thành công, vui lòng thử lại!");
@@ -164,9 +164,11 @@ const Login = ({ className, propsUser, getUserRequest }) => {
     if (isHome && !!userGlobal.facebookId) {
 
       getUserRequest(userGlobal.facebookId);
-      history.push({
-        pathname: "/main/favorite_cities",
-      })
+      setTimeout(() => {
+        history.push({
+          pathname: "/main/favorite_cities",
+        })
+      }, 500);
     } else if (isHome == false) {
       document.querySelector("button.btnJS4").click();
     }
@@ -190,13 +192,7 @@ const Login = ({ className, propsUser, getUserRequest }) => {
 
           {(isOpen ? (
             <div id="myDropdown" className="dropdown-content" style={{ width: (isHome ? "150px" : '120px') }} >
-              {() => {
-                setTimeout(() => {
-                  return (
-                    <a onClick={handlePushFavo} >Yêu thích</a>
-                  )
-                }, 2000);
-              }}
+              <a onClick={handlePushFavo} >Yêu thích</a>
               <a onClick={handleLogOut}>Log out</a>
             </div>
           ) : null)}
